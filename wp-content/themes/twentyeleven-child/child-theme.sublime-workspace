@@ -1,0 +1,1612 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"curre",
+				"current_user"
+			],
+			[
+				"admin",
+				"admin_init"
+			],
+			[
+				"custom_post",
+				"custom_post_types.inc.php"
+			],
+			[
+				"margin",
+				"margin-top"
+			],
+			[
+				"remove",
+				"remove_submenu_page"
+			],
+			[
+				"get_cat",
+				"get_cat_ID"
+			],
+			[
+				"font-",
+				"font-size"
+			],
+			[
+				"cate",
+				"category"
+			],
+			[
+				"geT_category_by",
+				"get_category_by_slug"
+			],
+			[
+				"cat",
+				"category"
+			],
+			[
+				"get_ca",
+				"get_cat_ID"
+			],
+			[
+				"categ",
+				"get_category"
+			],
+			[
+				"get_cate",
+				"get_the_category"
+			],
+			[
+				"var",
+				"var_dump"
+			],
+			[
+				"cus",
+				"custom_plural"
+			],
+			[
+				"suppo",
+				"supports"
+			],
+			[
+				"register_pos",
+				"register_post_type"
+			],
+			[
+				"functi",
+				"function"
+			],
+			[
+				"back",
+				"background-color"
+			],
+			[
+				"padding",
+				"padding"
+			],
+			[
+				"arial",
+				"Arial, Helvetica, sans-serif"
+			],
+			[
+				"marg",
+				"margin"
+			],
+			[
+				"wp_e",
+				"wp_enqueue_scripts"
+			],
+			[
+				"add_",
+				"add_action"
+			],
+			[
+				"wp_reg",
+				"wp_register_script"
+			],
+			[
+				"wp_registers",
+				"wp_register_style"
+			],
+			[
+				"wp_",
+				"wp_enqueue_script"
+			],
+			[
+				"log",
+				"login"
+			],
+			[
+				"get_sty",
+				"get_stylesheet_directory_uri"
+			],
+			[
+				"remove_me",
+				"remove_menu_page"
+			],
+			[
+				"remove_se",
+				"remove_submenu_page  (function)"
+			],
+			[
+				"globa",
+				"global"
+			],
+			[
+				"home",
+				"home_url"
+			],
+			[
+				"wp_en",
+				"wp_enqueue_style"
+			],
+			[
+				"templ",
+				"template"
+			],
+			[
+				"css",
+				"css_url"
+			],
+			[
+				"if",
+				"if	if …"
+			],
+			[
+				"a",
+				"a	<a href=\"mailto:\">"
+			],
+			[
+				"func",
+				"function"
+			],
+			[
+				"head",
+				"header"
+			],
+			[
+				"get_he",
+				"get_header"
+			],
+			[
+				"quer",
+				"query_posts"
+			],
+			[
+				"geT_cat",
+				"get_cat_ID"
+			],
+			[
+				"playerRe",
+				"playerReady"
+			],
+			[
+				"video",
+				"video	<video> with legacy object"
+			],
+			[
+				"sub",
+				"subject"
+			],
+			[
+				"ba",
+				"background-color"
+			],
+			[
+				"strto",
+				"strtotime"
+			],
+			[
+				"endfor",
+				"endforeach  (keyword)"
+			],
+			[
+				"new",
+				"newborn_posts"
+			],
+			[
+				"get_pos",
+				"get_posts"
+			],
+			[
+				"displ",
+				"display"
+			],
+			[
+				"over",
+				"overflow"
+			],
+			[
+				"visi",
+				"visibility"
+			],
+			[
+				"link",
+				"link	link - icon"
+			],
+			[
+				"qu",
+				"questionnaire_form.inc.php"
+			],
+			[
+				"wp_de",
+				"wp_deregister_script"
+			],
+			[
+				"wp_re",
+				"wp_register_script"
+			],
+			[
+				"plug",
+				"plugins_url"
+			],
+			[
+				"plu",
+				"plugin_head	Plugin Head"
+			],
+			[
+				"subst",
+				"substr_replace"
+			],
+			[
+				"subs",
+				"substr_replace"
+			],
+			[
+				"alert",
+				"alert_message"
+			],
+			[
+				"Questi",
+				"Questionnaire"
+			],
+			[
+				"header",
+				"header  (function)"
+			],
+			[
+				"webs",
+				"website_form_fields"
+			],
+			[
+				"label",
+				"label	<label> with <input>"
+			],
+			[
+				"row",
+				"row_num"
+			],
+			[
+				"post",
+				"post_fields"
+			],
+			[
+				"server",
+				"serverHostingInput"
+			],
+			[
+				"serve",
+				"serverHostingRadio"
+			],
+			[
+				"vali",
+				"valid_fields"
+			],
+			[
+				"valid",
+				"valid_fields  (variable)"
+			],
+			[
+				"npq_",
+				"npq_validate_post_fields"
+			],
+			[
+				"we",
+				"website_form_fields.inc.php"
+			],
+			[
+				"table",
+				"table	<table>"
+			],
+			[
+				"reg",
+				"register_auth.inc.php"
+			],
+			[
+				"sec",
+				"sections/"
+			],
+			[
+				"descri",
+				"description_section/"
+			],
+			[
+				"website_c",
+				"website_comments.inc.php"
+			],
+			[
+				"incl",
+				"include_once"
+			],
+			[
+				"website_e",
+				"website_existing_transfer.inc.php"
+			],
+			[
+				"hos",
+				"hosting_section/"
+			],
+			[
+				"include",
+				"include_once"
+			],
+			[
+				"website_brow",
+				"website_browser_support.inc.php"
+			],
+			[
+				"typ",
+				"type_section/"
+			],
+			[
+				"incld",
+				"include_once"
+			],
+			[
+				"input",
+				"input	input - checkbox"
+			],
+			[
+				"text",
+				"textarea"
+			],
+			[
+				"new_",
+				"new_projects_questionaire.php"
+			],
+			[
+				"data",
+				"dataValue"
+			],
+			[
+				"class",
+				"class=  (attribute)"
+			],
+			[
+				"in",
+				"inc	inc"
+			],
+			[
+				"padd",
+				"padding"
+			],
+			[
+				"max-",
+				"max-height"
+			],
+			[
+				"get_category_by",
+				"get_the_category_by_ID"
+			],
+			[
+				"recent",
+				"recent_posts"
+			],
+			[
+				"change",
+				"change_parent_url"
+			],
+			[
+				"pos",
+				"position"
+			],
+			[
+				"paddin",
+				"padding-bottom"
+			],
+			[
+				"max",
+				"max-width"
+			],
+			[
+				"lin",
+				"line-height"
+			],
+			[
+				"rece",
+				"recent_posts"
+			],
+			[
+				"print",
+				"print_r"
+			],
+			[
+				"rpImg",
+				"rpImgWidth"
+			],
+			[
+				"margn",
+				"margin-left"
+			],
+			[
+				"text-",
+				"text-align"
+			],
+			[
+				"wrapper",
+				"wrapper_class"
+			],
+			[
+				"rec",
+				"recent_posts_shortcode.php"
+			],
+			[
+				"thumbna",
+				"thumbnail"
+			],
+			[
+				"tex",
+				"text-align"
+			],
+			[
+				"thumbn",
+				"thumbnail"
+			],
+			[
+				"thumb",
+				"thumbnail"
+			],
+			[
+				"FAS",
+				"FALSE"
+			],
+			[
+				"exis",
+				"existing_images"
+			],
+			[
+				"images",
+				"images_model"
+			],
+			[
+				"ifram",
+				"iframes_model"
+			],
+			[
+				"datE_defaul",
+				"date_default_timezone_set"
+			],
+			[
+				"timez",
+				"date_timezone_set"
+			],
+			[
+				"dat",
+				"date"
+			],
+			[
+				"phone",
+				"phone_bill"
+			],
+			[
+				"minute",
+				"minutes_used"
+			],
+			[
+				"imag",
+				"image"
+			],
+			[
+				"upload",
+				"upload_data"
+			],
+			[
+				"uplo",
+				"upload_data"
+			],
+			[
+				"return",
+				"return_status"
+			],
+			[
+				"image",
+				"image/png"
+			],
+			[
+				"session",
+				"session_start"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 220.0,
+		"selected_items":
+		[
+			[
+				"lower",
+				"Convert Case: Lower Case"
+			],
+			[
+				"ins",
+				"Package Control: Install Package"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"inst",
+				"Package Control: Install Package"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"lo",
+				"Convert Case: Lower Case"
+			],
+			[
+				"low",
+				"Convert Case: Lower Case"
+			],
+			[
+				"lowe",
+				"Convert Case: Lower Case"
+			],
+			[
+				"prefix",
+				"Preferences: Prefixr Key Bindings – Default"
+			],
+			[
+				"uppe",
+				"Convert Case: Upper Case"
+			],
+			[
+				"lowe	",
+				"Convert Case: Lower Case"
+			],
+			[
+				"upp",
+				"Convert Case: Upper Case"
+			],
+			[
+				"instal",
+				"Package Control: Install Package"
+			],
+			[
+				"instl",
+				"Package Control: Install Package"
+			],
+			[
+				"tabs",
+				"Indentation: Convert to Tabs"
+			],
+			[
+				"upper",
+				"Convert Case: Upper Case"
+			],
+			[
+				"phpcs",
+				"PHP Code Sniffer: Goto next error"
+			],
+			[
+				"uppr",
+				"Convert Case: Upper Case"
+			],
+			[
+				"upgr",
+				"Package Control: Upgrade Package"
+			],
+			[
+				"pack",
+				"Package Control: Upgrade Package"
+			],
+			[
+				"pac",
+				"Package Control: List Packages"
+			],
+			[
+				"pa",
+				"Package Control: Upgrade Package"
+			],
+			[
+				"tab",
+				"Indentation: Convert to Tabs"
+			],
+			[
+				"php",
+				"Set Syntax: PHP"
+			],
+			[
+				"todo",
+				"Set Syntax: iTodo"
+			],
+			[
+				"",
+				"Bracket Highlighter: Select Bracket Content"
+			],
+			[
+				"pacage",
+				"Package Control: Upgrade Package"
+			]
+		],
+		"width": 705.0
+	},
+	"console":
+	{
+		"height": 0.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/Library/Server/Web/Data/Sites/Default/admin-custom/wp-content/themes/twentyeleven-child/functions.php",
+		"/Library/Server/Web/Data/Sites/Default/admin-custom/wp-content/themes/twentyeleven-child/_assets/inc/admin/admin_customizations.inc.php",
+		"/Library/Server/Web/Data/Sites/Default/admin-custom/wp-config.php",
+		"/Library/Server/Web/Data/Sites/Default/admin-custom/wp-content/themes/twentyeleven-child/_assets/css/login.css",
+		"/Library/Server/Web/Data/Sites/Default/admin-custom/wp-content/themes/twentyeleven-child/documentation/documentation.php",
+		"/Library/Server/Web/Data/Sites/Default/admin-custom/wp-content/themes/twentyeleven-child/_assets/inc/admin/login_customizations.inc.php",
+		"/Library/Server/Web/Data/Sites/Default/admin-custom/wp-content/themes/twentyeleven-child/_assets/inc/debug.inc.php",
+		"/Library/Server/Web/Data/Sites/Default/admin-custom/wp-content/themes/twentyeleven-child/_assets/inc/admin/custom_post_types.inc.php",
+		"/Library/Server/Web/Data/Sites/Default/admin-custom/wp-content/themes/twentyeleven-child/_assets/css/less/admin.less",
+		"/Library/Server/Web/Data/Sites/Default/admin-custom/wp-content/themes/twentyeleven-child/_assets/css/less/site.less",
+		"/Library/Server/Web/Data/Sites/Default/admin-custom/wp-content/themes/twentyeleven-child/child-theme.sublime-project",
+		"/Library/Server/Web/Data/Sites/Default/admin-custom/wp-content/themes/twentyeleven-child/child-theme.sublime-workspace",
+		"/Users/mothership/Library/Caches/Cleanup At Startup/Transmit/C0577623-20D3-4029-8922-3E4BDE581F40/functions.php",
+		"/Users/mothership/Library/Caches/Cleanup At Startup/Transmit/580E1974-33E7-486A-AABA-EF19817D7F48/archive.php",
+		"/Users/mothership/Library/Caches/Cleanup At Startup/Transmit/4312ECE3-12F6-4C6D-B316-4F6676A63B96/custom.css",
+		"/Users/mothership/Library/Caches/Cleanup At Startup/Transmit/A3DA9688-6E5A-43D6-B4D3-F15CE15B3D9E/homepage.php",
+		"/Users/mothership/Library/Caches/Cleanup At Startup/Transmit/64EB66A2-1842-4A44-9AC2-630EB736F236/header.php",
+		"/Users/mothership/Library/Caches/Cleanup At Startup/Transmit/8A8E29AB-9FDF-470E-8943-6DD8DF593787/docs.css",
+		"/Users/mothership/Library/Caches/Cleanup At Startup/Transmit/B108D058-DF54-4E91-AD3F-AD38A76112D3/header.php",
+		"/Users/mothership/Library/Caches/Cleanup At Startup/Transmit/983481CA-2C36-4F22-BEF7-E075B4B5DC7C/mail_test.php",
+		"/Users/mothership/Library/Caches/Cleanup At Startup/Transmit/EA64FC5A-6A1C-4A9D-B320-1723DA449509/functions.php",
+		"/Users/mothership/Library/Caches/Cleanup At Startup/Transmit/584C4ED3-8CD6-48F3-9680-1B664930D892/wp-config.php",
+		"/Users/mothership/Library/Caches/Cleanup At Startup/Transmit/1844AE65-DAD2-49AC-BF23-0B77F2DC915F/header.php",
+		"/Users/mothership/Library/Caches/Cleanup At Startup/Transmit/0BD653A9-2163-403A-8239-909D3E9C000F/homepage.php",
+		"/Users/mothership/Library/Caches/Cleanup At Startup/Transmit/2BBE2D3F-55BA-4332-826B-F3B3DF783644/header.php",
+		"/Users/mothership/Library/Caches/Cleanup At Startup/Transmit/AC2B9302-71E7-4402-AF72-2F228CC685CE/testing.php",
+		"/Users/mothership/Library/Caches/Cleanup At Startup/Transmit/CD14FFF6-0A2D-473E-B857-B9F3C1B9B54A/cat.php",
+		"/Users/mothership/Library/Caches/Cleanup At Startup/Transmit/4B3B4FE4-08A3-428C-AFAA-187FD4DA272C/single.php",
+		"/Users/mothership/Library/Caches/Cleanup At Startup/Transmit/D92F868C-BF68-4960-AE15-7E378B2F1A90/cat.php",
+		"/Users/mothership/Library/Caches/Cleanup At Startup/Transmit/39ABFAB3-8221-46DE-8276-8A90D2892187/homepage.php",
+		"/Users/mothership/Library/Caches/Cleanup At Startup/Transmit/64684353-63C5-4C51-8283-D564469DE1A1/custom.css",
+		"/Users/mothership/Library/Caches/Cleanup At Startup/Transmit/7BC3C462-7869-459E-B9A2-4FB34A8D86C5/homepage.php",
+		"/Users/mothership/Library/Caches/Cleanup At Startup/Transmit/F51C440C-00B2-42A8-83C4-A5A24960E7F4/functions.php",
+		"/Users/mothership/Library/Caches/Cleanup At Startup/Transmit/BA0B0AC8-10E4-4FBA-A90A-EFF282C2DE67/mail_test.php",
+		"/Users/mothership/Library/Caches/Cleanup At Startup/Transmit/91F9DC8E-6071-408E-9098-9A75B009B727/.htaccess",
+		"/Users/mothership/Library/Caches/Cleanup At Startup/Transmit/88CA3BC2-02A6-415F-91BE-D18036107220/.htaccess",
+		"/Users/mothership/Library/Caches/Cleanup At Startup/Transmit/745F86F3-23F0-4E7B-AFAB-D753A11901D1/.htaccess",
+		"/Users/mothership/Library/Caches/Cleanup At Startup/Transmit/C1E8629A-B64F-40EB-A42D-CBE87D445595/.htaccess",
+		"/Users/mothership/Library/Caches/Cleanup At Startup/Transmit/8CD2174D-2FC1-4789-9351-BEB692141F44/.htaccess",
+		"/Users/mothership/Library/Caches/Cleanup At Startup/Transmit/403B7F25-7D46-4D2E-822B-E29FA903592A/.htaccess",
+		"/Users/mothership/Library/Caches/Cleanup At Startup/Transmit/07ED6690-108F-4CA9-A1A6-B20A6A6B8D4E/.htaccess",
+		"/Users/mothership/Library/Caches/Cleanup At Startup/Transmit/966A067B-693A-4CB5-B2FA-F561BAAF1067/.htaccess",
+		"/Users/mothership/Library/Caches/Cleanup At Startup/Transmit/B7E25228-025A-43D9-9AF7-97142F05334E/index.html",
+		"/Users/mothership/Library/Caches/Cleanup At Startup/Transmit/4BDA28D7-C78A-4818-A7A9-84E3F27E9F65/index.html",
+		"/Users/mothership/Library/Caches/Cleanup At Startup/Transmit/A21A9729-48CD-42A3-8424-AE572A34DE2B/functions.php",
+		"/Users/mothership/Library/Application Support/Sparrow/dtholloran@gmail.com.sparrowdb/Cache/%5BGmail%5D%2FSent%20Mail/552/2/credentials.txt",
+		"/Users/mothership/Library/Caches/Cleanup At Startup/Transmit/26606588-2F6F-4E3E-A2BF-704AAE78D3F9/home.php",
+		"/Users/mothership/Library/Caches/Cleanup At Startup/Transmit/8C22C1C7-50B4-4694-896B-DAA9D79EF6C2/docs.css",
+		"/Users/mothership/Desktop/YMCA/images.txt",
+		"/Users/mothership/Library/Caches/Cleanup At Startup/Transmit/84638C4C-0EC0-414C-9753-370DB629B9C0/functions.php",
+		"/Users/mothership/Library/Caches/Cleanup At Startup/Transmit/2389A74B-1E0E-41AE-9793-72E445269758/header.php",
+		"/Users/mothership/Library/Caches/Cleanup At Startup/Transmit/C5A34D1E-D30C-4567-9EC7-09220C84E8F9/custom.css",
+		"/Users/mothership/Library/Caches/Cleanup At Startup/Transmit/0E5751A9-D715-491A-AD38-6CAF429D1C44/index.php",
+		"/Users/mothership/Library/Caches/Cleanup At Startup/Transmit/5C2C0CED-4841-4032-9524-4D19B5B6B582/index.php",
+		"/Users/mothership/Library/Caches/Cleanup At Startup/Transmit/8B107696-DF95-44A8-87FE-32060C3A9439/.htaccess",
+		"/Users/mothership/Library/Caches/Cleanup At Startup/Transmit/D82C381B-3EC6-488D-B58B-A846F7262D3D/index.php",
+		"/Users/mothership/Library/Caches/Cleanup At Startup/Transmit/8C47DA2C-EACE-42B4-93BB-94A869F3AA49/index.php",
+		"/Users/mothership/Library/Caches/Cleanup At Startup/Transmit/33CD7394-1B12-4B40-AE85-3CE31F11E7A4/index.php",
+		"/Users/mothership/Library/Caches/Cleanup At Startup/Transmit/8F8F8A2A-2B39-4EE9-89BD-AA6E04C75C6A/cgiecho",
+		"/Users/mothership/Library/Caches/Cleanup At Startup/Transmit/0DB5B712-D1F4-471C-8468-EE6F89CCD427/.htaccess",
+		"/Users/mothership/Library/Caches/Cleanup At Startup/Transmit/191D4731-63AE-4D81-AC15-090DD55D28F6/index.php",
+		"/Users/mothership/Library/Caches/Cleanup At Startup/Transmit/D981442D-66D1-42C5-AF81-87229164F754/.htaccess",
+		"/Users/mothership/Library/Caches/Cleanup At Startup/Transmit/45AB48B7-9B42-4606-9E54-BD1EB3D25BC4/.htaccess",
+		"/Users/mothership/Library/Caches/Cleanup At Startup/Transmit/A48DC8F2-3236-4044-8CD7-C457C3F7316B/index.php",
+		"/Users/mothership/Library/Caches/Cleanup At Startup/Transmit/7B798FBD-42E5-4F4D-99D4-EACA4F3AD459/index.php",
+		"/Users/mothership/Desktop/default_wp_install_todo.txt",
+		"/Library/Server/Web/Data/Sites/Default/admin-custom/.htaccess",
+		"/Library/Server/Web/Data/Sites/Default/admin-custom/errors/notfound.html",
+		"/Library/Server/Web/Data/Sites/Default/admin-custom/errors/notfound.php",
+		"/Library/Server/Web/Data/Sites/Default/admin-custom/.gitignore",
+		"/Library/Server/Web/Data/Sites/Default/admin-custom/wp-content/themes/twentyeleven-child/_assets/css/less/partials/post.less",
+		"/Library/Server/Web/Data/Sites/Default/admin-custom/wp-content/themes/twentyeleven-child/_assets/css/less/partials/sidebar.less",
+		"/Library/Server/Web/Data/Sites/Default/admin-custom/wp-content/themes/twentyeleven-child/_assets/css/less/login.less",
+		"/Library/Server/Web/Data/Sites/Default/admin-custom/wp-content/themes/twentyeleven-child/_assets/css/less/tiny-mce.less",
+		"/Library/Server/Web/Data/Sites/Default/admin-custom/wp-content/themes/twentyeleven-child/_assets/css/admin.css",
+		"/Library/Server/Web/Data/Sites/Default/admin-custom/wp-content/themes/twentyeleven-child/_assets/css/custom.css",
+		"/Library/Server/Web/Data/Sites/Default/admin-custom/wp-content/themes/twentyeleven-child/_assets/css/README.txt",
+		"/Library/Server/Web/Data/Sites/Default/admin-custom/wp-content/themes/twentyeleven-child/documentation/documentation.html",
+		"/Library/Server/Web/Data/Sites/Default/admin-custom/wp-content/themes/twentyeleven-child/_assets/js/site.js",
+		"/Library/Server/Web/Data/Sites/Default/admin-custom/wp-content/themes/twentyeleven-child/_assets/css/site.css",
+		"/Library/Server/Web/Data/Sites/Default/admin-custom/wp-content/themes/twentyeleven-child/documentation/documentation.md",
+		"/Library/Server/Web/Data/Sites/Default/admin-custom/wp-content/themes/twentyeleven-child/_assets/css/tiny-mce.css",
+		"/Library/Server/Web/Data/Sites/Default/admin-custom/wp-content/themes/twentyeleven-child/_assets/css/less/partials/header.less",
+		"/Library/Server/Web/Data/Sites/Default/custom-theme/.htaccess",
+		"/Library/Server/Web/Data/Sites/Default/custom-theme/wp-content/themes/fm_theme/functions.php",
+		"/Library/Server/Web/Data/Sites/Default/custom-theme/wp-config.php",
+		"/Library/Server/Web/Data/Sites/Default/admin-custom/wp-content/themes/twentyeleven-child/readme.md",
+		"/Library/Server/Web/Data/Sites/Default/admin-custom/wp-content/themes/twentyeleven-child/_assets/inc/admin/test.php",
+		"/Library/Server/Web/Data/Sites/Default/admin-custom/wp-content/themes/twentyeleven-child/_assets/inc/admin/admin_customizations.php",
+		"/Library/Server/Web/Data/Sites/Default/admin-custom/wp-content/themes/twentyeleven/functions.php",
+		"/Library/Server/Web/Data/Sites/Default/admin-custom/wp-content/themes/twentyeleven-child/style.css",
+		"/Library/Server/Web/Data/Sites/Default/admin-custom/wp-content/themes/twentyeleven/admin_styles.css",
+		"/Users/mothership/Downloads/wc-stlouis-2012/admin-custom.js",
+		"/Users/mothership/Downloads/wc-stlouis-2012/admin-style.css",
+		"/Users/mothership/Downloads/wc-stlouis-2012/custom.js",
+		"/Users/mothership/Downloads/wc-stlouis-2012/remove-actions-and-filters.php",
+		"/Users/mothership/Downloads/wc-stlouis-2012/style.css",
+		"/Users/mothership/Downloads/wc-stlouis-2012/run-some-filters.php",
+		"/Users/mothership/Downloads/wc-stlouis-2012/wc-stlouis-2012.php",
+		"/Users/mothership/Library/Caches/Cleanup At Startup/Transmit/C7C63735-C5BA-46E1-A2D7-833F1F37FF71/homepage.php",
+		"/Volumes/tele-less/less/body.less",
+		"/Users/mothership/Library/Caches/Cleanup At Startup/Transmit/087E419C-D44A-4C33-8FBC-53E2867EB2FB/index.php",
+		"/Users/mothership/Library/Caches/Cleanup At Startup/Transmit/CA775F33-444E-42EE-A729-1D614DF353E4/newborns.php",
+		"/Users/mothership/Library/Caches/Cleanup At Startup/Transmit/0673A336-038A-4273-AF3F-3791C6C6AF8F/blog_overview copy.php",
+		"/Volumes/tele-less/less/custom.less",
+		"/Volumes/tele-less/less/colors.less",
+		"/Users/mothership/Library/Caches/Cleanup At Startup/Transmit/5D8B10AE-2F8A-4F4A-9B56-2ADF2C639048/homepage.php",
+		"/Volumes/Passavant - Calendar/themes-ai1ec/vortex/agenda.php",
+		"/Volumes/Passavant - Calendar/themes-ai1ec/vortex/agenda-widget.php",
+		"/Volumes/Passavant - Calendar/themes-ai1ec/vortex/oneday.php",
+		"/Volumes/Passavant - Calendar/themes-ai1ec/vortex/month.php",
+		"/Users/mothership/Library/Caches/Cleanup At Startup/Transmit/40DE9C63-E065-4B88-A1D3-D6B46F2A8757/docs.css",
+		"/Users/mothership/Library/Caches/Cleanup At Startup/Transmit/A3AAE46C-DCEB-47A4-A09A-F3A86B22DFF4/functions.php",
+		"/Users/mothership/Library/Caches/Cleanup At Startup/Transmit/7189AF1A-8A12-45E0-B0CD-2D6D772D3BDE/theme_shortcodes.php",
+		"/Users/mothership/Library/Caches/Cleanup At Startup/Transmit/E42FE10C-511E-4B9E-B550-64C0D92C2031/recent_posts_shortcode.php",
+		"/Users/mothership/Library/Caches/Cleanup At Startup/Transmit/7EF3B0DF-B66D-43F3-937D-16967FE2B32C/homepage.php",
+		"/Users/mothership/Library/Caches/Cleanup At Startup/Transmit/3D4EFC29-836A-4D05-929D-987C326ACE65/custom.css",
+		"/Users/mothership/Library/Caches/Cleanup At Startup/Transmit/A330365D-2D19-41BF-BE3B-95255BF7DD70/homepage_recent_posts_save.txt",
+		"/Volumes/tele-less/bootstrap.css",
+		"/Users/mothership/Downloads/TeleManiac Website Needs.txt",
+		"/Users/mothership/Library/Caches/Cleanup At Startup/Transmit/23F59377-57B2-494F-AF89-C8960FE0CFD4/home2.php",
+		"/Users/mothership/Library/Caches/Cleanup At Startup/Transmit/B4ECDCF6-769C-4B9F-8ECF-64D4128B84F1/style.css",
+		"/Volumes/tele-less/less/footer.less",
+		"/Volumes/tele-less/less/homepage.less",
+		"/Users/mothership/Library/Caches/Cleanup At Startup/Transmit/78DC15BE-D8BF-4B80-9AFA-C72426FA610C/footer.php",
+		"/Volumes/tele-less/less/header.less",
+		"/Users/mothership/Library/Application Support/Sparrow/dan@freemanhelp.com.sparrowdb/Cache/INBOX/466/2/TeleManiac Website Needs.txt",
+		"/Users/mothership/Library/Caches/Cleanup At Startup/Transmit/B1978D8F-7420-4F16-9777-945C6B5E05E4/header.php"
+	],
+	"find":
+	{
+		"height": 50.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+			"<project>",
+			"<project>,/Library/Server/Web/Data/Sites/Default/estimator/wp-content/plugins/project_estimator",
+			"<project>",
+			"",
+			"/Volumes/circlebalpacas copy/shareaholic",
+			"<project>",
+			"/Library/Server/Web/Data/Sites/Default/website_estimator/wp-content/plugins/Branding_Estimator",
+			"<project>",
+			"/Library/Server/Web/Data/Sites/Default/dry-harbor-9273",
+			"<project>",
+			"/Library/Server/Web/Data/Sites/Default/custom-theme/wp-content/themes/thematic",
+			"<project>",
+			"/Library/Server/Web/Data/Sites/Default/custom-theme/wp-content/themes/thematic",
+			"<project>",
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": true,
+		"find_history":
+		[
+			"author",
+			"editor",
+			"// Get the current users role\n		global $current_user, $wpdb;\n		get_currentuserinfo();\n		$role = $wpdb->prefix . 'capabilities';\n		$current_user->role = array_keys($current_user->$role);\n		$role = $current_user->role[0];\n\n		",
+			"fmm_developer",
+			"	=>	",
+			"true,",
+			"=>	true",
+			"=>",
+			"=>	true",
+			"=>",
+			"unfiltered_html",
+			"create_users",
+			"remove_meta_box( ",
+			"'post'",
+			"// remove_meta_box(",
+			" id=\"top\"",
+			"docum",
+			"fm_add_favicon",
+			" ==",
+			"pages",
+			"posts",
+			"fm_remove_posts_meta_boxes",
+			"remove_meta_box(",
+			" remove_meta_box(",
+			"remove_meta_box(",
+			"normal",
+			"'normal'",
+			"remove_meta_box",
+			"	'",
+			"			'",
+			" - ",
+			"p",
+			"Portfolio",
+			"remove",
+			"  ",
+			"[text* ",
+			" class:note-form",
+			" watermark class:note-form",
+			"]</p>",
+			"<p>",
+			"subject",
+			"</p>",
+			"watermark ",
+			"class:pull-left",
+			" name ",
+			"<div class=\"clear\"></div>",
+			"<p><h3 class=\"pull-left\">",
+			"&nbsp;</h3>",
+			"-",
+			"func_name",
+			"featured",
+			"\"",
+			"=> ",
+			"=>",
+			"$cat_slug",
+			"wordpress/",
+			"text* ",
+			"text ",
+			"</p>",
+			" </span>",
+			"</span> ",
+			"<p><span class=\"donatelabel\">",
+			"<h3>",
+			"Custom",
+			"'Custom'",
+			"{$custom}",
+			"Book",
+			"codex_custom_init",
+			"create_custom_post_type_test",
+			"=>",
+			" - ",
+			"h3",
+			"/* ",
+			"fm_add_admin_styles",
+			"fm_register_jquery",
+			"enqueue_scripts",
+			"my_mce_before_init",
+			"my_mce_buttons_2",
+			"make_mce_awesome",
+			"my_login",
+			"// ** Custom Settings **//\n/* Turns off the post revisions feature to speed up posting. */\ndefine('WP_POST_REVISIONS', false );\n\n/* Set the auto save duration between saves */\ndefine('AUTOSAVE_INTERVAL', 240 );\n\n/* Allows for moving Wordpress site with less headaches */\n// http://wordpress.org/extend/plugins/velvet-blues-update-urls/\n// define('RELOCATE',true);\n\n/* Disallows the theme editor in Wordpress admin*/\ndefine('DISALLOW_FILE_EDIT',true);\n\n/* Disallows any theme or plugin updates */\ndefine('DISALLOW_FILE_MODS',true);\n\n/* Turns on WP debugging output. */\n// define('WP_DEBUG',true);\n\n// ** END Custom Settings **//",
+			" ",
+			"get_template_directory_uri()",
+			"fm_add_documentation_content",
+			"wps_theme_func",
+			", ",
+			"fm_add_documentation_page",
+			"fm_add_documentation",
+			"register_custom_menu_page",
+			"fm_admin_footer",
+			"||",
+			"if ( !is_super_admin() || !is_admin_bar_showing() )",
+			"if ( !is_super_admin() || !is_admin_bar_showing() ) return;",
+			"posts",
+			"wordpress.org",
+			"wpadminbar",
+			"set_user_admin_bar_false_by_default",
+			"admin_init",
+			"');\n",
+			"fm_remove_admin_menus",
+			"WP_Twenty_Eleven_Ephemera_Widget",
+			"sub_menu",
+			"menu",
+			"my_remove_menu_pages",
+			"remove_footer_admin",
+			"fm_add_admin_styles",
+			",25",
+			"fm_add_fmhelp_admin_bar_link()",
+			"fm_add_contact_admin_bar_link",
+			"dashboard_incoming_links",
+			"dashboard_secondary",
+			"dashboard_incoming_links",
+			"dashboard_primary",
+			"dashboard_incoming_links",
+			"dashboard_recent_drafts",
+			"$wp_meta_boxes['dashboard']['side']['core'][",
+			"'normal'",
+			"fm_add_company_info(",
+			"$addformat",
+			"'",
+			"wpsc_buy_button",
+			"20",
+			"ai1ec-event-time",
+			"event-time",
+			".phys-dept a",
+			",",
+			"IMG0071",
+			"func_name"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"/",
+			"http://www.telemaniacski.com",
+			"",
+			"form-choices hide-visible\"",
+			"<?php include_once \"public/public_helpers.php\"; ?>",
+			"!empty($session_values['page_id'])",
+			"!empty(session_values['page_id'])",
+			"23877d5024e37d5e57077600e824e685",
+			"360336584032972",
+			"/Library/Server/Web/Data/Sites/Default/dh_fan_page_tab",
+			"safe-hollows-2986.herokuapp.com",
+			"$_SERVER['SERVER_NAME']",
+			"$_SERVER[SERVER_NAME]",
+			"[SERVER_NAME] != 'dry-harbor-9273.herokuapp.com'",
+			"fonts/",
+			"'_assets/js/",
+			"'_assets/css/",
+			"'_assets/images/",
+			"estimator/",
+			"admin.php",
+			"",
+			"estimators/web_app_estimator.php",
+			"variables/web_app_vars.php",
+			"options/web_app/web_app_",
+			"PEoptions",
+			"PEoptions_",
+			"PE_options_",
+			"PE",
+			"P_E",
+			"project-estimator-plugin",
+			"project",
+			"Project",
+			"projectEstimator",
+			"PROJECTESTIMATOR",
+			"project_estimator",
+			"project",
+			"Project",
+			"P_E",
+			"PE",
+			"projectEstimator",
+			"PROJECTESTIMATOR",
+			"PE_paypal_",
+			"PE_currency",
+			"PE_step",
+			"PE_phone_num",
+			"PE_myEmail",
+			"project",
+			"Project",
+			"informationSubmitted",
+			"returnURL",
+			"projectEstimator",
+			"PROJECTESTIMATOR",
+			"Project_Estimator",
+			"P_E_",
+			"PE_",
+			"Project_Estimator",
+			"form_firstName",
+			"research_estimator",
+			"brandingEstimate",
+			"BE",
+			"BE_",
+			"BE_informationSubmitted",
+			"BE",
+			"brandingEstimator",
+			"BRANDIGESTIMATOR"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 0.0
+	},
+	"input":
+	{
+		"height": 53.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 46.0
+	},
+	"output.sftp":
+	{
+		"height": 0.0
+	},
+	"replace":
+	{
+		"height": 102.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"less",
+				"_assets/css/less/admin.less"
+			],
+			[
+				".less",
+				"_assets/css/less/site.less"
+			],
+			[
+				"functions",
+				"wp-content/themes/twentyeleven-child/functions.php"
+			],
+			[
+				"func",
+				"wp-content/themes/twentyeleven-child/functions.php"
+			],
+			[
+				"wp-c",
+				"wp-config.php"
+			],
+			[
+				"admin.c",
+				"wp-content/themes/twentyeleven-child/_assets/css/admin.css"
+			],
+			[
+				"one",
+				"themes-ai1ec/vortex/oneday.php"
+			],
+			[
+				"month",
+				"themes-ai1ec/vortex/month.php"
+			],
+			[
+				"agenda",
+				"themes-ai1ec/vortex/agenda-widget.php"
+			],
+			[
+				"agenda-widget.php",
+				"themes-ai1ec/vortex/agenda-widget.php"
+			],
+			[
+				"sitem",
+				"sitemap.xml"
+			],
+			[
+				".coff",
+				"_assets/js/coffee/plugin.coffee"
+			],
+			[
+				"form",
+				"_assets/inc/form_fields/website_form_fields.inc.php"
+			],
+			[
+				"gene",
+				"_assets/inc/general_info.inc.php"
+			],
+			[
+				"hos",
+				"_assets/inc/website_section/sections/hosting.inc.php"
+			],
+			[
+				".co",
+				"_assets/js/coffee/plugin.coffee"
+			],
+			[
+				"websi",
+				"_assets/inc/website_section/website_info.inc.php"
+			],
+			[
+				".les",
+				"_assets/css/less/plugin.less"
+			],
+			[
+				"sub",
+				"_assets/inc/questionaire_submit.php"
+			],
+			[
+				"submit",
+				"_assets/inc/questionaire_submit.php"
+			],
+			[
+				"coff",
+				"_assets/js/coffee/plugin.coffee"
+			],
+			[
+				"genr",
+				"_assets/inc/general_info.inc.php"
+			],
+			[
+				"comment",
+				"_assets/inc/website_section/sections/comments.inc.php"
+			],
+			[
+				"foote",
+				"application/views/editor/footer.php"
+			],
+			[
+				"public",
+				"application/views/public_template.php"
+			],
+			[
+				"footer",
+				"application/views/editor/footer.php"
+			],
+			[
+				"upload",
+				"application/views/editor/form_partials/upload_images_form.php"
+			],
+			[
+				"uplo",
+				"application/controllers/image_upload.php"
+			],
+			[
+				"image",
+				"application/controllers/image_upload.php"
+			],
+			[
+				"publ",
+				"application/controllers/public_page.php"
+			],
+			[
+				"auto",
+				"application/config/autoload.php"
+			],
+			[
+				"admi",
+				"application/controllers/admin_edit.php"
+			],
+			[
+				"edit",
+				"application/views/edit_template.php"
+			],
+			[
+				"editor/al",
+				"application/views/editor/alerts.php"
+			],
+			[
+				"admin",
+				"application/controllers/admin_edit.php"
+			],
+			[
+				"iframe",
+				"application/models/iframes_model.php"
+			],
+			[
+				"ad",
+				"application/controllers/admin_edit.php"
+			],
+			[
+				"publi",
+				"application/controllers/public_page.php"
+			],
+			[
+				"controll",
+				"application/controllers/admin_edit.php"
+			],
+			[
+				"option",
+				"application/views/editor/form_partials/options_form.php"
+			],
+			[
+				".coffe",
+				"_assets/js/coffee/script.coffee"
+			],
+			[
+				"html",
+				"application/views/editor/form_partials/html_form.php"
+			],
+			[
+				"header",
+				"application/views/editor/header.php"
+			],
+			[
+				"public_template.php",
+				"application/views/public_template.php"
+			],
+			[
+				"",
+				"application/config/config.php"
+			],
+			[
+				"face",
+				"application/helpers/facebook_helper.php"
+			],
+			[
+				"data",
+				"application/config/database.php"
+			],
+			[
+				"config",
+				"application/config/config.php"
+			],
+			[
+				"subm",
+				"application/controllers/iframe_form_submit.php"
+			],
+			[
+				"options",
+				"application/views/editor/form_partials/options_form.php"
+			],
+			[
+				"model",
+				"application/models/iframe_model.php"
+			],
+			[
+				"confi",
+				"application/config/config.php"
+			],
+			[
+				"side",
+				"_assets/inc/views/public_sidebar.php"
+			],
+			[
+				"page",
+				"_assets/inc/views/public_page.php"
+			],
+			[
+				"rout",
+				"config/routes.php"
+			],
+			[
+				"help",
+				"helpers/facebook_helper.php"
+			],
+			[
+				"head",
+				"header.php"
+			],
+			[
+				"hea",
+				"fm_theme/header.php"
+			],
+			[
+				"deb",
+				"application/helpers/debug_helper.php"
+			],
+			[
+				"faceb",
+				"application/helpers/facebook_helper.php"
+			],
+			[
+				"debu",
+				"application/helpers/debug_helper.php"
+			],
+			[
+				"tem",
+				"application/views/public_template.php"
+			],
+			[
+				"inde",
+				"index.php"
+			],
+			[
+				"inst",
+				"application/controllers/install.php"
+			],
+			[
+				"conf",
+				"_assets/inc/config.php"
+			],
+			[
+				"p",
+				"public.php"
+			],
+			[
+				"fac",
+				"application/helpers/facebook_helper.php"
+			],
+			[
+				"cof",
+				"application/config/config.php"
+			],
+			[
+				"alert",
+				"application/views/editor/alerts.php"
+			],
+			[
+				"con",
+				"application/config/config.php"
+			],
+			[
+				"co",
+				"_assets/inc/config.php"
+			],
+			[
+				"optio",
+				"ci/application/views/partials/editor/options.php"
+			],
+			[
+				"opt",
+				"ci/application/views/partials/editor/options.php"
+			],
+			[
+				"routes",
+				"ci/application/config/routes.php"
+			],
+			[
+				"foot",
+				"ci/_assets/inc/views/partials/footer.php"
+			],
+			[
+				"templ",
+				"ci/application/views/public_template.php"
+			],
+			[
+				"temp",
+				"ci/application/views/public_template.php"
+			],
+			[
+				"he",
+				"ci/_assets/inc/views/partials/header.php"
+			],
+			[
+				"public_",
+				"_assets/css/public_page.css"
+			],
+			[
+				"aut",
+				"ci/application/config/autoload.php"
+			],
+			[
+				"cong",
+				"_assets/inc/config.php"
+			],
+			[
+				"plugin",
+				"_assets/js/plugin.js"
+			],
+			[
+				"pag",
+				"_assets/inc/views/public_page.php"
+			],
+			[
+				"bug",
+				"bugtracker.php"
+			],
+			[
+				"com",
+				"_assets/inc/views/admin/submit/company_submit.php"
+			],
+			[
+				"comp",
+				"_assets/inc/views/admin/company_info.php"
+			],
+			[
+				"emplo",
+				"_assets/inc/views/admin/submit/employee_submit.php"
+			],
+			[
+				"employe",
+				"_assets/inc/views/admin/employee_list.php"
+			],
+			[
+				"admin.js",
+				"_assets/js/admin.js"
+			],
+			[
+				"em",
+				"_assets/inc/views/admin/employee_template.php"
+			],
+			[
+				"compa",
+				"_assets/inc/views/admin/company_info.php"
+			],
+			[
+				".cof",
+				"_assets/js/coffee/plugin/script.coffee"
+			],
+			[
+				"debug",
+				"_assets/inc/debug.php"
+			],
+			[
+				"c",
+				"_assets/inc/views/admin/contact_list.php"
+			],
+			[
+				"defau",
+				"_assets/inc/views/admin/default_employee_template.php"
+			],
+			[
+				".js",
+				"_assets/js/coffee/plugin/script.js"
+			],
+			[
+				"bugt",
+				"bugtracker.php"
+			],
+			[
+				"pu",
+				"_assets/inc/views/public.php"
+			],
+			[
+				"/less",
+				"_assets/css/less/bootstrap-responsive.less"
+			],
+			[
+				"ema",
+				"email.php"
+			],
+			[
+				".css",
+				"_assets/css/plugin.css"
+			],
+			[
+				"adm",
+				"admin.php"
+			],
+			[
+				"heade",
+				"application/views/partials/header.php"
+			],
+			[
+				"header.php",
+				"wp-content/themes/fm_theme/header.php"
+			],
+			[
+				"tweet",
+				"fm_theme/_assets/inc/recent_tweets.inc.php"
+			],
+			[
+				"them",
+				"thematic/library/extensions/theme-options.php"
+			],
+			[
+				"theme",
+				"thematic/library/extensions/theme-options.php"
+			],
+			[
+				"functio",
+				"fm_theme/functions.php"
+			],
+			[
+				"recen",
+				"fm_theme/_assets/inc/recent_posts.inc.php"
+			],
+			[
+				"home",
+				"fm_theme/home.php"
+			],
+			[
+				"tw",
+				"fm_theme/_assets/inc/recent_tweets.inc.php"
+			],
+			[
+				"shor",
+				"fm_theme/_assets/inc/shortcodes.inc.php"
+			],
+			[
+				"recet",
+				"fm_theme/_assets/inc/recent_tweets.inc.php"
+			],
+			[
+				"glo",
+				"fm_theme/_assets/css/less/global.less"
+			],
+			[
+				"bod",
+				"fm_theme/_assets/css/less/body.less"
+			],
+			[
+				"site.le",
+				"fm_theme/_assets/css/less/site.less"
+			],
+			[
+				"site",
+				"fm_theme/_assets/css/site.css"
+			],
+			[
+				"short",
+				"fm_theme/_assets/inc/shortcodes.php"
+			],
+			[
+				"footer-e",
+				"thematic/library/extensions/footer-extensions.php"
+			],
+			[
+				"widget",
+				"admin/widget_settings.php"
+			],
+			[
+				"des",
+				"admin/design_settings.php"
+			],
+			[
+				"pro",
+				"_assets/js/projectEstimator.js"
+			],
+			[
+				"maste",
+				"_assets/css/master.css"
+			],
+			[
+				"main",
+				"admin/main_settings.php"
+			],
+			[
+				"rewrite",
+				"estimator/wp-includes/rewrite.php"
+			],
+			[
+				"link-templ",
+				"estimator/wp-includes/link-template.php"
+			],
+			[
+				"master",
+				"_assets/css/master.css"
+			],
+			[
+				"mast",
+				"_assets/css/master.css"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"selected_items":
+		[
+			[
+				"",
+				"/Library/Server/Web/Data/Sites/Default/website_estimator/wp-content/plugins/project-estimate.sublime-project"
+			]
+		],
+		"width": 380.0
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 194.0,
+	"status_bar_visible": true
+}

@@ -13,16 +13,16 @@
 }
 /* == Background =================================================================================== */
 	/* Logo Background Tiled*/
-	body.login {
+	/*body.login {
 		background-image: url("../img/admin/logo_bg_tiled.png");
 		background-repeat: repeat;
-	}
-
-	/* Logo Background Large*/
-	/*body.login {
-		background-image: url("../img/admin/logo_bg_big.jpg");
-		background-repeat: no-repeat;
 	}*/
 
+	/* Logo Background Large*/
+	body.login {
+		background-image: url("../img/admin/logo_bg_big.jpg");
+		background-repeat: no-repeat;
+	}
+
 	/* Changes Lost Pass/Back To Site Link Color*/
-	/*.login #nav a, .login #backtoblog a { color: #333!important; }*/
+	.login #nav a, .login #backtoblog a { color: #333!important; }
