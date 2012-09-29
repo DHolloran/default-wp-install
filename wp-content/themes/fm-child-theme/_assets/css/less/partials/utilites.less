@@ -1,0 +1,169 @@
+// == General Utility Classes ========================================
+	.pull-left { float: left; }
+	.pull-right { float: right; }
+	.unstyled { margin: 0; padding: 0; list-style: none; }
+	.hidden { display: none; }
+	.zero-out { margin:0; padding: 0; }
+	.no-margin-first { margin-top: 0 !important; margin-left: 0 !important; }
+	.np-margin-last { margin-right: 0 !important; margin-bottom: 0 !important; }
+	.no-margin-left { margin-left: 0 !important; }
+	.np-margin-right { margin-right: 0 !important; }
+	.not-visible { visibility: hidden; width: 0!important; height: 0!important; }
+	.input-block-level {
+	  display: block;
+	  -webkit-box-sizing: border-box;
+	  -moz-box-sizing: border-box;
+	  box-sizing: border-box;
+	  width: 100%;
+	  min-height: 30px;
+	}
+
+	// Adds (PDF) and size if specified to all PDF links
+	a[href$=".pdf"]:after { content: " (PDF)"; }
+	a[href$=".pdf"][data-size]:after { content: " (PDF, " attr(data-size) ")"; }
+
+	// Nice Blockquote
+	// blockquote {
+	// 	background:#f9f9f9;
+	// 	border-left:10px solid #ccc;
+	// 	margin:1.5em 10px;
+	// 	padding:.5em 10px;
+	// 	quotes:"\201C""\201D""\2018""\2019"; }
+	// blockquote:before {
+	// 	color:#ccc;
+	// 	content:open-quote;
+	// 	font-size:4em;
+	// 	line-height:.1em;
+	// 	margin-right:.25em;
+	// 	vertical-align:-.4em; }
+	// blockquote p {
+	// 	display:inline; }
+
+	// Top Shadow
+	// body:before {
+	//   position: fixed;
+	//   top: -10px;
+	//   left: 0;
+
+	//   z-index: 100;
+	//   width: 100%;
+	//   height: 10px;
+
+	//   -webkit-box-shadow: 0px 0px 10px rgba(0,0,0,.8);
+	//       -moz-box-shadow: 0px 0px 10px rgba(0,0,0,.8);
+	//                  box-shadow: 0px 0px 10px rgba(0,0,0,.8);
+	//   content: ""; }
+	// Zebra Stripe Table
+	tbody.zebra tr:nth-child(odd) { background-color: #ccc; }
+
+	// Cross Browser Opacity
+	.transparent {
+	  opacity: 0.5;
+	  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+	  filter: alpha(opacity=50);
+	  -moz-opacity: 0.5;
+	  -khtml-opacity: 0.5;
+	}
+
+	// Remove dotted border on links
+	a:active, a:focus { outline: none; }
+
+	// Force WebKit to put file upload button on right
+	input[type="file"]{
+	   text-align: left;
+	   -webkit-appearance: none;
+	   -webkit-rtl-ordering:  left;
+	}
+	input[type="file"]::-webkit-file-upload-button{
+	   float: right;
+	   margin: 0 0 0 10px;
+	   border: 1px solid #aaaaaa;
+	   border-radius: 4px;
+	   background-image: -webkit-gradient(linear, left bottom, left top, from(#d2d0d0), to(#f0f0f0));
+	   background-image: -moz-linear-gradient(90deg, #d2d0d0 0%, #f0f0f0 100%);
+	   -webkit-appearance: none;
+	}
+
+	// Give all clickable elements a cursor
+	a[href],
+	input[type='submit'],
+	input[type='image'],
+	label[for],
+	select,
+	button,
+	.pointer {
+		cursor: pointer;
+	}
+// == Float Clear ====================================================
+	// Clear Fix
+	.clearfix {
+		*zoom: 1;
+		&:before,
+		&:after {
+		  display: table;
+		  content: "";
+		  line-height: 0;
+		}
+		&:after { clear: both; }
+	} // .clearfix
+
+	// Clear
+	.clear { clear: both; }
+// == Text ===========================================================
+	// Blurry Text
+	.blur {
+	   color: transparent;
+	   text-shadow: 0 0 5px rgba(0,0,0,0.5);
+	}
+
+	// Text Selection
+	::-moz-selection { background-color: #FFA; color: #000; }
+	::selection { background-color: #FFA; color: #000; }
+
+	// Hides Text
+	.hide-text {
+		overflow: hidden;
+		text-indent: 100%;
+		white-space: nowrap;
+	}
+
+	// Fancy Ampersand
+	// .amp {
+	// 	font-family: Baskerville, 'Goudy Old Style', Palatino, 'Book Antiqua', serif;
+	// 	font-style: italic;
+	// 	font-weight: normal; }
+
+	// Quality abbreviations
+	abbr {
+	 border-bottom: 1px dotted #222;
+	 color: #222;
+	 cursor: help;
+	}
+
+	// Force <pre> to text wrap
+	pre {
+		white-space: pre-wrap;
+		white-space: -moz-pre-wrap;
+		white-space: -pre-wrap;
+		white-space: -o-pre-wrap;
+		word-wrap: break-word;
+	}
+
+	// Prevent Superscripts and Subscripts from Affecting Line-Height
+	sup, sub {
+	  position: relative;
+	  top: -0.4em;
+	  vertical-align: baseline;
+	}
+	sub { top: 0.4em; }
+
+	//Truncate With Ellipsis
+	.ellipsis {
+		overflow: hidden;
+		width: 250px;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+
+
+

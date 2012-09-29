@@ -1,0 +1,12 @@
+/*
+Theme Name:     FreeMan Marketing Child Theme
+Theme URI:      http://www.freemanhelp.com
+Description:    Child theme for use with projects at FreeMan Marketing
+Author:         Dan Holloran
+Author URI:     http://www.freemanhelp.com
+Template:       twentyeleven
+Version:        0.2.0
+*/
+
+/* Import the parents stylesheet */
+@import url("../twentyeleven/style.css");
