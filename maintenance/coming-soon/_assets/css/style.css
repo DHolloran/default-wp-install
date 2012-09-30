@@ -1,0 +1,142 @@
+/*
+Coming Soon Page Styles
+Author: Dan Holloran
+Email: dan@freemanhelp.com
+http://www.freemanhelp.com
+*/
+
+/* == Global/Body == */
+	/* Sticky Footer */
+	* { margin:0; padding:0; }
+	html, body, #wrap { height: 100%; }
+	body > #wrap {height: auto; min-height: 100%;}
+	#main { padding-bottom: 150px; }  /* must be same height as the footer */
+	#footer {  position: relative; margin-top: -150px; /* negative value of footer height */ height: 150px; clear:both;}
+	/* CLEAR FIX*/
+	.clearfix:after {content: "."; display: block; height: 0; clear: both; visibility: hidden;}
+	.clearfix {display: inline-block;}
+	/* Hides from IE-mac \*/
+	* html .clearfix { height: 1%;}
+	.clearfix {display: block;}
+	/* End hide from IE-mac */
+
+	body {
+		background-color: #fafafa;
+		color: #333;
+		background-image: url(http://0341f4c.netsolhost.com/wp-content/uploads/2012/01/grandcanyon3.jpg);
+	}
+	#top-half-bg {
+		width: 100%;
+		height: 100%;
+		position: absolute;z-index: -10;
+		/*background: #7fd0ff;
+		background: -moz-linear-gradient(top,  #7fd0ff 1%, #cbebff 47%, #fafafa 100%);
+		background: -webkit-gradient(linear, left top, left bottom, color-stop(1%,#7fd0ff), color-stop(47%,#cbebff), color-stop(100%,#fafafa));
+		background: -webkit-linear-gradient(top,  #7fd0ff 1%,#cbebff 47%,#fafafa 100%);
+		background: -o-linear-gradient(top,  #7fd0ff 1%,#cbebff 47%,#fafafa 100%);
+		background: -ms-linear-gradient(top,  #7fd0ff 1%,#cbebff 47%,#fafafa 100%);
+		background: linear-gradient(to bottom,  #7fd0ff 1%,#cbebff 47%,#fafafa 100%);
+		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7fd0ff', endColorstr='#fafafa',GradientType=0 );*/
+	}
+/* == Header == */
+	header {
+		margin: 100px 0 60px 0;
+		text-align: center;
+		text-shadow: 1px 1px 3px rgba(0, 0, 0, .25);
+	}
+	header h1 {
+		font-size: 48px;
+	}
+	.tagline {
+		font-size: 24px;
+		margin-top: 15px;
+		font-weight: bold;
+	}
+/* == Email Signup Form == */
+	#email-signup-form { height: 40px; margin-bottom: 60px;}
+	#email-signup-form input[type="text"] {
+		width: 470px;
+		height: 40px;
+		font-size: 32px;
+		line-height: 40px;
+		border-radius: 5px;
+		box-shadow: 1px 1px 3px rgba(0, 0, 0, .25);
+	}
+	#email-signup-form label {
+		font-size: 32px;
+		line-height: 40px;
+		height: 40px;
+		margin: 5px 17px 0 35px;
+		width: 179px;
+		font-weight: bold;
+		color: #414141;
+		text-shadow: 1px 1px 3px #FAFAFA;
+	}
+	.btn-xlarge {
+		padding: 12px 12px;
+		font-size: 32px;
+		margin: 3px 0 0 17px;
+		box-shadow: 1px 1px 3px rgba(0, 0, 0, .25);
+	}
+/* == Count Down Timer == */
+	#count-down {
+		margin-left: 262px;
+		width: 380px;
+		color: #333;
+		padding: 20px;
+		height: 200px;
+		border-radius: 25px;
+	}
+	.cntSeparator {
+		font-size: 54px;
+		margin: 22px 7px;
+	}
+	.counter-desc {
+		margin: 3px;
+		height: 15px;
+		padding: 0;
+		opacity: .7;
+	}
+	.counter-desc div {
+		font-family: Arial;
+		width: 70px;
+		margin-right: 65px;
+		font-size: 13px;
+		font-weight: bold;
+	}
+	.counter-desc div:last-child {
+		margin-right:0;
+	}
+	#seperator8,#cnt_9,#cnt_10 { display: none; }
+/* == Footer == */
+	footer {
+		width:100%;
+		height: 40px;
+		background: #333; /* Old browsers */
+		background: -moz-linear-gradient(top,  #333 0%, #000 100%); /* FF3.6+ */
+		background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#333), color-stop(100%,#000)); /* Chrome,Safari4+ */
+		background: -webkit-linear-gradient(top,  #333 0%,#000 100%); /* Chrome10+,Safari5.1+ */
+		background: -o-linear-gradient(top,  #333 0%,#000 100%); /* Opera 11.10+ */
+		background: -ms-linear-gradient(top,  #333 0%,#000 100%); /* IE10+ */
+		background: linear-gradient(to bottom,  #333 0%,#000 100%); /* W3C */
+		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#333', endColorstr='#000',GradientType=0 ); /* IE6-9 */
+		color: #fafafa;
+		font-size: 18px;
+		line-height: 40px;
+		text-align: center;
+	}
+	footer a:link, footer a:visited {
+		color:  #7fd0ff;
+	}
+	footer a:hover, footer a:active {
+		color: #005580;
+		text-decoration: underline;
+	}
+	/* Facebook like button. */
+	.fb_iframe_widget {
+		display: block!important;
+	}
+	.fb-like {
+		display: block!important;
+		margin: -49px 0 0 525px;
+	}
