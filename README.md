@@ -6,7 +6,7 @@ Author(s) email: <Dan@freemanhelp.com>
 Website: http://www.FreeManHelp.com  
 Description: For use at FreeMan Marketing as a good starting place for all new project  
 
-##Change Log
+###Change Log
 - **1.0.0** To many to list first upload
 **Since 1.0.0**
 - Removed TwentyTen default theme
@@ -16,7 +16,7 @@ Description: For use at FreeMan Marketing as a good starting place for all new p
 - Merged TODO.md and INSTALL.md into README.md
 
 ***
-##TODO
+###TODO
 - Moving/Re-doing admin theme menus that client should have access to so we can restrict the ones that they shouldn't
 - Ajax Helper
 - Add launch checklist/punchlist
@@ -50,7 +50,7 @@ Description: For use at FreeMan Marketing as a good starting place for all new p
 
 
 ***
-##Install
+###Install
 - Set Settings > General timezone to  chicago
 - Users >Your Profile check Disable the visual editor when writing
 - Tools > Import /test-data.2011-01-17.xml
@@ -59,7 +59,7 @@ Description: For use at FreeMan Marketing as a good starting place for all new p
 
 
 ***
-##Launch
+###Launch
 - Setup Helps With Spam in .htaccess with site url
 - Setup Force WWW/no-WWW in .htaccess with site url
 - TODO
@@ -68,32 +68,32 @@ Description: For use at FreeMan Marketing as a good starting place for all new p
 
 
 ***
-##Included Projects
+###Included Projects
 - TODO
 
 
 
 
 ***
-##Shortcodes
+###Shortcodes
 - TODO
 
 
 
 ***
-##CSS Utility Classes
+###CSS Utility Classes
 - TODO
 
 
 
 ***
-##LESS Mixins
+###LESS Mixins
 - TODO
 
 
 
 ***
-##CSS Utility Classes
+###CSS Utility Classes
 - TODO
 
 
