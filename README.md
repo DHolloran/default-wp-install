@@ -1,33 +1,34 @@
 Default WordPress Install
 =========================
 
-Author(s): Dan Holloran  
-Author(s) email: <Dan@freemanhelp.com>  
-Website: http://www.FreeManHelp.com  
-Description: For use at FreeMan Marketing as a good starting place for all new project  
+**Author(s):** Dan Holloran  
+**Author(s) email:** <Dan@freemanhelp.com>  
+**Website:** http://www.FreeManHelp.com  
+**Description:** For use at FreeMan Marketing as a good starting place for all new project  
+**Acknowledgments:** Thank you to everyone that has created an open project that I have included in this project which allows me to make my job/life easier
 
 ###Change Log
-- **1.0.0** To many to list first upload
-**Since 1.0.0**
-- Removed TwentyTen default theme
-- Setup default .sublime-project
-- Moved maintenance files into maintenance directory
-- Added more ShortCodes
-- Merged TODO.md and INSTALL.md into README.md
+- **1.0.0** To many to list first upload  
+- **Since 1.0.0**
+	- Removed TwentyTen default theme
+ 	- Setup default .sublime-project
+ 	- Moved maintenance files into maintenance directory
+ 	- Added more ShortCodes
+ 	- Merged TODO.md and INSTALL.md into README.md
 
 ***
 ###TODO
 - Moving/Re-doing admin theme menus that client should have access to so we can restrict the ones that they shouldn't
 - Ajax Helper
-- Add launch checklist/punchlist
+- Add launch checklist/punch-list
 - Fill out license
 - Add setup instructions/checklist
-- Upload zip
-- Make private Repo
+- ~~Upload zip~~
+- ~~Make private Repo~~
 - Add style guide/best practices
 - Add suggested downloads links
 - Look over WordCamp notes
-- Make screen shot for theme switcher
+- ~~Make screen shot for theme switcher~~
 - Include JavaScript form validation http://rickharrison.github.com/validate.js/
 - Find PHP form validation
 - Implement /wp-content/themes/fm-child-theme/_assets/js/libs/jquery.timeago.js
@@ -38,19 +39,20 @@ Description: For use at FreeMan Marketing as a good starting place for all new p
 - Add Google/Adobe Edge fonts support
 - Complete /wp-content/sample-db-error.php for custom DB error page
 - Contact Us dashboard form for owner/admin???
-- Make contact information is only accessible by owner/admin????
+- Make sure contact information is only accessible by owner/admin????
 - Add more icon fonts
 - Implement /wp-content/themes/fm-child-theme/_assets/js/libs/retina.js
 - Add more responsive helpers
-- Add Adaptive.js
-- Add Enhance.js
+- Add Adaptive.js????
+- Add Enhance.js????
 - Look for other libs to add that will make life easier
-- Fill in TODO's in readme
+- Fill in TODO's in read me
+- Better information about what is available
 
 
 
 ***
-###Install
+###Install Check-List
 - Set Settings > General timezone to  chicago
 - Users >Your Profile check Disable the visual editor when writing
 - Tools > Import /test-data.2011-01-17.xml
@@ -59,7 +61,7 @@ Description: For use at FreeMan Marketing as a good starting place for all new p
 
 
 ***
-###Launch
+###Launch Check-List
 - Setup Helps With Spam in .htaccess with site url
 - Setup Force WWW/no-WWW in .htaccess with site url
 - TODO
