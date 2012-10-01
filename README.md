@@ -3,7 +3,7 @@ Default WordPress Install
 
 **Author(s):** Dan Holloran  
 **Author(s) email:** <Dan@freemanhelp.com>  
-**Website:** http://www.FreeManHelp.com  
+**Website:** [http://www.FreeManHelp.com]( http://www.freemanhelp.com)  
 **Description:** For use at FreeMan Marketing as a good starting place for all new project  
 **Acknowledgments:** Thank you to everyone that has created an open project that I have included in this project which allows me to make my job/life easier
 
