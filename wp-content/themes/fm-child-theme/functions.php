@@ -1,20 +1,32 @@
 <?php
-// == Adds the documentation page content (admin_customizations.inc.php) ===
+// == Adds the site documentation page content (admin_customizations.inc.php) ===
 		function fm_add_documentation_content()
 		{
-			// :TODO Add a PDF button/icon
-			$pdf_download_link = get_stylesheet_directory_uri(). '/documentation/documentation.pdf';
+			$pdf_download_link = get_stylesheet_directory_uri(). '/documentation/user/documentation.pdf';
 
 			// Output heading
-		  echo '<div class="wrap">';
-		  echo '<div id="icon-options-general" class="icon32"><br></div><h2 id="top">Site Documentation</h2>';
-		  echo "<p><a href=\"$pdf_download_link\" class=\"button-primary\">Download PDF</a></p>";
-		  echo '<div class="clear"></div>';
-		  // Require  the documentation
-		  require_once "documentation/documentation.php";
-
-		  echo '</div> <!-- END .wrap -->';
+			echo '<div class="wrap">';
+			echo '<div id="icon-options-general" class="icon32"><br></div><h2 id="top">Site User Guide</h2>';
+			echo "<p><a href=\"$pdf_download_link\" class=\"button-primary\">Download</a></p>";
+			echo '<div class="clear"></div>';
+			// Require  the documentation
+			require_once "documentation/user/documentation.html";
+			echo '</div> <!-- END .wrap -->';
 		} // fm_add_documentation_content()
+
+// == Adds the Dev documentation page content (admin_customizations.inc.php) ====
+		function fm_add_developer_documentation_content()
+		{
+
+			// Output heading
+			echo '<div class="wrap">';
+			echo '<div id="icon-options-general" class="icon32"><br></div><h2 id="top">Developer Documentation</h2>';
+			echo '<div class="clear"></div>';
+
+			// Require  the documentation
+			require_once "documentation/developer/documentation.html";
+			echo '</div> <!-- END .wrap -->';
+		} // fm_add_developer_documentation_content()
 
 
 // All PHP requires should be placed in _assets/inc/ thanks!
