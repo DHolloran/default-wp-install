@@ -12,6 +12,10 @@
 	.unstyled { list-style: none; margin: 0; padding: 0; }
 	.clear { clear: both; }
 
+	// Adds (PDF) and size if specified to all PDF links
+	a[href$=".pdf"]:after { content: " (PDF)"; }
+	a[href$=".pdf"][data-size]:after { content: " (PDF, " attr(data-size) ")"; }
+
 // == Admin Bar ==========================================================================
 	/* :TODO Change the color of the admin bar. Make it very simple!*/
 	/* Admin Bar Logo */
