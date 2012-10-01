@@ -23,25 +23,21 @@ Default WordPress Install
  	
 ***
 ###TODO
+
 ####Forms TODOs
 - Include JavaScript form validation http://rickharrison.github.com/validate.js/
 - Find PHP form validation
-
-
 
 ####Icons/Fonts TODOs
 - Add more icon fonts
 - Add Google/Adobe Edge fonts support
 
-
-
 ####Add/Edit Files TODOs
-- Implement /wp-content/themes/fm-child-theme/_assets/js/libs/retina.js
 - Complete /wp-content/sample-db-error.php for custom DB error page
 - Make error pages
 - Implement H5BP into child theme
 - Page to PDF creation
-
+- Decided on what files require other files 
 
 ####Repsonsive TODOs
 - Add more responsive helpers
@@ -49,8 +45,6 @@ Default WordPress Install
 - Add Enhance.js????
 - Implement 360andup or some other sort of media-queries
 - Implement /wp-content/themes/fm-child-theme/_assets/js/libs/jquery.timeago.js
-
-
 
 ####Random TODOs
 - Look for other libs to add that will make life easier
@@ -70,8 +64,7 @@ Default WordPress Install
 - ~~Make private Repo~~
 - ~~Make screen shot for theme switcher~~
 - ~~Make sure contact information is only accessible by owner/admin~~
-
-
+- ~~Implement /wp-content/themes/fm-child-theme/_assets/js/libs/retina.js~~
 
 ***
 ###Install Check-List
@@ -93,8 +86,10 @@ Default WordPress Install
 
 ***
 ###Included Projects
-- TODO
-
+- Retina.js [http://retinajs.com/](http://retinajs.com/) *Disabled by default*
+- HTML 5 Shim
+- Prefix Free [http://leaverou.github.com/prefixfree/](http://leaverou.github.com/prefixfree/) *Disabled by default*
+- jquery.timeago.js [http://timeago.yarp.com](http://timeago.yarp.com) *Disabled by default*
 
 
 

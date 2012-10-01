@@ -21,26 +21,33 @@
 	function fm_enqueue_site_scripts()
 	{
 		// Unregister and re-register jQuery
-		wp_deregister_script('jquery');
-		wp_register_script('jquery', 'https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js'
-		                   ,array(), '1.8.2', true);
+		// wp_deregister_script('jquery');
+		// wp_register_script('jquery', 'https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js'
+		//                    ,array(), '1.8.2', true);
 
 		// Register site main script
-		// wp_register_script('fm-site-script', get_stylesheet_directory_uri(). '/_assets/js/site.js',
-		// 									array('jquery'), null, true);
+		// wp_register_script('fm-site-script', get_stylesheet_directory_uri(). '/_assets/js/site.js', array('jquery'), null, true);
 
-		// Register site main script
-		wp_register_script('fm-coffee-script', get_stylesheet_directory_uri(). '/_assets/js/coffee/coffee.js',
-											array('jquery'), null, true);
+		// Register site coffee script
+		wp_register_script('fm-coffee-script', get_stylesheet_directory_uri(). '/_assets/js/coffee/coffee.js', array('jquery'), null, true);
+
+		// Register TimeAgo
+		// wp_register_script('fm-timeago-js', get_stylesheet_directory_uri(). '/wp-content/themes/fm-child-theme/_assets/js/libs/jquery.timeago.js', null, true);
+
+		// Register Retina.js
+		// wp_register_script('fm-retina-js', get_stylesheet_directory_uri(). '/wp-content/themes/fm-child-theme/_assets/js/libs/retina.js', null, true);
 
 		// Register Prefix-Free
-		wp_register_script('fm-prefix-free', get_stylesheet_directory_uri(). '/_assets/js/libs/prefixfree.min.js', null, false);
+		// wp_register_script('fm-prefix-free', get_stylesheet_directory_uri(). '/_assets/js/libs/prefixfree.min.js', null, false);
 
 		// Enqueue Scripts
 		// wp_enqueue_script('jquery');
 		// wp_enqueue_script('fm-site-script');
-		wp_enqueue_script('fm-prefix-free');
 		wp_enqueue_script('fm-coffee-script');
+		// wp_enqueue_script('fm-retina-js');
+		// wp_enqueue_script('fm-prefix-free');
+		// wp_enqueue_script('fm-timeago-js');
+
 	} // fm_enqueue_site_scripts()
 	add_action('wp_enqueue_scripts', 'fm_enqueue_site_scripts');
 

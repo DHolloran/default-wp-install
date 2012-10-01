@@ -47,29 +47,28 @@
 	} // fm_month_name_shortcode($atts)
 	add_shortcode('fm-date', 'fm_date_shortcode');
 
-	// Get Current Day of the Week Name
+	// Get Current Day of the Week Name [fm-day-of-week]
 	function fm_day_of_week_name_shortcode() {
 		$day_of_week = date('l');
 		return $day_of_week;
 	} // fm_month_name_shortcode()
 	add_shortcode('fm-day-of-week', 'fm_day_of_week_name_shortcode');
 
-	// Get Current Date
+	// Get Current Date [fm-date]
 	function fm_date_shortcode() {
 		$date = date('j');
 		return $date;
 	} // fm_date_shortcode()
-	add_shortcode('fm-month', 'fm_date_shortcode');
+	add_shortcode('fm-date', 'fm_date_shortcode');
 
-	// Get Current Month Name
-	// Get Current Year
+	// Get Current Month Name [fm-month-name]
 	function fm_month_shortcode() {
-		$month = date('Y');
+		$month = date('F');
 		return $month;
 	} // fm_month_shortcode()
 	add_shortcode('fm-month-name', 'fm_month_shortcode');
 
-	// Get Current Year
+	// Get Current Year [fm-year]
 	function fm_year_shortcode() {
 		$year = date('Y');
 		return $year;
