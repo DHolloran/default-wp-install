@@ -1,25 +1,27 @@
 Default WordPress Install
 =========================
 
-**Author(s):** Dan Holloran  
-**Author(s) email:** <Dan@freemanhelp.com>  
-**Website:** http://www.FreeManHelp.com  
-**Description:** For use at FreeMan Marketing as a good starting place for all new project  
+**Author(s):** Dan Holloran
+**Author(s) email:** <Dan@freemanhelp.com>
+**Website:** http://www.FreeManHelp.com
+**Description:** For use at FreeMan Marketing as a good starting place for all new project
 **Acknowledgments:** Thank you to everyone that has created an open project that I have included in this project which allows me to make my job/life easier
 
 ###Change Log
-- **1.0.0** To many to list first upload  
+- **1.0.0** To many to list first upload
 - **Since 1.0.0**
 	- Removed TwentyTen default theme
  	- Setup default .sublime-project
  	- Moved maintenance files into maintenance directory
  	- Added more ShortCodes
  	- Merged TODO.md and INSTALL.md into README.md
-
+ 	- Added AJAX helper
+ 	- Added child theme screenshot
+ 	- Fixed user role checking
 ***
 ###TODO
 - Moving/Re-doing admin theme menus that client should have access to so we can restrict the ones that they shouldn't
-- Ajax Helper
+- ~~Ajax Helper~~
 - Add launch checklist/punch-list
 - Fill out license
 - Add setup instructions/checklist
@@ -39,7 +41,7 @@ Default WordPress Install
 - Add Google/Adobe Edge fonts support
 - Complete /wp-content/sample-db-error.php for custom DB error page
 - Contact Us dashboard form for owner/admin???
-- Make sure contact information is only accessible by owner/admin????
+- ~~Make sure contact information is only accessible by owner/admin~~
 - Add more icon fonts
 - Implement /wp-content/themes/fm-child-theme/_assets/js/libs/retina.js
 - Add more responsive helpers
