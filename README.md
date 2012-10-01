@@ -20,6 +20,9 @@ Default WordPress Install
  	- Added child theme screenshot
  	- Fixed user role checking
  	- Added slides custom post type for use with slideshows
+ 	- Added retina.js
+ 	- Added prefix-free.js
+ 	- Added jquery.timeago.js
  	
 ***
 ###TODO
@@ -27,6 +30,10 @@ Default WordPress Install
 ####Forms TODOs
 - Include JavaScript form validation http://rickharrison.github.com/validate.js/
 - Find PHP form validation
+
+####Plugins TODOs
+- Add jPlayer plugin
+
 
 ####Icons/Fonts TODOs
 - Add more icon fonts
@@ -46,12 +53,11 @@ Default WordPress Install
 - Implement 360andup or some other sort of media-queries
 - Implement /wp-content/themes/fm-child-theme/_assets/js/libs/jquery.timeago.js
 
-####Random TODOs
+####General TODOs
 - Look for other libs to add that will make life easier
-- Fill in TODO's in read me
+- Add explanations to LESS mixins
 - Better information about what is available
 - Add style guide/best practices
-- Add suggested downloads links
 - Look over WordCamp notes
 - Add launch checklist/punch-list
 - Fill out license
@@ -59,12 +65,6 @@ Default WordPress Install
 - Custom theme options page to transplant theme options client should have access too
 
 ####Completed TODOs
-- ~~Ajax Helper~~
-- ~~Upload zip~~
-- ~~Make private Repo~~
-- ~~Make screen shot for theme switcher~~
-- ~~Make sure contact information is only accessible by owner/admin~~
-- ~~Implement /wp-content/themes/fm-child-theme/_assets/js/libs/retina.js~~
 
 ***
 ###Install Check-List
@@ -72,8 +72,6 @@ Default WordPress Install
 - Users >Your Profile check Disable the visual editor when writing
 - Tools > Import /test-data.2011-01-17.xml
 - TODO
-
-
 
 ***
 ###Launch Check-List
@@ -138,7 +136,46 @@ Default WordPress Install
 
 ***
 ###LESS Mixins
-- TODO
+- **General**
+	- `.opacity(@opacity: 0.5)`
+	- `.columns(@colwidth: 250px, @colcount: 0, @colgap: 50px, @columnRuleColor: #EEE, @columnRuleStyle: solid, @columnRuleWidth: 1px)`
+	- `.min-height(@height)`
+	- `.arrow-up(@border-size: 30px, @color: #333)`
+	- `.arrow-down(@border-size: 30px, @color: #333)`
+	- `.arrow-right(@border-size: 30px, @color: #333)`
+	- `.arrow-left(@border-size: 30px, @color: #333)`
+	- `.drop-cap(@color:#903)`
+	- `.box-sizing (@type: border-box)`
+	- `.perspective (@value: 1000)`
+- **Gradient**
+	- `.gradient(@color: #F5F5F5, @start: #EEE, @stop: #FFF)`
+	- `.bw-gradient(@color: #F5F5F5, @start: 0, @stop: 255)`
+	- `.horizontal-gradient (@startColor: #eee, @endColor: white)`
+- **Borders**
+	- `.bordered(@top-color: #EEE, @right-color: #EEE, @bottom-color: #EEE, @left-color: #EEE)`
+	- `.border-top(@border-color: #333, @margin-top: 5px)`
+	- `.rounded(@radius: 2px)`
+	- `.border-top-right(@radius)`
+	- `.border-bottom-right(@radius)`
+	- `.border-top-leftt(@radius)`
+	- `.border-bottom-leftt(@radius)`
+	- `.border-radiuses (@topright: 0, @bottomright: 0, @bottomleft: 0, @topleft: 0)`
+- **Drop Shadow**
+	- `.drop-shadow(@x-axis: 0, @y-axis: 1px, @blur: 2px, @alpha: 0.1)`
+	- `.inner-shadow(@horizontal:0, @vertical:1px, @blur:2px, @alpha: 0.4)`
+	- `.box-shadow(@arguments)`
+	- `.text-shadow (@string: 0 1px 3px rgba(0, 0, 0, 0.25))`
+- **Animation**
+	- `.transition-duration(@duration: 0.2s)`
+	- `.rotation(@deg:5deg)`
+	- `.scale(@ratio:1.5)`
+	- `.transition(@duration:0.2s, @ease:ease-out)`
+	- `.translate(@x:0, @y:0)`
+	- `.transform-origin (@x:center, @y:center)`
+	- `.transform(@string)`
+	- `.skew (@deg, @deg2)`
+	- `.translate3d (@x, @y: 0, @z: 0)`
+	- `.animation (@name, @duration: 300ms, @delay: 0, @ease: ease)`
 
 
 
