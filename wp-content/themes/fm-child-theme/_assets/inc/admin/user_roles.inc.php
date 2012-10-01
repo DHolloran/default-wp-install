@@ -79,8 +79,9 @@
 	function user_is_fmm_developer()
 	{
 		$role = get_current_user_role();
+
 		// Check if the current user is a FreeMan Marketing Developer
-		if ($role = 'fmm_developer') {
+		if ($role == 'fmm_developer') {
 			return true;
 		} else {
 			return false;
@@ -91,7 +92,7 @@
 	{
 		$role = get_current_user_role();
 		// Check if the current user is a FreeMan Marketing Developer
-		if ($role = 'admin') {
+		if ($role == 'administrator') {
 			return true;
 		} else {
 			return false;
@@ -102,7 +103,7 @@
 	{
 		$role = get_current_user_role();
 		// Check if the current user is a FreeMan Marketing Developer
-		if ($role = 'editor') {
+		if ($role == 'editor') {
 			return true;
 		} else {
 			return false;
@@ -113,7 +114,7 @@
 	{
 		$role = get_current_user_role();
 		// Check if the current user is a FreeMan Marketing Developer
-		if ($role = 'author') {
+		if ($role == 'author') {
 			return true;
 		} else {
 			return false;
@@ -124,7 +125,7 @@
 	{
 		$role = get_current_user_role();
 		// Check if the current user is a FreeMan Marketing Developer
-		if ($role = 'contributor') {
+		if ($role == 'contributor') {
 			return true;
 		} else {
 			return false;
@@ -135,7 +136,7 @@
 	{
 		$role = get_current_user_role();
 		// Check if the current user is a FreeMan Marketing Developer
-		if ($role = 'subscriber') {
+		if ($role == 'subscriber') {
 			return true;
 		} else {
 			return false;

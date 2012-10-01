@@ -1,5 +1,6 @@
 <?php
 // :TODO Extend more admin customization functionality
+
 // == Admin StyleSheet ================================================
 	function fm_add_admin_stylesheet()
 	{
@@ -7,6 +8,7 @@
 		wp_register_style('fm-admin-styles', $css_url);
 		wp_enqueue_style('fm-admin-styles');
 	} // fm_add_admin_stylesheet()
+
 // == Admin Bar =======================================================
 	// Add contact us email link
 		function fm_add_contact_admin_bar_link()
@@ -59,6 +61,7 @@
 			'href' => home_url(),
 			'meta'  => array( 'target' => '_blank')));
 		} // fm_add_fmhelp_admin_bar_link()
+
 // == Side Menu =======================================================
 	// :TODO Make it to where everything can be visible to developers only.
 	// Remove Admin Menu Items
@@ -102,16 +105,26 @@
 		} // fm_remove_admin_menu_pages()
 
 	// Add Documentation Menu Page
-		// Adds the documentation page
-		function fm_add_documentation()
-		{
-		  add_menu_page(
-			  'Site Documentation',
-			  'Documentation',
-			  'manage_options',
-			  'fm-site-documentation',
-			  'fm_add_documentation_content');
-		} // fm_add_documentation()
+	function fm_add_site_documentation()
+	{
+	  add_menu_page(
+		  'Site User Guide',
+		  'User Guide',
+		  'manage_options',
+		  'fm-site-documentation',
+		  'fm_add_documentation_content');
+	} // fm_add_site_documentation()
+
+	// Add Developer Documentation Menu Page
+	function fm_add_developer_documentation()
+	{
+		add_menu_page( 'Developer Documentation',
+			'Developers',
+			'manage_options',
+			'developer-documentation',
+			'fm_add_developer_documentation_content');
+	} // fm_add_developer_documentation()
+
 // == Dashboard =======================================================
 	// Add The FreeMan Marketing Company Info Widget
 		function fm_add_company_info()
@@ -157,6 +170,7 @@
 			// Removes the other WordPress news dashboard widget
 			remove_meta_box( 'dashboard_secondary', 'dashboard', 'side' );
 		} // fm_remove_dashboard_widgets()
+
 // == Posts ===========================================================
 	function fm_remove_posts_meta_boxes()
 	{
@@ -199,6 +213,7 @@
 		// remove_meta_box( 'authordiv', 'post', 'normal' );
 
 	} // fm_remove_posts_meta_boxes()
+
 // == Pages ===========================================================
 	function fm_remove_pages_meta_boxes()
 	{
@@ -232,6 +247,7 @@
 			// remove_meta_box( 'authordiv', 'page', 'normal' );
 
 	} // fm_remove_pages_meta_boxes()
+
 // == Widgets =========================================================
 
 	// Remove Default Widgets
@@ -281,6 +297,7 @@
 	    unregister_widget('Twenty_Eleven_Ephemera_Widget');
 
     } // fm_remove_default_widgets()
+
 // == Footer ==========================================================
   // Custom admin footer text
 		function fm_custom_admin_footer()
@@ -289,6 +306,7 @@
 			$wp_version = get_bloginfo('version');
 			echo "Created by <a href=\"http://www.freemanhelp.com\">Freeman Marketing</a> for $client_name powered by <a href=\"http://www.wordpress.org\">WordPress $wp_version</a>";
 		} // fm_custom_admin_footer()
+
 // == :TODO Tiny MCE ==================================================
 	// :TODO Look into other Tiny MCE options
 	// Make TinyMCE Editor Awesome
@@ -346,48 +364,66 @@
 	// Add Tiny MCE editor styles
 	add_editor_style(get_stylesheet_directory_uri() . '/_assets/css/tiny-mce.css');
 
-// == Execute if is admin section and not FMM Developer ===============
-	if (is_admin() AND !user_is_fmm_developer()) {
-		// Adds contact us link to menu bar
-		add_action('admin_bar_menu', 'fm_add_contact_admin_bar_link',25);
+// == All Add Actions Below ===========================================
+	if (is_admin()) {
+		// == FMM Developers Only ==============
+			if (user_is_fmm_developer()) {
+				// Adds a developer documentation menu page
+				add_action('admin_menu', 'fm_add_developer_documentation');
+			} // if(user_is_fmm_developer())
 
-		// Adds website link to admin bar
-		// add_action('admin_bar_menu', 'fm_add_fmhelp_admin_bar_link',25);
+		// == Administrator or FMM Developer ==============
+			if(user_is_admin() or user_is_fmm_developer()) {
+				// Replaces site link with a view your site link
+				add_action( 'wp_before_admin_bar_render', 'fm_remove_admin_bar_menus' ); // Remove the original site name
+				add_action('admin_bar_menu', 'fm_add_view_site_admin_bar_link',25); // Adds a new link that will open in a new window
+
+				// Adds a site documentation menu page
+				add_action('admin_menu', 'fm_add_site_documentation');
+
+				// Adds company information widget
+				add_action('wp_dashboard_setup', 'fm_add_custom_widgets');
+
+				// Adds contact us link to menu bar
+				add_action('admin_bar_menu', 'fm_add_contact_admin_bar_link',25);
+
+				// Adds website link to admin bar
+				// add_action('admin_bar_menu', 'fm_add_fmhelp_admin_bar_link',25);
+
+
+			} // if(user_is_admin() or user_is_fmm_developer())
+
+		// == All users except FMM Developer =============
+			if (!user_is_fmm_developer()) {
+
+				// Only for administrator
+				if(user_is_admin()) {
+
+				}
+
+				// Removes admin menu pages
+				add_action( 'admin_menu', 'fm_remove_admin_menu_pages' );
+
+				// Removes default widgets
+				add_action('wp_dashboard_setup', 'fm_remove_dashboard_widgets');
+
+				// Remove posts meta boxes
+				add_action('add_meta_boxes', 'fm_remove_posts_meta_boxes');
+
+				// Remove pages meta boxes
+				add_action('add_meta_boxes', 'fm_remove_pages_meta_boxes');
+
+				// Removes default widgets
+				add_action('widgets_init', 'fm_remove_default_widgets', 1);
+
+			} // if(!user_is_fmm_developer())
+
+		// == All users =============================================
+		// Adds admin stylesheet
+		add_action('admin_init', 'fm_add_admin_stylesheet');
 
 		// Sets admin bar to not display when viewing page by default
 		add_action("user_register", "fm_set_user_view_page_admin_bar_false", 10, 1);
-
-		// Removes admin menu pages
-		add_action( 'admin_menu', 'fm_remove_admin_menu_pages' );
-
-		// Removes default widgets
-		add_action('wp_dashboard_setup', 'fm_remove_dashboard_widgets');
-
-		// Remove posts meta boxes
-		add_action('add_meta_boxes', 'fm_remove_posts_meta_boxes');
-
-		// Remove pages meta boxes
-		add_action('add_meta_boxes', 'fm_remove_pages_meta_boxes');
-
-		// Removes default widgets
-		add_action('widgets_init', 'fm_remove_default_widgets', 1);
-
-	} // if(is_admin() AND !user_is_fmm_developer())
-
-// == Execute if is admin section only =====================================
-	if (is_admin()) {
-		// Replaces site link with a view your site link
-		add_action( 'wp_before_admin_bar_render', 'fm_remove_admin_bar_menus' ); // Remove the original site name
-		add_action('admin_bar_menu', 'fm_add_view_site_admin_bar_link',25); // Adds a new link that will open in a new window
-
-		// Adds a documentation menu page
-		add_action('admin_menu', 'fm_add_documentation');
-
-		// Adds company information widget
-		add_action('wp_dashboard_setup', 'fm_add_custom_widgets');
-
-		// Adds admin stylesheet
-		add_action('admin_init', 'fm_add_admin_stylesheet');
 
 		// Adds custom admin footer text
 		add_filter('admin_footer_text', 'fm_custom_admin_footer');
@@ -404,6 +440,7 @@
 		// Adds a favicon for admin area
 		add_action('admin_head', 'fm_add_favicon');
 
-	} // if(is_admin())
 
+
+	} // if(is_admin())
 
