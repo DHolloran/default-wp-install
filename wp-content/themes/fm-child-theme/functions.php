@@ -24,7 +24,7 @@
 			echo '<div class="clear"></div>';
 
 			// Require  the documentation
-			require_once "documentation/developer/documentation.html";
+			require_once "documentation/developer/documentation.php";
 			echo '</div> <!-- END .wrap -->';
 		} // fm_add_developer_documentation_content()
 

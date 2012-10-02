@@ -103,7 +103,7 @@
 
 		} // fm_remove_admin_menu_pages()
 
-	// Add Documentation Menu Page
+	// Add Site Documentation Menu Page
 	function fm_add_site_documentation()
 	{
 	  add_menu_page(
