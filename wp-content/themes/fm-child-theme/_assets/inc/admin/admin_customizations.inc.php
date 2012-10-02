@@ -4,8 +4,7 @@
 // == Admin StyleSheet ================================================
 	function fm_add_admin_stylesheet()
 	{
-		$css_url =  get_stylesheet_directory_uri() . '/_assets/css/admin.css';
-		wp_register_style('fm-admin-styles', $css_url);
+		wp_register_style('fm-admin-styles', get_stylesheet_directory_uri() . '/_assets/css/admin.css');
 		wp_enqueue_style('fm-admin-styles');
 	} // fm_add_admin_stylesheet()
 

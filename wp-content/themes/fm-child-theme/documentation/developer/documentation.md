@@ -1,9 +1,53 @@
 ###Table of Contents
-1. [Included Projects](#included_projects)
-2. [Shortcodes](#shortcodes)
-3. [Css Utility Classes](#css_utilities)
-4. [CSS Helpers](#css_helpers)
-5. [LESS Mixins](#less_mixins)
+1. [Install Check-list](#install_checklist)
+2. [Launch Check-list](#launch_checklist)
+3. [Included Projects](#included_projects)
+4. [Included Plugins](#included_plugins)
+5. [Shortcodes](#shortcodes)
+6. [Css Utility Classes](#css_utilities)
+7. [CSS Helpers](#css_helpers)
+8. [LESS Mixins](#less_mixins)
+
+
+***
+<h3 id="install_checklist">Install Check-List</h3>
+- **Things that must be done before accessing from browser**
+	- **IMPORTANT: Do not name administrator account admin**
+	- **IMPORTANT: Make editor account for client to post content**
+	- **IMPORTANT: Change table prefix in wp-config.php**
+	- **IMPORTANT: Replace the salts and keys** 
+- Set Settings > General timezone to  chicago
+- Users >Your Profile check Disable the visual editor when writing
+- Tools > Import /test-data.2011-01-17.xml
+[https://api.wordpress.org/secret-key/1.1/salt/ ](https://api.wordpress.org/secret-key/1.1/salt/ )
+- Turn on database backup plugin
+
+***
+<h3 id="launch_checklist">Launch Check-List</h3>
+- Setup Helps With Spam in .htaccess with site url
+- Setup Force WWW/no-WWW in .htaccess with site url
+- Turn on wp-cache plugin
+- Check contact forms for correct emails
+- Update General > Settings email to clients main info email
+- Update Users > Admin users email to main info email
+- Associate any posts made by developer accounts with clients editor accounts
+- Run W3C link check validator [http://validator.w3.org/checklink](http://validator.w3.org/checklink) **IMPORTANT: Make sure dev folder is renamed site-dev-name-moved**
+- Turn on sitemap plugin
+- Remove all developer plugins
+- Parts to check
+	- Favicon
+	- SEO title, meta, others
+	- Cross browser check	
+	- Test all functionality
+	- Validate HTML/CSS
+	- Check RSS link
+	- Create analytics/web master tools account
+	- Add analytics
+	- Error pages
+	- Compress all static files CSS/JS
+	- Optimise images
+	- Proofread
+- Others [Ultimate-Web-Development-Checklist.pdf](Ultimate-Web-Development-Checklist.pdf)
 
 ***
 <h3 id="included_projects">Included Projects</h3>
@@ -11,6 +55,30 @@
 - HTML 5 Shim
 - Prefix Free [http://leaverou.github.com/prefixfree/](http://leaverou.github.com/prefixfree/) *Disabled by default*
 - jquery.timeago.js [http://timeago.yarp.com](http://timeago.yarp.com) *Disabled by default*
+
+***
+<h3 id="included_plugins">Included Plugins</h3>
+- [ALO Easymail](http://wordpress.org/extend/plugins/alo-easymail/)
+- [Clean Notifications](http://wordpress.org/extend/plugins/clean-notifications/)
+- [Debogger](http://wordpress.org/extend/plugins/debogger/) **Developer**
+- [Debug Bar](http://wordpress.org/extend/plugins/debug-bar/) **Developer**
+- [Debug Bar Cron](http://wordpress.org/extend/plugins/debug-bar-cron/) **Developer**
+- [Developer](http://wordpress.org/extend/plugins/developer/) **Developer**
+- [Disable Comments](http://wordpress.org/extend/plugins/disable-comments/)
+- [Google XML Sitemaps V3 for qTranslate](http://wordpress.org/extend/plugins/google-xml-sitemaps-v3-for-qtranslate/)
+- [JW Player](http://wordpress.org/extend/plugins/jw-player-plugin-for-wordpress/)
+- [Log Deprecated Notices](http://wordpress.org/extend/plugins/log-deprecated-notices/) **Developer**
+- [Rewrite Rules Inspector](http://wordpress.org/extend/plugins/rewrite-rules-inspector/) **Developer**
+- [Share This](http://wordpress.org/extend/plugins/share-this/)
+- [Subscribe to Comments](http://wordpress.org/extend/plugins/subscribe-to-comments/)
+- [Theme Check](http://wordpress.org/extend/plugins/theme-check/) **Developer**
+- [User Switching](http://wordpress.org/extend/plugins/user-switching/) **Developer**
+- [Velvet Blues Update URLs](wordpress.org/extend/plugins/velvet-blues-update-urls/) **Developer**
+- [W3 Total Cache](http://wordpress.org/extend/plugins/w3-total-cache/)
+- [WordPress Importer](http://wordpress.org/extend/plugins/wordpress-importer/)
+- [WordPress SEO by Yoast](http://wordpress.org/extend/plugins/wordpress-seo/)
+- [WP DBManager](http://wordpress.org/extend/plugins/wp-dbmanager/)
+- [WP Members](http://wordpress.org/extend/plugins/wp-members/)
 
 ***
 <h3  id="shortcodes">Shortcodes</h3>

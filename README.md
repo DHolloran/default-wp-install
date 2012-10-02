@@ -23,6 +23,8 @@ Default WordPress Install
  	- Added retina.js
  	- Added prefix-free.js
  	- Added jquery.timeago.js
+ 	- Add setup instructions/checklist to developer documentation
+ 	- Added JW Player plugin
  	
 ***
 ###TODO
@@ -30,10 +32,6 @@ Default WordPress Install
 ####Forms TODOs
 - Include JavaScript form validation http://rickharrison.github.com/validate.js/
 - Find PHP form validation
-
-####Plugins TODOs
-- Add jPlayer plugin
-
 
 ####Icons/Fonts TODOs
 - Add more icon fonts
@@ -63,33 +61,33 @@ Default WordPress Install
 - Fill out license
 - Add setup instructions/checklist
 - Custom theme options page to transplant theme options client should have access too
+- Added more information about what is included
 
 ####Completed TODOs
 
 ***
-###Install Check-List
-- Set Settings > General timezone to  chicago
-- Users >Your Profile check Disable the visual editor when writing
-- Tools > Import /test-data.2011-01-17.xml
-- TODO
-
-***
-###Launch Check-List
-- Setup Helps With Spam in .htaccess with site url
-- Setup Force WWW/no-WWW in .htaccess with site url
-- TODO
-
-
-
-
-***
-###Included Projects
-- Retina.js [http://retinajs.com/](http://retinajs.com/) *Disabled by default*
-- HTML 5 Shim
-- Prefix Free [http://leaverou.github.com/prefixfree/](http://leaverou.github.com/prefixfree/) *Disabled by default*
-- jquery.timeago.js [http://timeago.yarp.com](http://timeago.yarp.com) *Disabled by default*
-
-
+###Plugins Included
+- [ALO Easymail](http://wordpress.org/extend/plugins/alo-easymail/)
+- [Clean Notifications](http://wordpress.org/extend/plugins/clean-notifications/)
+- [Debogger](http://wordpress.org/extend/plugins/debogger/) **Developer**
+- [Debug Bar](http://wordpress.org/extend/plugins/debug-bar/) **Developer**
+- [Debug Bar Cron](http://wordpress.org/extend/plugins/debug-bar-cron/) **Developer**
+- [Developer](http://wordpress.org/extend/plugins/developer/) **Developer**
+- [Disable Comments](http://wordpress.org/extend/plugins/disable-comments/)
+- [Google XML Sitemaps V3 for qTranslate](http://wordpress.org/extend/plugins/google-xml-sitemaps-v3-for-qtranslate/)
+- [JW Player](http://wordpress.org/extend/plugins/jw-player-plugin-for-wordpress/)
+- [Log Deprecated Notices](http://wordpress.org/extend/plugins/log-deprecated-notices/) **Developer**
+- [Rewrite Rules Inspector](http://wordpress.org/extend/plugins/rewrite-rules-inspector/) **Developer**
+- [Share This](http://wordpress.org/extend/plugins/share-this/)
+- [Subscribe to Comments](http://wordpress.org/extend/plugins/subscribe-to-comments/)
+- [Theme Check](http://wordpress.org/extend/plugins/theme-check/) **Developer**
+- [User Switching](http://wordpress.org/extend/plugins/user-switching/) **Developer**
+- [Velvet Blues Update URLs](wordpress.org/extend/plugins/velvet-blues-update-urls/) **Developer**
+- [W3 Total Cache](http://wordpress.org/extend/plugins/w3-total-cache/)
+- [WordPress Importer](http://wordpress.org/extend/plugins/wordpress-importer/)
+- [WordPress SEO by Yoast](http://wordpress.org/extend/plugins/wordpress-seo/)
+- [WP DBManager](http://wordpress.org/extend/plugins/wp-dbmanager/)
+- [WP Members](http://wordpress.org/extend/plugins/wp-members/)
 
 ***
 ###Shortcodes
