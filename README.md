@@ -62,6 +62,9 @@ Default WordPress Install
 - Add setup instructions/checklist
 - Custom theme options page to transplant theme options client should have access too
 - Added more information about what is included
+- Add author meta tag to header as Freeman Marketing
+- Add humans.txt
+- Make robots.txt stop google from indexing until launch
 
 ####Completed TODOs
 

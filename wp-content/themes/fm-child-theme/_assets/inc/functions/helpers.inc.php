@@ -110,4 +110,13 @@
 	} // fm_set_default_thumbnail( $post_id )
 
 
+// == Safe Session Start =========================================================
+	function fm_session_start()
+	{
+		if(!isset($_SESSION)) session_start();
+	} // fm_session_start()
+
+
+
+
 
