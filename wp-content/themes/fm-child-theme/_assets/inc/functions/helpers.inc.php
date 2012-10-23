@@ -91,23 +91,22 @@
 
 
 //  == Set Default Post Thumbnail ================================================
-	function fm_set_default_thumbnail( $post_id ) {
+	function fm_default_thumbnail( $post_id ) {
 	   // Link to default thumbnail
 	   $default_thumb = get_stylesheet_directory_uri(). '_assets/img/thumbs/default_thumb.png';
 	   // Get Thumbnail
 	   $post_thumbnail = get_post_meta( $post_id, $key = '_thumbnail_id', $single = true );
 
 	   // Verify that post is not a revision
-	   if ( !wp_is_post_revision( $post_id ) ) {
+	   if (!wp_is_post_revision($post_id)) {
 	      // Check if Thumbnail exists
-	      if ( empty( $post_thumbnail ) ) {
+	      if (empty($post_thumbnail)) {
 	         // Add thumbnail to post
-	         update_post_meta( $post_id, $meta_key = '_thumbnail_id',
-	                          $meta_value = $default_thumb );
-	      } // if()
-	   } // if()
+	         update_post_meta( $post_id, $meta_key = '_thumbnail_id', $meta_value = $default_thumb );
+	      } // if(empty($post_thumbnail))
+	   } // if(!wp_is_post_revision)
 
-	} // fm_set_default_thumbnail( $post_id )
+	} // fm_default_thumbnail( $post_id )
 
 
 // == Safe Session Start =========================================================
@@ -117,6 +116,38 @@
 	} // fm_session_start()
 
 
+// == Check/Get Post Thumbnail ===================================================
+	function fm_get_thumbnail($id, $size='thumbnail', $attr='' )
+	{
+		// If the post does not have a thumbnail
+		if (!has_post_thumbnail($id)) return false;
+
+		// If the post has a thumbnail
+		return get_the_post_thumbnail($id, $size, $attr);
+	} // fm_post_thumbnail()
+
+
+// == Check/Get Post Thumbnail URL ===============================================
+	function fm_get_thumbnail_url()
+	{
+		// If the post does not have a thumbnail
+		if (!has_post_thumbnail($id)) return false;
+
+		// If the post has a thumbnail
+		$image_url = wp_get_attachment_image_src(get_post_thumbnail_id());
+		return $image_url[0];
+	} // fm_get_thumbnail_url()
+
+
+// == Get Page ID by Slug ========================================================
+	function fm_get_page_id_by_slug($page_slug) {
+		$page = get_page_by_path($page_slug);
+		if ($page) {
+		    return $page->ID;
+		} else {
+		    return null;
+		}
+	} // fm_get_page_id_by_slug($page_slug)
 
 
 

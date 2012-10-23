@@ -1,0 +1,27 @@
+/* wpStoreCart CSS Theme */
+.wpsc-button {font-size:1%;font-variant:small-caps;cursor:pointer;background:transparent;text-indent:-9000px;width:97px;height:30px;min-width:97px;min-height:30px;border:0px;border:none;}
+.wpsc-checkout {background:transparent url('blue-and-blocky/checkout.png') top left no-repeat;float:right;}
+.wpsc-addtocart {background:transparent url('blue-and-blocky/addtocart.png') top left no-repeat;}
+.wpsc-buynow {background:transparent url('blue-and-blocky/buynow.png') top left no-repeat;}
+.wpsc-empty {background:transparent url('blue-and-blocky/empty.png') top left no-repeat;width:71px;height:24px;min-width:71px;min-height:24px;}
+.wpsc-update{background:transparent url('blue-and-blocky/update.png') top left no-repeat;width:71px;height:24px;min-width:71px;min-height:24px;}
+.wpsc-paypalcheckout{background:transparent url('blue-and-blocky/paypalcheckout.png') top left no-repeat;}
+.wpsc-authorizenetcheckout{background:transparent url('blue-and-blocky/authorizenetcheckout.png') top left no-repeat;}
+.wpsc-2checkoutcheckout{background:transparent url('blue-and-blocky/2checkoutcheckout.png') top left no-repeat;}
+.wpsc-checkmoneyordercheckout{background:transparent url('blue-and-blocky/checkmoneyordercheckout.png') top left no-repeat;}
+.wpsc-libertyreservecheckout{background:transparent url('blue-and-blocky/libertyreservecheckout.png') top left no-repeat;}
+.wpsc-qbmscheckout{background:transparent url('blue-and-blocky/checkout.png') top left no-repeat;}
+.wpsc-moneybookerscheckout{background:transparent url('blue-and-blocky/moneybookerscheckout.png') top left no-repeat;}
+.wpsc-login-button{background:transparent url('blue-and-blocky/login.png') top left no-repeat;}
+.wpsc-register-button {background:transparent url('blue-and-blocky/register.png') top left no-repeat;}
+.wpsc-product-img {float:left;margin:10px 10px 10px 10px; border:1px solid #555;}
+.wpsc-button:hover {opacity:0.7;}
+.wpsc-hide {display:inline;}
+.wpsc-grid {display:block;float:left;margin:15px 10px 15px 10px;width:180px;max-width:180px;height:400px;}
+.wpsc-clear {clear:both;}
+.wpsc-h1 {font-size:120%;}
+.wpsc-product-info {list-style:none;display:table;width:400px;clear:both;}
+.wpsc-product-info li {display:block;width:400px;}
+.wpscerror {display:block;background-color:#ff0000;color:#000000;margin:5px 5px 5px 5px;padding:5px 5px 5px 5px;border:1px #000000 solid;}
+#cc_cvv_input {max-width:30px;width:30px;}
+/* END wpStoreCart */

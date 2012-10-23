@@ -1,10 +1,10 @@
 Default WordPress Install
 =========================
 
-**Author(s):** Dan Holloran  
-**Author(s) email:** <Dan@freemanhelp.com>  
-**Website:** [http://www.FreeManHelp.com]( http://www.freemanhelp.com)  
-**Description:** For use at FreeMan Marketing as a good starting place for all new project  
+**Author(s):** Dan Holloran
+**Author(s) email:** <Dan@freemanhelp.com>
+**Website:** [http://www.FreeManHelp.com]( http://www.freemanhelp.com)
+**Description:** For use at FreeMan Marketing as a good starting place for all new project
 **Acknowledgments:** Thank you to everyone that has created an open project that I have included in this project which allows me to make my job/life easier
 
 ***
@@ -25,7 +25,7 @@ Default WordPress Install
  	- Added jquery.timeago.js
  	- Add setup instructions/checklist to developer documentation
  	- Added JW Player plugin
- 	
+
 ***
 ###TODO
 
@@ -42,7 +42,7 @@ Default WordPress Install
 - Make error pages
 - Implement H5BP into child theme
 - Page to PDF creation
-- Decided on what files require other files 
+- Decided on what files require other files
 
 ####Repsonsive TODOs
 - Add more responsive helpers
@@ -54,19 +54,19 @@ Default WordPress Install
 ####General TODOs
 - Look for other libs to add that will make life easier
 - Add explanations to LESS mixins
-- Better information about what is available
 - Add style guide/best practices
 - Look over WordCamp notes
 - Add launch checklist/punch-list
 - Fill out license
 - Add setup instructions/checklist
 - Custom theme options page to transplant theme options client should have access too
-- Added more information about what is included
-- Add author meta tag to header as Freeman Marketing
-- Add humans.txt
-- Make robots.txt stop google from indexing until launch
+- Make contact us form
 
 ####Completed TODOs
+- ~~Make a function that unregisters sidebars use global $wp_registered_sidebars to get the sidebar id~~
+- ~~Add humans.txt~~
+- ~~Add author meta tag to header as Freeman Marketing~~
+- ~~Make robots.txt stop google from indexing until launch~~
 
 ***
 ###Plugins Included
@@ -94,7 +94,7 @@ Default WordPress Install
 
 ***
 ###Shortcodes
-- [fm-blog-info show="<value>"] Shortcode version of `get_bloginfo($value);` 
+- [fm-blog-info show="<value>"] Shortcode version of `get_bloginfo($value);`
 - **Directory Helpers**
 	- [fm-site-url] Shortcode version of `site_url();`
 	- [fm-home-url] Shortcode version of `home_url();`
@@ -106,7 +106,7 @@ Default WordPress Install
 	- [fm-date] Shortcode version of `date('j');` returns current numerical date
 	- [fm-month-name] Shortcode version of `date('F');` returns current textual month name
 	- [fm-year] Shortcode version of `date('Y');` returns numerical current year
-	
+
 ***
 ###CSS Utility Classes
 - `.pull-left` Floats an element left
@@ -131,7 +131,7 @@ Default WordPress Install
 ***
 ###CSS Helpers
 - `a[href$=".pdf"]:after { content: " (PDF)"; }` Adds (PDF) to all .pdf file links
-- `a[href$=".pdf"][data-size]:after { content: " (PDF, " attr(data-size) ")"; }` Adds the size of the PDF to all .pdf file links if `data-size` attribute is includedattribute is included 
+- `a[href$=".pdf"][data-size]:after { content: " (PDF, " attr(data-size) ")"; }` Adds the size of the PDF to all .pdf file links if `data-size` attribute is includedattribute is included
 
 
 

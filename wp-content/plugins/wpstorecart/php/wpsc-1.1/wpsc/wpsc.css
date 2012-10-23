@@ -1,0 +1,42 @@
+/*
+wpsc v1.1
+http://conceptlogic.com/wpsc/
+*/
+
+#wpsc * { margin:0; padding:0; font-family:arial, tahoma, verdana, sans-serif; }
+#wpsc, #wpsc input, #wpsc-tooltip { font-size:12px; }
+
+#wpsc fieldset { border:0; }
+
+#wpsc table { width:100%; border:0; background:#fff; border-collapse:collapse; }
+#wpsc tr {  }
+#wpsc th, #wpsc td { padding:5px; border:0; border:solid 1px #ccc; vertical-align:top; text-align:left; font-weight:normal; }
+#wpsc td.empty { text-align:center; }
+
+#wpsc p.wpsc-error { text-align:center; padding:5px; }
+
+#wpsc strong#wpsc-title {  }
+
+#wpsc th { background:#ccffcc }
+#wpsc th#header {  }
+$wpsc th#footer {  }
+
+#wpsc td.wpsc-item-qty { width:25%; }
+#wpsc td.wpsc-item-name { width:50%; font-weight:bold; }
+#wpsc td.wpsc-item-price { width:25%; font-weight:bold; text-align:right; }
+#wpsc td.wpsc-item-price span { display:block; }
+
+#wpsc a.wpsc-remove { font-size:11px; font-weight:normal; }
+
+#wpsc span#wpsc-subtotal { display:block; }
+#wpsc span#wpsc-subtotal strong {  }
+
+#wpsc input.wpsc-button { padding:2px; margin:2px;}
+
+#wpsc input#wpsc-checkout { float:right; }
+
+#wpsc input#wpsc-paypal-checkout { display:block; padding:10px; margin:20px auto; }
+
+#wpsc-tooltip { border:solid 1px #000; padding:3px 7px 3px 25px; background:url(checkmark.png) 3px center no-repeat #f2fcee;  }
+
+

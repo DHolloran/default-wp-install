@@ -15,7 +15,7 @@
 	- **IMPORTANT: Do not name administrator account admin**
 	- **IMPORTANT: Make editor account for client to post content**
 	- **IMPORTANT: Change table prefix in wp-config.php**
-	- **IMPORTANT: Replace the salts and keys** 
+	- **IMPORTANT: Replace the salts and keys**
 - Set Settings > General timezone to  chicago
 - Users >Your Profile check Disable the visual editor when writing
 - Tools > Import /test-data.2011-01-17.xml
@@ -27,17 +27,20 @@
 - Setup Helps With Spam in .htaccess with site url
 - Setup Force WWW/no-WWW in .htaccess with site url
 - Turn on wp-cache plugin
+- Fill out humans.txt
+- Remove disallow all from robots.txt
 - Check contact forms for correct emails
 - Update General > Settings email to clients main info email
 - Update Users > Admin users email to main info email
 - Associate any posts made by developer accounts with clients editor accounts
+- Create and add All icons for devices/favicon in /wp-content/themes/fm-child-theme/_assets/img/icons
 - Run W3C link check validator [http://validator.w3.org/checklink](http://validator.w3.org/checklink) **IMPORTANT: Make sure dev folder is renamed site-dev-name-moved**
 - Turn on sitemap plugin
 - Remove all developer plugins
 - Parts to check
 	- Favicon
 	- SEO title, meta, others
-	- Cross browser check	
+	- Cross browser check
 	- Test all functionality
 	- Validate HTML/CSS
 	- Check RSS link
@@ -51,10 +54,11 @@
 
 ***
 <h3 id="included_projects">Included Projects</h3>
-- Retina.js [http://retinajs.com/](http://retinajs.com/) *Disabled by default*
+- Retina.js [http://retinajs.com/](http://retinajs.com/) *Disabled by default* *Activate CSS in site.less*
 - HTML 5 Shim
 - Prefix Free [http://leaverou.github.com/prefixfree/](http://leaverou.github.com/prefixfree/) *Disabled by default*
 - jquery.timeago.js [http://timeago.yarp.com](http://timeago.yarp.com) *Disabled by default*
+- jquery.pikaday.js [https://github.com/dbushell/Pikaday](https://github.com/dbushell/Pikaday) *Disabled by default* *Activate CSS in site.less*
 
 ***
 <h3 id="included_plugins">Included Plugins</h3>
@@ -82,7 +86,7 @@
 
 ***
 <h3  id="shortcodes">Shortcodes</h3>
-- [fm-blog-info show="<value>"] Shortcode version of `get_bloginfo($value);` 
+- [fm-blog-info show="<value>"] Shortcode version of `get_bloginfo($value);`
 - **Directory Helpers**
 	- [fm-site-url] Shortcode version of `site_url();`
 	- [fm-home-url] Shortcode version of `home_url();`
@@ -95,7 +99,7 @@
 	- [fm-month-name] Shortcode version of `date('F');` returns current textual month name
 	- [fm-year] Shortcode version of `date('Y');` returns numerical current year
 
-	
+
 ***
 <h3 id="css_utilities">CSS Utility Classes</h3>
 - `.pull-left` Floats an element left
@@ -120,7 +124,7 @@
 ***
 <h3 id="css_helpers">CSS Helpers</h3>
 - `a[href$=".pdf"]:after { content: " (PDF)"; }` Adds (PDF) to all .pdf file links
-- `a[href$=".pdf"][data-size]:after { content: " (PDF, " attr(data-size) ")"; }` Adds the size of the PDF to all .pdf file links if `data-size` attribute is included attribute is included 
+- `a[href$=".pdf"][data-size]:after { content: " (PDF, " attr(data-size) ")"; }` Adds the size of the PDF to all .pdf file links if `data-size` attribute is included attribute is included
 
 ***
 <h3 id="less_mixins">LESS Mixins</h3>

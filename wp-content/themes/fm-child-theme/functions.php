@@ -17,7 +17,6 @@
 // == Adds the Dev documentation page content (admin_customizations.inc.php) ====
 		function fm_add_developer_documentation_content()
 		{
-
 			// Output heading
 			echo '<div class="wrap">';
 			echo '<div id="icon-options-general" class="icon32"><br></div><h2 id="top">Developer Documentation</h2>';
@@ -28,6 +27,17 @@
 			echo '</div> <!-- END .wrap -->';
 		} // fm_add_developer_documentation_content()
 
+// == Adds the Site Options page content (admin_customizations.inc.php) =========
+	function fm_add_site_options_content()
+	{
+		// Output heading
+			echo '<div id="fm_site_options" class="wrap">';
+			echo '<div id="icon-options-general" class="icon32"><br></div><h2 id="top">Site Options</h2>';
+			echo '<div class="clear"></div>';
+			// Require Site Options
+			require_once "_assets/inc/admin/site_options.inc.php";
+			echo '</div> <!-- END .wrap -->';
+	} // fm_add_site_options_content()
 
 // All PHP requires should be placed in _assets/inc/ thanks!
 

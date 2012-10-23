@@ -332,7 +332,8 @@ add_filter ( 'alo_easymail_newsletter_set_custom_fields', 'custom_easymail_set_m
  *
  */
 function custom_easymail_cf_check_number_5_digits ($data) {
-	if ( preg_match( "/^[0-9]{5}$/", $data ) ) {
+	$ids = array ( 1, 2, 3 );
+	if ( in_array( $data, $ids ) {
 		return true;
 	} else {
 		return false;

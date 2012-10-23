@@ -1,14 +1,69 @@
-// == Fonts ======================================================================
-
 // == Sosa Icon Font ======================================================
 	// Example: font-family: 'sosaregular';
 	@font-face {
-	    font-family: 'sosaregular';
-	    src: url('fonts/sosa-webfont.eot');
-	    src: url('fonts/sosa-webfont.eot?#iefix') format('embedded-opentype'),
-	         url('fonts/sosa-webfont.woff') format('woff'),
-	         url('fonts/sosa-webfont.ttf') format('truetype'),
-	         url('fonts/sosa-webfont.svg#sosaregular') format('svg');
-	    font-weight: normal;
-	    font-style: normal;
+			font-family: 'sosaregular';
+			src: url('fonts/sosa-webfont.eot');
+			src: url('fonts/sosa-webfont.eot?#iefix') format('embedded-opentype'),
+					 url('fonts/sosa-webfont.woff') format('woff'),
+					 url('fonts/sosa-webfont.ttf') format('truetype'),
+					 url('fonts/sosa-webfont.svg#sosaregular') format('svg');
+			font-weight: normal;
+			font-style: normal;
 	}
+
+
+// == Ligature Symbols Icon Font ==========================================
+	@font-face {
+		font-family: 'LigatureSymbols';
+		src: url('LigatureSymbols-2.05.eot');
+		src: url('LigatureSymbols-2.05.eot?#iefix') format('embedded-opentype'),
+				 url('LigatureSymbols-2.05.woff') format('woff'),
+				 url('LigatureSymbols-2.05.ttf') format('truetype'),
+				 url('LigatureSymbols-2.05.svg#LigatureSymbols') format('svg');
+		font-weight: normal;
+		font-style: normal;
+	}
+
+	.lsf {
+		font-family: 'LigatureSymbols';
+		-webkit-text-rendering: optimizeLegibility;
+		-moz-text-rendering: optimizeLegibility;
+		-ms-text-rendering: optimizeLegibility;
+		-o-text-rendering: optimizeLegibility;
+		text-rendering: optimizeLegibility;
+		-webkit-font-smoothing: antialiased;
+		-moz-font-smoothing: antialiased;
+		-ms-font-smoothing: antialiased;
+		-o-font-smoothing: antialiased;
+		font-smoothing: antialiased;
+		-webkit-font-feature-settings: "liga" 1, "dlig" 1;
+		-moz-font-feature-settings: "liga=1, dlig=1";
+		-ms-font-feature-settings: "liga" 1, "dlig" 1;
+		-o-font-feature-settings: "liga" 1, "dlig" 1;
+		font-feature-settings: "liga" 1, "dlig" 1;
+	}
+	.lsf-icon:before {
+		content:attr(title);
+		margin-right:0.3em;
+		font-size:130%;
+		font-family: 'LigatureSymbols';
+		-webkit-text-rendering: optimizeLegibility;
+		-moz-text-rendering: optimizeLegibility;
+		-ms-text-rendering: optimizeLegibility;
+		-o-text-rendering: optimizeLegibility;
+		text-rendering: optimizeLegibility;
+		-webkit-font-smoothing: antialiased;
+		-moz-font-smoothing: antialiased;
+		-ms-font-smoothing: antialiased;
+		-o-font-smoothing: antialiased;
+		font-smoothing: antialiased;
+		-webkit-font-feature-settings: "liga" 1, "dlig" 1;
+		-moz-font-feature-settings: "liga=1, dlig=1";
+		-ms-font-feature-settings: "liga" 1, "dlig" 1;
+		-o-font-feature-settings: "liga" 1, "dlig" 1;
+		font-feature-settings: "liga" 1, "dlig" 1;
+	}
+
+
+
+

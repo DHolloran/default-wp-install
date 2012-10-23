@@ -1,0 +1,26 @@
+/* wpStoreCart CSS Theme */
+.wpsc-button {font-size:1%;font-variant:small-caps;cursor:pointer;background:transparent;text-indent:-9000px;width:134px;height:55px;min-width:134px;min-height:55px;border:0px;border:none;}
+.wpsc-checkout {background:transparent url('bright/checkout.png') top left no-repeat;float:right;}
+.wpsc-addtocart {background:transparent url('bright/addtocart.png') top left no-repeat;}
+.wpsc-buynow {background:transparent url('bright/buynow.png') top left no-repeat;}
+.wpsc-empty {background:transparent url('bright/empty.png') top left no-repeat;width:75px;height:31px;min-width:75px;min-height:31px;}
+.wpsc-update{background:transparent url('bright/update.png') top left no-repeat;width:75px;height:31px;min-width:75px;min-height:31px;}
+.wpsc-paypalcheckout{background:transparent url('bright/paypalcheckout.png') top left no-repeat;}
+.wpsc-authorizenetcheckout{background:transparent url('bright/authorizenetcheckout.png') top left no-repeat;}
+.wpsc-2checkoutcheckout{background:transparent url('bright/2checkoutcheckout.png') top left no-repeat;}
+.wpsc-checkmoneyordercheckout{background:transparent url('bright/checkmoneyordercheckout.png') top left no-repeat;}
+.wpsc-libertyreservecheckout{background:transparent url('bright/libertyreservecheckout.png') top left no-repeat;}
+.wpsc-qbmscheckout{background:transparent url('bright/checkout.png') top left no-repeat;}
+.wpsc-moneybookerscheckout{background:transparent url('bright/moneybookerscheckout.png') top left no-repeat;}
+.wpsc-login-button{background:transparent url('bright/login.png') top left no-repeat;}
+.wpsc-register-button {background:transparent url('bright/register.png') top left no-repeat;}
+.wpsc-product-img {float:left;margin:10px 10px 10px 10px; border:1px solid #555;}
+.wpsc-button:hover {opacity:0.7;}
+.wpsc-hide {display:inline;}
+.wpsc-grid {display:block;float:left;margin:15px 10px 15px 10px;width:180px;max-width:180px;height:400px;}
+.wpsc-clear {clear:both;}
+.wpsc-product-info {list-style:none;}
+.wpsc-product-info li {text-indent:12px;}
+.wpscerror {display:block;background-color:#ff0000;color:#000000;margin:5px 5px 5px 5px;padding:5px 5px 5px 5px;border:1px #000000 solid;}
+#cc_cvv_input {max-width:30px;width:30px;}
+/* END wpStoreCart */

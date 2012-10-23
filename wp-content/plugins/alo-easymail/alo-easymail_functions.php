@@ -1808,16 +1808,19 @@ function alo_em_get_recipients_in_queue ( $limit=false, $newsletter=false ) {
 	$headers = "From: ". $from_name ." <".$mail_sender.">\n";
 	$headers .= "Content-Type: text/html; charset=\"" . strtolower( get_option('blog_charset') ) . "\"\n";		
 
-	// Custon newsletter headers
+	// Custom newsletter headers
 	$headers = apply_filters( 'alo_easymail_newsletter_headers', $headers, $newsletter, $recipient );
 
+	// Custom newsletter attachs
+	$attachs = apply_filters( 'alo_easymail_newsletter_attachments', false, $newsletter );
+	
     // ---- Send MAIL (or DEBUG) ----
     $send_mode = ( $force_send ) ? "" : get_option('alo_em_debug_newsletters');
     switch ( $send_mode ) {
     	case "to_author":
 	    		$author = get_userdata( $newsletter->post_author );
     			$debug_subject = "( DEBUG - TO: ". $recipient->email ." ) " . $subject;
-    			$mail_engine = wp_mail( $author->user_email, $debug_subject, $content, $headers );
+    			$mail_engine = wp_mail( $author->user_email, $debug_subject, $content, $headers, $attachs );
 				break;
     	case "to_file":
     			$log = fopen( WP_CONTENT_DIR . "/user_{$newsletter->post_author}_newsletter_{$newsletter->ID}.log", 'a+' );
@@ -1826,11 +1829,12 @@ function alo_em_get_recipients_in_queue ( $limit=false, $newsletter=false ) {
     			$log_message .=	"TO:\t\t\t". $recipient->email ."\n";
     			$log_message .=	"SUBJECT:\t". $subject ."\n\n";
     			$log_message .=	"CONTENT:\n". $content ."\n\n";
+    			if ( !empty($attachs) ) $log_message .=	"ATTACHMENTS:\n". ( is_array($attachs) ? print_r($attachs,true) : $attachs ) ."\n\n";
 				$mail_engine = ( fwrite ( $log, $log_message ) ) ? true : false;
 				fclose ( $log );
 				break;
     	default:  // no debug: send it!
-				$mail_engine = wp_mail( $recipient->email, $subject, $content, $headers );       					        					
+				$mail_engine = wp_mail( $recipient->email, $subject, $content, $headers, $attachs );       					        					
     }
       
     $sent = ( $mail_engine ) ? "1" : "-1";
@@ -1875,17 +1879,27 @@ function alo_em_batch_sending () {
 	$limit_recs = min ( $tot_recs, alo_em_get_batchrate () );
 			
 	// the recipients to whom send
-	$recipients = alo_em_get_recipients_in_queue ( $limit_recs );
+	//$recipients = alo_em_get_recipients_in_queue ( $limit_recs );
 	
 	// update 'last cron time' option
 	update_option ( 'alo_em_last_cron', current_time( 'mysql', 0 ) );
 	
 	// if no recipients exit!
-	if ( !$recipients ) return;
+	//if ( !$recipients ) return;
 	
-	foreach ( $recipients as $recipient ) {
+	//foreach ( $recipients as $recipient ) {
+	for ( $i = 1; $i <= $limit_recs; $i ++ ) {
+
+		// Get the recipient
+		$recipients = alo_em_get_recipients_in_queue ( 1 );
+
+		// if no recipients exit the batch loop
+		if ( empty($recipients[0]) ) return;
+
+		$recipient = $recipients[0];
+				
 		if ( alo_em_get_newsletter_status ( $recipient->newsletter ) != "sendable" ) continue;
-		
+
 		ob_start();
 		
 		// Prepare and send the newsletter to this user!
@@ -2345,6 +2359,8 @@ add_filter ( 'the_content',  'alo_em_filter_content_in_site' );
 
 
 /**
+ * DEPRECATED: use [CUSTOM-LINK] placeholder
+ * 
  * Filter Newsletter Content when sending: search for links and replace with trackable links
  *
  * Priority 3: before than the placeholder replace
@@ -2353,23 +2369,6 @@ function alo_em_make_links_trackable_in_content ( $content, $newsletter, $recipi
 	global $wp_version;
 	if ( !is_object( $recipient ) ) $recipient = new stdClass();
 	if ( empty( $recipient->lang ) ) $recipient->lang = alo_em_short_langcode ( get_locale() );
-
-	/*
-	if ( preg_match_all('/<a(.*)href=[\'|"]([^"]+)[\'|"] (.*)>(.*)<\/a>/i', $content, $matches, PREG_SET_ORDER)) {
-		if ( is_array($matches) ) : foreach($matches as $match) :
-			//print_r($match);
-			$found = $match[0];
-			$pre_href = trim($match[1]);
-			$href = $match[2];
-			$post_href = trim($match[3]);
-			$text_link = $match[4];
-			
-			$new_url = alo_em_make_url_trackable ( $recipient, $href );
-			$content = str_replace( $found, "<a $pre_href href=\"$new_url\" $post_href>$text_link</a>", $content );
-		endforeach; endif;
-	}
-	return $content;
-    */
 
 	if ( defined( 'ALO_EM_LOAD_SIMPLEHTMLDOM' ) ) {
 
@@ -2388,6 +2387,97 @@ function alo_em_make_links_trackable_in_content ( $content, $newsletter, $recipi
 	return $html;
 }
 add_filter ( 'alo_easymail_newsletter_content',  'alo_em_make_links_trackable_in_content', 3, 4 );
+
+
+/**
+ * Add [CUSTOM-LINK] placeholder
+ */
+function alo_em_customlink_placeholder ( $placeholders ) {
+	$placeholders["easymail_customlink"] = array (
+		"title" 		=> __("Custom links", "alo-easymail"),
+		"tags" 			=> array (
+			"[CUSTOM-LINK]"	=> 	__("This placeholder produces a link (html &lt;a&gt; tag) and has the following parameters", "alo-easymail"). ":". "<ul style='margin-left: 2em;font-size: 90%'>".
+								"<li><code style='font-style:normal;font-weight: bold'>". "href". "</code> ".
+									__("the ID of a post or a full web address", "alo-easymail"). " (". __("mandatory", "alo-easymail") . ")</li>".
+								"<li><code style='font-style:normal;'>". "title". "</code> ".
+									__("the text of the link", "alo-easymail").". ". __("Default", "alo-easymail") .": " . __("the title of the post (if &#39;href&#39; is a post ID) or the &#39;href&#39; itself", "alo-easymail") . "</li>".
+								"<li><code style='font-style:normal;'>". "tracking". "</code> ".
+									__("the click on the link by the recipient will be tracked (1) or not (0)", "alo-easymail"). ". " .__("Default", "alo-easymail") . ": 1 (". __("Yes", "alo-easymail") . ")</li>".
+								"<li><code style='font-style:normal;'>". "class". "</code> ".
+									__("the class tag attribute", "alo-easymail"). ". " .__("Default", "alo-easymail") .": &#39;alo-easymail-link&#39;" . "</li>".
+								"<li><code style='font-style:normal;'>". "style". "</code> ".
+									__("the style tag attribute", "alo-easymail"). "</li>".																		
+								"</ul>" .
+								__("Sample:", "alo-easymail") . " ". __("a link to blog post with ID 1, with custom css style, without tracking", "alo-easymail") . ": <br />" .
+									"<code style='font-style:normal;'>". "[CUSTOM-LINK href=1 style=\"color: #f00\" tracking=0]". "</code>" . "<br />" .
+								__("Sample:", "alo-easymail") . " ". __("a link to Wordress.org, with custom title", "alo-easymail") . ": <br />" .
+									"<code style='font-style:normal;'>". "[CUSTOM-LINK href=\"http://www.wordpress.org\" title=\"visit WordPress site\"]". "</code>" 							
+		)
+	);
+	return $placeholders;
+}
+add_filter ( 'alo_easymail_newsletter_placeholders_table', 'alo_em_customlink_placeholder' );
+
+
+function custom_easymail_placeholders_title_easymail_customlink ( $post_id ) {
+	echo __("You can insert customised links to blog posts or external web addresses", "alo-easymail"). '.';	
+}
+add_action('alo_easymail_newsletter_placeholders_title_easymail_customlink', 'custom_easymail_placeholders_title_easymail_customlink' );
+
+
+function alo_em_placeholders_replace_customlink_tag ( $content, $newsletter, $recipient, $stop_recursive_the_content=false ) {  
+	if ( !is_object( $recipient ) ) $recipient = new stdClass();
+	if ( empty( $recipient->lang ) ) $recipient->lang = alo_em_short_langcode ( get_locale() );
+
+	if ( preg_match_all('/\[CUSTOM-LINK(.*)\]/i', $content, $matches, PREG_SET_ORDER)) {
+
+		if ( is_array($matches) ) : foreach($matches as $match) :
+
+			// Complete palceholder
+			$found = $match[0];
+
+			// Placeholder attributes
+			$atts =  shortcode_parse_atts( trim($match[1]) );
+
+			$params = shortcode_atts( array(
+				'href' 		=> '',
+				'title' 	=> '',
+				'tracking' 	=> 1,
+				'class'		=> 'alo-easymail-link',
+				'style'		=> '',
+			), $atts );
+			
+			if ( empty($params['href']) ) continue; // skip if 'href' is empty
+			
+			// Numeric = post ID
+			if ( is_numeric( $params['href'] ) )
+			{
+				if ( $obj_post = get_post( $params['href'] ) )
+				{
+					$title = !empty($params['title']) ? stripslashes ( $params['title'] ) : stripslashes ( alo_em_translate_text ( $recipient->lang, $obj_post->post_title, $obj_post->ID, 'post_title' ) );
+					$link = alo_em_translate_url( $obj_post->ID, $recipient->lang );
+				}								
+			}
+			else
+			// Otherwise = url
+			{
+				$title = !empty($params['title']) ? stripslashes ( $params['title'] ) : esc_url( $params['href'] );
+				$link = esc_url( $params['href'] );
+			}
+
+			if ( $params['tracking'] == 1 )
+			{			
+				$link = alo_em_make_url_trackable ( $recipient, $link );
+			}
+
+			$content = str_replace( $found, '<a href="'. $link . '" class="'. esc_attr($params['class']) . '" style="'. esc_attr($params['style']) . '">'. $title .'</a>', $content );
+			
+		endforeach; endif;
+	}
+	
+	return $content;
+}
+add_filter ( 'alo_easymail_newsletter_content',  'alo_em_placeholders_replace_customlink_tag', 10, 4 );
 
 
 
@@ -3362,8 +3452,11 @@ function alo_em_get_subscriber_table_row ( $subscriber_id, $row_index=0, $edit=f
         $html .= "<td style=\"vertical-align: middle;\">";
 		$html .= "<input type=\"checkbox\" name=\"subscribers[]\" id=\"subscribers_". $subscriber_id . "\" value=\"". $subscriber_id. "\" />\n";
 	    $html .= "</td>\n";
-	
-		$html .= "<td>" . get_avatar($subscriber->email, 30). "&nbsp;</td>";
+
+		if ( get_option('show_avatars') )
+		{
+			$html .= "<td>" . get_avatar($subscriber->email, 30). "&nbsp;</td>";
+		}
 	
 		$html .= "<td class=\"subscriber-email\">";
 		if ( $edit ) {
@@ -3508,7 +3601,10 @@ function alo_em_get_subscriber_table_row ( $subscriber_id, $row_index=0, $edit=f
 		    $html .= "<img src=\"".ALO_EM_PLUGIN_URL. "/images/16-edit.png\" alt=\"". esc_attr( __("Quick edit", "alo-easymail") )."\" /></a>";    
 			
 			$html .= " <a href=\"\" title=\"". esc_attr( __("Delete subscriber", "alo-easymail") )."\" class=\"easymail-subscriber-delete\" id=\"easymail-subscriber-delete_{$subscriber_id}\" rel=\"{$subscriber_id}\">";
-			$html .= "<img src=\"".ALO_EM_PLUGIN_URL."/images/trash.png\" alt=\"". esc_attr( __("Delete subscriber", "alo-easymail") )."\" /></a>";			        	
+			$html .= "<img src=\"".ALO_EM_PLUGIN_URL."/images/trash.png\" alt=\"". esc_attr( __("Delete subscriber", "alo-easymail") )."\" /></a>";
+
+			$html .= " <a href=\"\" title=\"". esc_attr( __("Delete subscriber and add the email to the list of who unsubscribed", "alo-easymail") )."\" class=\"easymail-subscriber-delete  and-unsubscribe\" id=\"easymail-subscriber-delete-and-unsubscribe_{$subscriber_id}\" rel=\"{$subscriber_id}\">";
+			$html .= "<img src=\"".ALO_EM_PLUGIN_URL."/images/trash_del.png\" alt=\"". esc_attr( __("Delete subscriber and add the email to the list of who unsubscribed", "alo-easymail") )."\" /></a>";							
 		}	
 		$html .= "</td>\n";		
 	return $html;

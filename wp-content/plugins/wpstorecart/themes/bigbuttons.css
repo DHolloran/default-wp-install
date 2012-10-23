@@ -1,0 +1,9 @@
+/* wpStoreCart CSS Theme */
+.wpsc-button {font-family:Segoe UI, Verdana, Serif;font-size:130%;font-variant:small-caps;padding:2px 5px 2px 5px;}
+#wpsc-checkout {font-size:140%;font-weight:bold;float:right;}
+.wpsc-product-img {float:left;margin:10px 10px 10px 10px; border:1px solid #555;}
+.wpsc-hide {display:inline;}
+.wpsc-grid {display:block;float:left;margin:15px 10px 15px 10px;width:180px;max-width:180px;height:400px;}
+.wpsc-clear {clear:both;}
+.wpscerror {display:block;background-color:#ff0000;color:#000000;margin:5px 5px 5px 5px;padding:5px 5px 5px 5px;border:1px #000000 solid;}
+/* END wpStoreCart */

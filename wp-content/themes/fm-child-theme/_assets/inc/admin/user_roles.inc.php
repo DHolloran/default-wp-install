@@ -70,6 +70,7 @@
 		global $current_user, $wpdb;
 		get_currentuserinfo();
 		$role = $wpdb->prefix . 'capabilities';
+		if (gettype($current_user->roles) != 'array' || empty($current_user->roles)) return;
 		$current_user->role = array_keys($current_user->$role);
 		$role = $current_user->role[0];
 

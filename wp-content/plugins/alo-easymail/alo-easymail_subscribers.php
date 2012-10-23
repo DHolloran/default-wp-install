@@ -221,6 +221,23 @@ if ( isset($_REQUEST['doaction_step1']) ) {
 		 		print '<div id="message" class="updated fade"><p>'.__("Subscribers deleted", "alo-easymail").'.</p></div>';
 		 		break;
 
+		 	case "delete_and_unsubscribe":
+		 		if ( !isset($_REQUEST['subscribers'] ) || $_REQUEST['subscribers'] == "" )  {
+		 			echo '<div id="message" class="error"><p>'.__("Error during operation.", "alo-easymail");
+					echo " ". __("No subscriber selected", "alo-easymail") .".";
+					echo '</p></div>';
+					break;
+				}		 	
+		 		foreach ($_REQUEST['subscribers'] as $subsc => $val) {
+
+					$subscriber_obj =  alo_em_get_subscriber_by_id( $val );
+					alo_em_add_email_in_unsubscribed ( $subscriber_obj->email );
+										
+		 			alo_em_delete_subscriber_by_id ( $val );
+		 		}
+		 		print '<div id="message" class="updated fade"><p>'.__("Subscribers deleted and added to list of who unsubscribed", "alo-easymail").'.</p></div>';
+		 		break;
+		 		
 		 	case "activate":
 		 		if ( !isset($_REQUEST['subscribers'] ) || $_REQUEST['subscribers'] == "" )  {
 		 			echo '<div id="message" class="error"><p>'.__("Error during operation.", "alo-easymail");
@@ -266,7 +283,7 @@ if ( isset($_REQUEST['doaction_step1']) ) {
 					}
 				</style>
 
-				<div class="updated" style="background-color:#fffefe"><p><?php _e("Note: the email addresses of who unsubscribed the newsletter are archivied in a database table, so you cannot add or import those addresses using the tools in this page", "alo-easymail") ?>.</p></div>
+				<div class="updated" style="background-color:#fffefe"><p><?php _e("Note: the email addresses of who unsubscribed the newsletter are archivied in a database table, so you cannot add or import those addresses using the tools in this page", "alo-easymail") ?>. <a href="#easymail-export-unsubscribed"><?php _e("You can view and export these email addresses", "alo-easymail"); ?></a>.</p></div>
 				
 				<hr class="break" />
 				<a href="javascript:history.back()"><?php _e("Cancel", "alo-easymail"); ?></a>
@@ -396,9 +413,20 @@ if ( isset($_REQUEST['doaction_step1']) ) {
 					<input type="submit" value="<?php _e('Export', 'alo-easymail') ?>" class="button" name="doaction_step2" />
 				</form>		
 			 	<hr class="break" />
+			 					
+			 	<h3 style="margin-top:20px" id="easymail-export-unsubscribed"><?php _e("Export unsubscribed emails", "alo-easymail") ?></h3>
+			 	<p><?php _e("You can export email addresses of who unsubscribed the newsletter: the plugin shows them on screen so you can copy and paste them into a text file or into any application", "alo-easymail") ?></p>
+			 	<form action="" method="get">			 	
+			 		<input type="hidden" name="post_type"  value="newsletter" />
+					<input type="hidden" name="action"  value="export_unsubscribers_step2" /> <?php // the action ?>
+					<input  type="hidden" name="page"   value="alo-easymail/alo-easymail_subscribers.php"/>
+					<input type="submit" value="<?php _e('Export', 'alo-easymail') ?>" class="button" name="doaction_step2" />
+				</form>		
+			 	<hr class="break" />
 			 				 					
 		 		<a href="javascript:history.back()"><?php _e("Cancel", "alo-easymail"); ?></a>
 		 		<hr class="break" />
+		 				 		
 			 	<?php	
 		 		exit();
 		}
@@ -655,8 +683,8 @@ if ( isset($_REQUEST['doaction_step2']) ) {
 			case "export_step2":
 				
 				//edit : added all this foreach
+				$fields_name = "";
 				if( $alo_em_cf ) {
-					$fields_name = "";
 					foreach( $alo_em_cf as $key => $value ){
 						  $fields_name 	.= ", ".$key;
 					}
@@ -682,7 +710,33 @@ if ( isset($_REQUEST['doaction_step2']) ) {
 				echo '<p><a href="javascript:history.back()">'. __("Back", "alo-easymail"). '</a></p>';
 				exit();
 				break;
-					
+
+
+			// Export unsubscribed: show emails on screen
+			case "export_unsubscribers_step2":
+				
+				//edit : added all this foreach
+				if( $alo_em_cf ) {
+					$fields_name = "";
+					foreach( $alo_em_cf as $key => $value ){
+						  $fields_name 	.= ", ".$key;
+					}
+				}
+				$unsubs = $wpdb->get_results( "SELECT email FROM {$wpdb->prefix}easymail_unsubscribed" );
+				if ( $unsubs ) {
+					echo '<p><a href="javascript:history.back()">'. __("Back", "alo-easymail"). '</a></p>';
+					echo "<pre style='font-family:Courier,Monospace;width:50%;height:300px;border:1px dotted grey;background-color:white;padding:5px 25px;list-style-type:none;overflow:auto;'>\r\n";
+					foreach ( $unsubs as $sub ) {
+						echo esc_html( $sub->email ). "\r\n";
+					}
+					echo "\r\n</pre>";
+				} else {
+					echo '<div id="message" class="error"><p>'. __("No unsubscribed emails", "alo-easymail") . '.</p></div>';
+				}
+				echo '<p><a href="javascript:history.back()">'. __("Back", "alo-easymail"). '</a></p>';
+				exit();
+				break;
+									
 		} // end switch action
 	} else {
 		echo '<div id="message" class="updated fade"><p>'. __("No action selected", "alo-easymail") .'.</p></div>';
@@ -811,6 +865,9 @@ function checkBulkForm (form, field) {
 	if (document.getElementById(form).action.value == 'delete') {
 		return confirm ('<?php echo esc_js( __("Do you really want to DELETE these subscribers?", "alo-easymail") )?>');
 	}
+	if (document.getElementById(form).action.value == 'delete_and_unsubscribe') {
+		return confirm ('<?php echo esc_js( __("Do you really want to DELETE these subscribers?", "alo-easymail").' '. __("The email address will be added to the list of who unsubscribed", "alo-easymail") .": ". __("so you cannot add or import these email addresses using the tools in admin pages", "alo-easymail") ) ?>');
+	}	
 }
 
 //-->
@@ -838,6 +895,7 @@ function checkBulkForm (form, field) {
 			<option value="activate"><?php _e("Activate", "alo-easymail") ?></option>
 			<option value="deactivate"><?php _e("Deactivate", "alo-easymail") ?></option>			
 			<option value="delete"><?php _e('Delete') ?></option>
+			<option value="delete_and_unsubscribe"><?php _e("Delete and add to list of who unsubscribed", "alo-easymail") ?></option>	
 		</select>
 		
 		<input  type="hidden" name="s"  value="<?php if (!empty( $s )) echo stripslashes( $s ) ; ?>" />
@@ -919,7 +977,7 @@ $total_items = $wpdb->get_var("SELECT COUNT(*) FROM {$wpdb->prefix}easymail_subs
 	<tr>
 		<th scope="col"> </th>
 		<th scope="col"><input type="checkbox" name="checkall_subscribers" value="" onclick="toggleCheckboxes(this, 'posts-filter', 'subscribers');" style="margin:1px" /></th>
-		<th scope="col"><div style="text-align: center;"><!-- Avatar --></div></th>
+		<?php if ( get_option('show_avatars') ) : ?> <th scope="col"><div style="text-align: center;"><!-- Avatar --></div></th><?php endif; ?>
 		<th scope="col"><?php echo "<a href='".$link_string."&amp;sortby=email".( ( isset($_GET['order']) && $_GET['order'] == 'DESC' )? "&amp;order=ASC": "&amp;order=DESC")."' title='".__("Order by e-mail", "alo-easymail")."'>".__("E-mail", "alo-easymail")."</a>"; ?>	</th>
 		<th scope="col"><?php _e("Name", "alo-easymail") ?></th>
         

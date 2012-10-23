@@ -4,7 +4,7 @@
 Plugin Name: ALO EasyMail Newsletter
 Plugin URI: http://www.eventualo.net/blog/wp-alo-easymail-newsletter/
 Description: To send newsletters. Features: collect subcribers on registration or with an ajax widget, mailing lists, cron batch sending, multilanguage.
-Version: 2.4.11
+Version: 2.4.12
 Author: Alessandro Massasso
 Author URI: http://www.eventualo.net
 
@@ -48,7 +48,9 @@ global $wp_version;
 if ( version_compare ( $wp_version , '3.1', '<' ) ) require_once( ABSPATH . WPINC .'/registration.php' );
 require_once( 'alo-easymail_functions.php' );
 require_once( 'alo-easymail-widget.php' );
-if ( defined( 'ALO_EM_LOAD_SIMPLEHTMLDOM' ) && ! class_exists('simple_html_dom_node') ) require_once( 'inc/simple_html_dom.php' );
+
+// SimpleDom deprecated in 2.4.12: use [CUSTOM-LINK] instead
+if ( defined( 'ALO_EM_LOAD_SIMPLEHTMLDOM' ) && ! class_exists('simple_html_dom_node') ) require_once( ALO_EM_PLUGIN_ABS .'/inc/simple_html_dom.php' );
 
 /**
  * File including custom hooks. See plugin homepage or inside that file for more info.
@@ -821,7 +823,7 @@ function alo_em_ajax_alo_easymail_subscriber_edit_inline () {
 	check_ajax_referer( "alo-easymail" );
 	$subscriber = $_POST['subscriber'];
 	$row_index = $_POST['row_index'];	
-	$inline_action = $_POST['inline_action'];	
+	$inline_action = $_POST['inline_action'];
 	
 	if ( $subscriber ) {
 		$mailinglists = alo_em_get_mailinglists( 'admin,public' );
@@ -910,15 +912,22 @@ function alo_em_ajax_alo_easymail_subscriber_edit_inline () {
 				break;
 
 			case 'delete':
+				// If required, add email in unsubscribed db table
+				if ( isset($_POST['to_unsubscribe']) && $_POST['to_unsubscribe'] == 1 )
+				{
+					$subscriber_obj =  alo_em_get_subscriber_by_id( $subscriber );
+					alo_em_add_email_in_unsubscribed ( $subscriber_obj->email );
+				}
+							
 				// Delete the subscriber
-				if ( alo_em_delete_subscriber_by_id ( $subscriber ) ) {	
-					echo "-ok-deleted";
+				if ( alo_em_delete_subscriber_by_id ( $subscriber ) ) {		
+					echo "-ok-deleted";					
 					break;
 				} else {
 					echo "-1"; // error
 					break;
 				}		
-				
+					
 				echo alo_em_get_subscriber_table_row ( $subscriber, $row_index, false, $mailinglists, $languages );		
 								
 			case 'cancel':
@@ -1287,7 +1296,8 @@ function alo_em_localize_admin_script () {
 		'errEmailNotValid' => esc_js( __("The e-email address is not correct", "alo-easymail") ),
 		'errNameIsBlank' => esc_js( __("The name field is empty", "alo-easymail") ),
 		'errEmailAlreadySubscribed'=> esc_js( __("There is already a subscriber with this e-email address", "alo-easymail") ),
-		'confirmDelSubscriber'=> esc_js( __("Do you really want to DELETE this subscriber?", "alo-easymail") )
+		'confirmDelSubscriber'=> esc_js( __("Do you really want to DELETE this subscriber?", "alo-easymail") ),
+		'confirmDelSubscriberAndUnsubscribe'=> esc_js( __("Do you really want to DELETE this subscriber?", "alo-easymail").' '. __("The email address will be added to the list of who unsubscribed", "alo-easymail") .": ". __("so you cannot add or import these email addresses using the tools in admin pages", "alo-easymail") )		
     );
 }
 

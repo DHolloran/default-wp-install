@@ -72,7 +72,7 @@ if ($email && $action == 'unsubscribe') {
 		echo '<input type="hidden" name="em1" value="'. esc_attr($em1). '" />';
 		echo '<input type="hidden" name="em2" value="'. esc_attr($em2) .'" />';
 		echo '<input type="hidden" name="uk" value="'. $unikey .'" />';
-		echo '<input type="submit" name="submit" value="'. esc_attr( __('Edit') ). '" />';
+		echo '<input type="submit" name="submit" value="'. esc_attr( __('Edit', "alo-easymail") ). '" />';
 		echo '</form>'; 
     }
     

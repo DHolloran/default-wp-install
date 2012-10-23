@@ -33,6 +33,8 @@ require( 'php_error.php' );
 <head>
 <meta charset="<?php bloginfo( 'charset' ); ?>" />
 <meta name="viewport" content="width=device-width" />
+<meta name="Author" content="FreeMan Marketing, http://www.freemanhelp.com">
+<meta name="Designer" content="FreeMan Marketing">
 <title><?php
 	/*
 	 * Print the <title> tag based on what is being viewed.

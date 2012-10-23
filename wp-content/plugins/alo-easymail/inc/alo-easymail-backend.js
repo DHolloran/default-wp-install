@@ -103,7 +103,8 @@ jQuery(document).ready( function($) {
 			};
 
 			jQuery( '#easymail-subscriber-edit-inline_'+ id  ).hide();
-			jQuery( '#easymail-subscriber-delete_'+ id  ).hide();			
+			jQuery( '#easymail-subscriber-delete_'+ id  ).hide();
+			jQuery( '#easymail-subscriber-delete-and-unsubscribe_'+ id  ).hide();					
 			jQuery( '#easymail-subscriber-'+ id +'-actions-loading' ).show();
 			
 			jQuery.post( easymailJs.ajaxurl, data, function(response) {
@@ -213,7 +214,8 @@ jQuery(document).ready( function($) {
 			};
 
 			jQuery( '#easymail-subscriber-edit-inline-save_'+ id  ).hide();
-			jQuery( '#easymail-subscriber-edit-inline-cancel_'+ id  ).hide();			
+			jQuery( '#easymail-subscriber-edit-inline-cancel_'+ id  ).hide();
+			jQuery( '#easymail-subscriber-delete-and-unsubscribe_'+ id  ).hide();						
 			jQuery( '#easymail-subscriber-'+ id +'-actions-loading' ).show();
 			
 			jQuery.post( easymailJs.ajaxurl, data, function(response) {
@@ -233,8 +235,19 @@ jQuery(document).ready( function($) {
 		jQuery('.easymail-subscriber-delete').live( "click", function() {
 			var id = jQuery( this ).attr('rel');
 			var row_index = jQuery.trim( jQuery('tr#subscriber-row-'+ id +' th.subscriber-row-index').html() );
-			
-			if ( !confirm( easymailJs.confirmDelSubscriber ) ) return false;
+
+			var to_unsubscribe;
+			if ( jQuery( this ).hasClass('and-unsubscribe') ) {
+				to_unsubscribe = 1;
+			} else {
+				to_unsubscribe = 0;
+			}
+
+			if ( to_unsubscribe == 1 ) {
+				if ( !confirm( easymailJs.confirmDelSubscriberAndUnsubscribe ) ) return false;
+			} else {
+				if ( !confirm( easymailJs.confirmDelSubscriber ) ) return false;
+			}
 			
 			// Get data...
 			var data = {
@@ -242,11 +255,13 @@ jQuery(document).ready( function($) {
 				inline_action	:	'delete',
 				subscriber		: 	id,
 				row_index		:	row_index,
-				_ajax_nonce		: 	easymailJs.nonce
+				_ajax_nonce		: 	easymailJs.nonce,
+				to_unsubscribe	:	to_unsubscribe
 			};
 
 			jQuery( '#easymail-subscriber-edit-inline_'+ id  ).hide();
-			jQuery( '#easymail-subscriber-delete_'+ id  ).hide();			
+			jQuery( '#easymail-subscriber-delete_'+ id  ).hide();
+			jQuery( '#easymail-subscriber-delete-and-unsubscribe_'+ id  ).hide();			
 			jQuery( '#easymail-subscriber-'+ id +'-actions-loading' ).show();
 			
 			jQuery.post( easymailJs.ajaxurl, data, function(response) {

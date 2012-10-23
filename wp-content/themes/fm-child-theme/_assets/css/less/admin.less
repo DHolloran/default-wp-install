@@ -8,18 +8,36 @@
 
 // Import the MarkDown documentation styles
 @import "partials/admin/documentation";
+@import "partials/icons";
+@import "partials/utilites";
+@import "partials/mixins";
+@import "partials/forms";
 
-// == Utility Classes ====================================================================
+// == Utility Classes =================================
 	.pull-left { float: left; }
 	.pull-right { float: right; }
 	.unstyled { list-style: none; margin: 0; padding: 0; }
+	.clear { clear: both; }
+	// Clear Fix
+	.clearfix {
+		*zoom: 1;
+		&:before,
+		&:after {
+		  display: table;
+		  content: "";
+		  line-height: 0;
+		}
+		&:after { clear: both; }
+	} // .clearfix
+
+	// Clear
 	.clear { clear: both; }
 
 	// Adds (PDF) and size if specified to all PDF links
 	a[href$=".pdf"]:after { content: " (PDF)"; }
 	a[href$=".pdf"][data-size]:after { content: " (PDF, " attr(data-size) ")"; }
 
-// == Admin Bar ==========================================================================
+// == Admin Bar =======================================
 	/* :TODO Change the color of the admin bar. Make it very simple!*/
 	/* Admin Bar Logo */
 	#wp-admin-bar-wp-logo > .ab-item .ab-icon {
@@ -29,5 +47,23 @@
 	}
 	#wpadminbar #wp-admin-bar-wp-logo.hover > .ab-item .ab-icon { background-position: 0 0; }
 
-// == Thank You Meta Box =================================================================
-#dashboard-widgets-wrap #postbox-container-1 { width: 100%!important; }
+// == Site Options ====================================
+	#fm_site_options {
+		@form-height: 30px;
+		@form-input-height: 24px;
+		@font-size: 14px;
+		li {
+			width: 100%;
+			margin-top:20px;
+			height: @form-height;
+		}
+		label,
+		input,
+		select {
+			height: @form-input-height;
+			line-height: @form-height;
+			font-size: 14px;
+			.border-radius(3px);
+			padding: 3px;
+		}
+	} // #fm_site_options

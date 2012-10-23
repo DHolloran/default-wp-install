@@ -1,13 +1,4 @@
 <?php
-// :TODO Extend more admin customization functionality
-
-// == Admin StyleSheet ================================================
-	function fm_add_admin_stylesheet()
-	{
-		wp_register_style('fm-admin-styles', get_stylesheet_directory_uri() . '/_assets/css/admin.css');
-		wp_enqueue_style('fm-admin-styles');
-	} // fm_add_admin_stylesheet()
-
 // == Admin Bar =======================================================
 	// Add contact us email link
 		function fm_add_contact_admin_bar_link()
@@ -36,17 +27,17 @@
 	// Set admin bar to not display when viewing page by default
 		function fm_set_user_view_page_admin_bar_false($user_id)
 		{
-		  update_user_meta( $user_id, 'show_admin_bar_front', 'false' );
-		  update_user_meta( $user_id, 'show_admin_bar_admin', 'false' );
+			update_user_meta( $user_id, 'show_admin_bar_front', 'false' );
+			update_user_meta( $user_id, 'show_admin_bar_admin', 'false' );
 		} // fm_set_user_view_page_admin_bar_false($user_id)
 
 	// Replace default site name with view your site link
 		// Removes the original menu item
 		function fm_remove_admin_bar_menus()
 		{
-	    global $wp_admin_bar;
-	    // Removes the site name
-	    $wp_admin_bar->remove_menu('site-name');
+			global $wp_admin_bar;
+			// Removes the site name
+			$wp_admin_bar->remove_menu('site-name');
 		} // fm_remove_admin_bar_menus()
 
 		// Replaces with new and improved menu item
@@ -56,10 +47,11 @@
 			if ( !is_super_admin() OR !is_admin_bar_showing()) return;
 			$wp_admin_bar->add_menu( array(
 			'id' => 'fm-view-website',
-			'title' => __( 'View your site'),
+			'title' => __( 'View Site'),
 			'href' => home_url(),
 			'meta'  => array( 'target' => '_blank')));
 		} // fm_add_fmhelp_admin_bar_link()
+
 
 // == Side Menu =======================================================
 	// :TODO Make it to where everything can be visible to developers only.
@@ -104,25 +96,42 @@
 		} // fm_remove_admin_menu_pages()
 
 	// Add Site Documentation Menu Page
-	function fm_add_site_documentation()
-	{
-	  add_menu_page(
-		  'Site User Guide',
-		  'User Guide',
-		  'manage_options',
-		  'fm-site-documentation',
-		  'fm_add_documentation_content');
-	} // fm_add_site_documentation()
+		function fm_add_site_documentation()
+		{
+			add_menu_page(
+				'Site User Guide',
+				'User Guide',
+				'manage_options',
+				'fm-site-documentation',
+				'fm_add_documentation_content');
+		} // fm_add_site_documentation()
 
 	// Add Developer Documentation Menu Page
-	function fm_add_developer_documentation()
-	{
-		add_menu_page( 'Developer Documentation',
-			'Developers',
-			'manage_options',
-			'developer-documentation',
-			'fm_add_developer_documentation_content');
-	} // fm_add_developer_documentation()
+		function fm_add_developer_documentation()
+		{
+			add_menu_page( 'Developer Documentation',
+				'Developers',
+				'manage_options',
+				'developer-documentation',
+				'fm_add_developer_documentation_content');
+		} // fm_add_developer_documentation()
+
+	// Add Site Options Menu Page
+		function fm_add_site_options()
+		{
+			add_menu_page( 'Site Options',
+				'Site Options',
+				'manage_options',
+				'site-options',
+				'fm_add_site_options_content');
+		} // fm_add_site_options()
+
+
+// == Screen Options ==================================================
+	function fm_remove_screen_options(){
+			return false;
+	} // fm_remove_screen_options()
+
 
 // == Dashboard =======================================================
 	// Add The FreeMan Marketing Company Info Widget
@@ -170,135 +179,221 @@
 			remove_meta_box( 'dashboard_secondary', 'dashboard', 'side' );
 		} // fm_remove_dashboard_widgets()
 
+
 // == Posts ===========================================================
 	function fm_remove_posts_meta_boxes()
 	{
-    // Remove revisions metabox.
-    // remove_meta_box( 'revisionsdiv', 'post', 'normal' );
+		// Remove revisions metabox.
+		// remove_meta_box( 'revisionsdiv', 'post', 'normal' );
 
-    // == Sidebar Meta Boxes ==
-    // Remove formats metabox.
-    // remove_meta_box( 'formatdiv', 'post', 'side' );
+		// == Sidebar Meta Boxes ==
+		// Remove formats metabox.
+		// remove_meta_box( 'formatdiv', 'post', 'side' );
 
-    // Remove categories metabox.
-    // remove_meta_box( 'categorydiv', 'post', 'side' );
+		// Remove categories metabox.
+		// remove_meta_box( 'categorydiv', 'post', 'side' );
 
-    // Remove tags metabox.
-    // remove_meta_box( 'tagsdiv-post_tag', 'post', 'side' );
+		// Remove tags metabox.
+		// remove_meta_box( 'tagsdiv-post_tag', 'post', 'side' );
 
-    // Remove featured image metabox.
-    // remove_meta_box( 'postimagediv', 'post', 'side' );
+		// Remove featured image metabox.
+		// remove_meta_box( 'postimagediv', 'post', 'side' );
 
-    // == Main Meta Boxes ==
-    // Remove excerpt metabox.
-    // remove_meta_box( 'postexcerpt', 'post', 'normal' );
+		// == Main Meta Boxes ==
+		// Remove excerpt metabox.
+		// remove_meta_box( 'postexcerpt', 'post', 'normal' );
 
-    // Remove trackbacks metabox.
-    // remove_meta_box( 'trackbacksdiv', 'post', 'normal' );
+		// Remove trackbacks metabox.
+		// remove_meta_box( 'trackbacksdiv', 'post', 'normal' );
 
- 		// Remove custom fields metabox.
-    // remove_meta_box( 'postcustom', 'post', 'normal' );
+		// Remove custom fields metabox.
+		// remove_meta_box( 'postcustom', 'post', 'normal' );
 
-    // Remove comments status metabox (discussion).
+		// Remove comments status metabox (discussion).
 		// remove_meta_box( 'commentstatusdiv', 'post', 'normal' );
 
-    // Remove comments metabox.
-    // remove_meta_box( 'commentsdiv', 'post', 'normal' );
+		// Remove comments metabox.
+		// remove_meta_box( 'commentsdiv', 'post', 'normal' );
 
-    // Remove slug metabox.
-    // remove_meta_box( 'slugdiv', 'post', 'normal' );
+		// Remove slug metabox.
+		// remove_meta_box( 'slugdiv', 'post', 'normal' );
 
 		// Remove author metabox
 		// remove_meta_box( 'authordiv', 'post', 'normal' );
 
 	} // fm_remove_posts_meta_boxes()
 
+
 // == Pages ===========================================================
 	function fm_remove_pages_meta_boxes()
 	{
-    // Remove revisions metabox.
-    // remove_meta_box( 'revisionsdiv', 'page', 'normal' );
+		// Remove revisions metabox.
+		// remove_meta_box( 'revisionsdiv', 'page', 'normal' );
 
-    // == Sidebar Meta Boxes ==
-	    // Remove formats metabox.
-	    // remove_meta_box( 'formatdiv', 'page', 'side' );
+		// == Sidebar Meta Boxes ==
+			// Remove formats metabox.
+			// remove_meta_box( 'formatdiv', 'page', 'side' );
 
 			// Remove attributes metabox.
-	    // remove_meta_box( 'pageparentdiv', 'page', 'side' );
+			// remove_meta_box( 'pageparentdiv', 'page', 'side' );
 
-	    // Remove featured image metabox.
-	    // remove_meta_box( 'postimagediv', 'page', 'side' );
+			// Remove featured image metabox.
+			// remove_meta_box( 'postimagediv', 'page', 'side' );
 
-    // == Main Meta Boxes ==
-	 		// Remove custom fields metabox.
-	    // remove_meta_box( 'postcustom', 'page', 'normal' );
+		// == Main Meta Boxes ==
+			// Remove custom fields metabox.
+			// remove_meta_box( 'postcustom', 'page', 'normal' );
 
-	    // Remove comments status metabox (discussion).
+			// Remove comments status metabox (discussion).
 			// remove_meta_box( 'commentstatusdiv', 'page', 'normal' );
 
-	    // Remove comments metabox.
-	    // remove_meta_box( 'commentsdiv', 'page', 'normal' );
+			// Remove comments metabox.
+			// remove_meta_box( 'commentsdiv', 'page', 'normal' );
 
-	    // Remove slug metabox.
-	    // remove_meta_box( 'slugdiv', 'page', 'normal' );
+			// Remove slug metabox.
+			// remove_meta_box( 'slugdiv', 'page', 'normal' );
 
 			// Remove author metabox
 			// remove_meta_box( 'authordiv', 'page', 'normal' );
 
 	} // fm_remove_pages_meta_boxes()
 
+
+// == Post/Page Meta Box =============================================
+	// Add Meta Box Content
+		function fm_add_meta_box_content($post)
+		{
+			// pp($post);
+			// get_post_meta($post->ID, 'fm_meta_key_name', $single) $single = true for string false for array
+			// add_post_meta($post->ID, 'fm_meta_key_name', $meta_value, $unique);
+			// update_post_meta($post->ID, 'fm_meta_key_name', $meta_value, $prev_value);
+		} // fm_add_meta_box_content()
+
+	// Add Meta Boxes
+		function fm_add_meta_boxes()
+		{
+			// FMM Title
+			add_meta_box( 'fm-meta-box', 'FMM Title', 'fm_add_meta_box_content', 'post', 'normal', 'high');
+		} // fm_add_meta_boxes()
+
+	// Remove Meta Boxes
+		function fm_remove_meta_boxes() {
+			// Links
+				// Removes Links > Target
+				// remove_meta_box('linktargetdiv', 'link', 'normal');
+
+				// Removes Links > Link Relationship (XFN)
+				// remove_meta_box('linkxfndiv', 'link', 'normal');
+
+				// Removes Links > Advanced
+				// remove_meta_box('linkadvanceddiv', 'link', 'normal');
+
+				// Removes Links > Categories
+				// remove_meta_box('linkcategorydiv', 'link', 'normal');
+
+			// Posts
+				// Posts > Excerpt
+				// remove_meta_box('postexcerpt', 'post', 'normal');
+
+				// Posts > Send Trackbacks
+				// remove_meta_box('trackbacksdiv', 'post', 'normal');
+
+				// Posts > Discussion
+				// remove_meta_box('commentstatusdiv', 'post', 'normal');
+
+				// Posts > Custom Fields
+				// remove_meta_box('postcustom', 'post', 'normal');
+
+				// Posts > Author
+				// remove_meta_box('authordiv', 'post', 'normal');
+
+				// Posts > Slug
+				// remove_meta_box('sqpt-meta-tags', 'post', 'normal');
+
+				// Posts > Tags
+				// remove_meta_box('tagsdiv-post_tag', 'post', 'side');
+
+			// Pages
+				// Pages > Discussion
+				// remove_meta_box('commentstatusdiv', 'page', 'normal');
+
+				// Pages > Custom Fields
+				// remove_meta_box('postcustom', 'page', 'normal');
+
+				// Pages > Author
+				// remove_meta_box('authordiv', 'page', 'normal');
+
+				// Pages > Slug
+				// remove_meta_box('slugdiv', 'page', 'normal');
+
+				// Pages > Comments
+				// remove_meta_box('commentsdiv', 'page', 'normal');
+
+		} // fm_remove_meta_boxes()
+
+
 // == Widgets =========================================================
 
 	// Remove Default Widgets
-    function fm_remove_default_widgets()
-    {
-    	// Removes the default WordPress pages widget
-	   // unregister_widget('WP_Widget_Pages');
+		function fm_remove_default_widgets()
+		{
+			// Removes the default WordPress pages widget
+		 // unregister_widget('WP_Widget_Pages');
 
-	    // Removes the default WordPress calendar widget
-	    unregister_widget('WP_Widget_Calendar');
+			// Removes the default WordPress calendar widget
+			unregister_widget('WP_Widget_Calendar');
 
-	    // Removes the default WordPress archives widget
-	    unregister_widget('WP_Widget_Archives');
+			// Removes the default WordPress archives widget
+			unregister_widget('WP_Widget_Archives');
 
-	    // Removes the default WordPress links widget
-	    unregister_widget('WP_Widget_Links');
+			// Removes the default WordPress links widget
+			unregister_widget('WP_Widget_Links');
 
-	    // Removes the default WordPress meta widget
-	    unregister_widget('WP_Widget_Meta');
+			// Removes the default WordPress meta widget
+			unregister_widget('WP_Widget_Meta');
 
-	    // Removes the default WordPress search widget
-	    // unregister_widget('WP_Widget_Search');
+			// Removes the default WordPress search widget
+			// unregister_widget('WP_Widget_Search');
 
-	    // Removes the default WordPress text widget
-	    // unregister_widget('WP_Widget_Text');
+			// Removes the default WordPress text widget
+			// unregister_widget('WP_Widget_Text');
 
-	    // Removes the default WordPress categories widget
-	    unregister_widget('WP_Widget_Categories');
+			// Removes the default WordPress categories widget
+			unregister_widget('WP_Widget_Categories');
 
-	    // Removes the default WordPress recent widget
-	    unregister_widget('WP_Widget_Recent_Posts');
+			// Removes the default WordPress recent widget
+			unregister_widget('WP_Widget_Recent_Posts');
 
-	    // Removes the default WordPress recent comments widget
-	    unregister_widget('WP_Widget_Recent_Comments');
+			// Removes the default WordPress recent comments widget
+			unregister_widget('WP_Widget_Recent_Comments');
 
-	    // Removes the default WordPress RSS widget
-	    unregister_widget('WP_Widget_RSS');
+			// Removes the default WordPress RSS widget
+			unregister_widget('WP_Widget_RSS');
 
-	    // Removes the default WordPress tag cloud widget
-	    unregister_widget('WP_Widget_Tag_Cloud');
+			// Removes the default WordPress tag cloud widget
+			unregister_widget('WP_Widget_Tag_Cloud');
 
-	    // Removes the default WordPress custom menu widget
-	    // unregister_widget('WP_Nav_Menu_Widget');
+			// Removes the default WordPress custom menu widget
+			// unregister_widget('WP_Nav_Menu_Widget');
 
-	    // Removes the default WordPress custom menu widget
-	    // :TODO not working WP v3.4.2
-	    unregister_widget('Twenty_Eleven_Ephemera_Widget');
+			// Removes the default WordPress custom menu widget
+			// :TODO not working WP v3.4.2
+			unregister_widget('Twenty_Eleven_Ephemera_Widget');
 
-    } // fm_remove_default_widgets()
+		} // fm_remove_default_widgets()
+
+
+// == Sidebars ========================================================
+	function fm_unregister_sidebars()
+	{
+		// global $wp_registered_sidebars
+		// pp($wp_registered_sidebars);
+		// unregister_sidebar( $id );
+	} // fm_unregister_sidebars()
+
 
 // == Footer ==========================================================
-  // Custom admin footer text
+	// Custom admin footer text
 		function fm_custom_admin_footer()
 		{
 			$client_name = get_bloginfo('name');
@@ -306,62 +401,63 @@
 			echo "Created by <a href=\"http://www.freemanhelp.com\">Freeman Marketing</a> for $client_name powered by <a href=\"http://www.wordpress.org\">WordPress $wp_version</a>";
 		} // fm_custom_admin_footer()
 
-// == :TODO Tiny MCE ==================================================
-	// :TODO Look into other Tiny MCE options
+
+// == Tiny MCE ========================================================
 	// Make TinyMCE Editor Awesome
 		function fm_make_mce_awesome( $init ) {
 			// Removes H1 tags
-		  $init['theme_advanced_blockformats'] = 'h2,h3,h4,p';
+			$init['theme_advanced_blockformats'] = 'h2,h3,h4,p';
 
-		  // Adds some custom buttons
-		  $init['theme_advanced_buttons1_add'] = 'copy, cut, paste, redo, undo';
+			// Adds some custom buttons
+			$init['theme_advanced_buttons1_add'] = 'copy, cut, paste, redo, undo';
 
-		  // Adds some more custom buttons
-		  $init['theme_advanced_buttons2_add'] = 'anchor, hr, sub, sup';
+			// Adds some more custom buttons
+			$init['theme_advanced_buttons2_add'] = 'anchor, hr, sub, sup';
 
-		  // Disables the WP help button
-		  $init['theme_advanced_disable'] = 'wp_help';
+			// Disables the WP help button
+			$init['theme_advanced_disable'] = 'wp_help';
 
-		  return $init;
+			return $init;
 		} // fm_make_mce_awesome($init)
 
 	// Tiny MCE Buttons 2
 		function fm_mce_buttons_2( $buttons ) {
-	    array_unshift( $buttons, 'styleselect' );
-	    return $buttons;
+			array_unshift( $buttons, 'styleselect' );
+			return $buttons;
 		} // fm_mce_buttons_2($buttons)
 
 	// Add a style drop down to Tiny MCE
 		function fm_mce_before_init( $settings ) {
 			$style_formats = array();
 			// Style Examples
-	    // $style_formats = array(
-	    //  array(
-	    //  'title' => 'Button',
-	    //  'selector' => 'a',
-	    //  'classes' => 'btn'
-	    //  ),
-	    //     array(
-	    //      'title' => 'Callout Box',
-	    //      'block' => 'div',
-	    //      'classes' => 'callout',
-	    //      'wrapper' => true
-	    //     ),
-	    //     array(
-	    //      'title' => 'Bold Red Text',
-	    //      'inline' => 'span',
-	    //      'styles' => array(
-	    //      'color' => '#f00',
-	    //      'fontWeight' => 'bold'
-	    //      )
-	    //     )
-	    // );
-	    $settings['style_formats'] = json_encode( $style_formats );
-	    return $settings;
+			// $style_formats = array(
+			//  array(
+			//  'title' => 'Button',
+			//  'selector' => 'a',
+			//  'classes' => 'btn'
+			//  ),
+			//     array(
+			//      'title' => 'Callout Box',
+			//      'block' => 'div',
+			//      'classes' => 'callout',
+			//      'wrapper' => true
+			//     ),
+			//     array(
+			//      'title' => 'Bold Red Text',
+			//      'inline' => 'span',
+			//      'styles' => array(
+			//      'color' => '#f00',
+			//      'fontWeight' => 'bold'
+			//      )
+			//     )
+			// );
+			$settings['style_formats'] = json_encode( $style_formats );
+			return $settings;
 		} // fm_mce_before_init($settings)
 
 	// Add Tiny MCE editor styles
 	add_editor_style(get_stylesheet_directory_uri() . '/_assets/css/tiny-mce.css');
+
 
 // == All Add Actions Below ===========================================
 	if (is_admin()) {
@@ -379,6 +475,9 @@
 
 				// Adds a site documentation menu page
 				add_action('admin_menu', 'fm_add_site_documentation');
+
+				// Adds a site options menu page
+				add_action('admin_menu', 'fm_add_site_options');
 
 				// Adds company information widget
 				add_action('wp_dashboard_setup', 'fm_add_custom_widgets');
@@ -400,6 +499,9 @@
 
 				}
 
+				// Removes Screen Options
+				add_filter('screen_options_show_screen', 'fm_remove_screen_options');
+
 				// Removes admin menu pages
 				add_action( 'admin_menu', 'fm_remove_admin_menu_pages' );
 
@@ -418,27 +520,35 @@
 			} // if(!user_is_fmm_developer())
 
 		// == All users =============================================
-		// Adds admin stylesheet
-		add_action('admin_init', 'fm_add_admin_stylesheet');
+			// Add Meta Box
+			// add_action( 'add_meta_boxes', 'fm_add_meta_boxes' );
 
-		// Sets admin bar to not display when viewing page by default
-		add_action("user_register", "fm_set_user_view_page_admin_bar_false", 10, 1);
+			// Remove meta boxes
+			add_action( 'admin_menu', 'fm_remove_meta_boxes' );
 
-		// Adds custom admin footer text
-		add_filter('admin_footer_text', 'fm_custom_admin_footer');
+			// Adds admin stylesheet
+			add_action('admin_init', 'fm_add_admin_stylesheet');
 
-		// Makes Tiny MCE awesome
-		add_filter('tiny_mce_before_init', 'fm_make_mce_awesome');
+			// Sets admin bar to not display when viewing page by default
+			add_action("user_register", "fm_set_user_view_page_admin_bar_false", 10, 1);
 
-		// Tiny MCE buttons 2
-		add_filter( 'mce_buttons_2', 'fm_mce_buttons_2' );
+			// Adds custom admin footer text
+			add_filter('admin_footer_text', 'fm_custom_admin_footer');
 
-		// Adds styles drop down menu
-		add_filter( 'tiny_mce_before_init', 'fm_mce_before_init' );
+			// Makes Tiny MCE awesome
+			add_filter('tiny_mce_before_init', 'fm_make_mce_awesome');
 
-		// Adds a favicon for admin area
-		add_action('admin_head', 'fm_add_favicon');
+			// Tiny MCE buttons 2
+			add_filter( 'mce_buttons_2', 'fm_mce_buttons_2' );
 
+			// Adds styles drop down menu
+			add_filter( 'tiny_mce_before_init', 'fm_mce_before_init' );
+
+			// Adds a favicon for admin area
+			add_action('admin_head', 'fm_add_favicon');
+
+			// Remove registered sidebars
+			add_action( 'widgets_init', 'fm_unregister_sidebars', 11 );
 
 
 	} // if(is_admin())
