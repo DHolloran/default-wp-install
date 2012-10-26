@@ -1,7 +1,7 @@
 <?php
 // == Admin Bar =======================================================
 	// Add contact us email link
-		function fm_add_contact_admin_bar_link()
+		function cb_add_contact_admin_bar_link()
 		{
 			global $wp_admin_bar;
 			if (!is_super_admin() OR !is_admin_bar_showing()) return;
@@ -11,10 +11,10 @@
 				'id' => 'contact-fm-help',
 				'title' => __('Contact FMM'),
 				'href' => $link));
-		} // fm_add_contact_admin_bar_link()
+		} // cb_add_contact_admin_bar_link()
 
 	// Add link to website
-		function fm_add_fmhelp_admin_bar_link()
+		function cb_add_fmhelp_admin_bar_link()
 		{
 			global $wp_admin_bar;
 			if (!is_super_admin() OR !is_admin_bar_showing()) return;
@@ -22,26 +22,26 @@
 				'id' => 'fm-website',
 				'title' => __('FreeManHelp.com'),
 				'href' => __('http://www.freemanhelp.com')));
-		} // fm_add_fmhelp_admin_bar_link()
+		} // cb_add_fmhelp_admin_bar_link()
 
 	// Set admin bar to not display when viewing page by default
-		function fm_set_user_view_page_admin_bar_false($user_id)
+		function cb_set_user_view_page_admin_bar_false($user_id)
 		{
 			update_user_meta( $user_id, 'show_admin_bar_front', 'false' );
 			update_user_meta( $user_id, 'show_admin_bar_admin', 'false' );
-		} // fm_set_user_view_page_admin_bar_false($user_id)
+		} // cb_set_user_view_page_admin_bar_false($user_id)
 
 	// Replace default site name with view your site link
 		// Removes the original menu item
-		function fm_remove_admin_bar_menus()
+		function cb_remove_admin_bar_menus()
 		{
 			global $wp_admin_bar;
 			// Removes the site name
 			$wp_admin_bar->remove_menu('site-name');
-		} // fm_remove_admin_bar_menus()
+		} // cb_remove_admin_bar_menus()
 
 		// Replaces with new and improved menu item
-		function fm_add_view_site_admin_bar_link()
+		function cb_add_view_site_admin_bar_link()
 		{
 			global $wp_admin_bar;
 			if ( !is_super_admin() OR !is_admin_bar_showing()) return;
@@ -50,13 +50,13 @@
 			'title' => __( 'View Site'),
 			'href' => home_url(),
 			'meta'  => array( 'target' => '_blank')));
-		} // fm_add_fmhelp_admin_bar_link()
+		} // cb_add_fmhelp_admin_bar_link()
 
 
 // == Side Menu =======================================================
 	// :TODO Make it to where everything can be visible to developers only.
 	// Remove Admin Menu Items
-		function fm_remove_admin_menu_pages()
+		function cb_remove_admin_menu_pages()
 		{
 			// Use this to get the values to remove top menu pages
 			// global $menu;
@@ -93,49 +93,49 @@
 			// Removes the Settings > Permalinks sub-menu page
 			// remove_submenu_page('options-general.php', 'options-permalink.php');
 
-		} // fm_remove_admin_menu_pages()
+		} // cb_remove_admin_menu_pages()
 
 	// Add Site Documentation Menu Page
-		function fm_add_site_documentation()
+		function cb_add_site_documentation()
 		{
 			add_menu_page(
 				'Site User Guide',
 				'User Guide',
 				'manage_options',
 				'fm-site-documentation',
-				'fm_add_documentation_content');
-		} // fm_add_site_documentation()
+				'cb_add_documentation_content');
+		} // cb_add_site_documentation()
 
 	// Add Developer Documentation Menu Page
-		function fm_add_developer_documentation()
+		function cb_add_developer_documentation()
 		{
 			add_menu_page( 'Developer Documentation',
 				'Developers',
 				'manage_options',
 				'developer-documentation',
-				'fm_add_developer_documentation_content');
-		} // fm_add_developer_documentation()
+				'cb_add_developer_documentation_content');
+		} // cb_add_developer_documentation()
 
 	// Add Site Options Menu Page
-		function fm_add_site_options()
+		function cb_add_site_options()
 		{
 			add_menu_page( 'Site Options',
 				'Site Options',
 				'manage_options',
 				'site-options',
-				'fm_add_site_options_content');
-		} // fm_add_site_options()
+				'cb_add_site_options_content');
+		} // cb_add_site_options()
 
 
 // == Screen Options ==================================================
-	function fm_remove_screen_options(){
+	function cb_remove_screen_options(){
 			return false;
-	} // fm_remove_screen_options()
+	} // cb_remove_screen_options()
 
 
 // == Dashboard =======================================================
 	// Add The FreeMan Marketing Company Info Widget
-		function fm_add_company_info()
+		function cb_add_company_info()
 		{
 			$doc_link = admin_url('admin.php?page=fm-site-documentation', 'http');
 			$website_name = get_bloginfo('name');
@@ -145,16 +145,16 @@
 				<p>If you have a question about how to use this site please consult the <a href="<?php echo $doc_link; ?>" title="Documentation">documentation</a>.</p>
 				<p>If you need any further help do not hesitate to contact us by phone at (111)-111-1111 or email at <a href="mailto:info@freemanhelp.com?subject=Question%20about%20my%20website - <?php echo $website_name; ?>">info@freemanhelp.com</a>
 		<?php
-		} // fm_add_company_info()
+		} // cb_add_company_info()
 
 	// Add the FreeMan Marketing Company Information
-		function fm_add_custom_widgets()
+		function cb_add_custom_widgets()
 		{
-			wp_add_dashboard_widget('fm-company-info', 'Thank You!', 'fm_add_company_info');
-		}//fm_add_custom_widgets()
+			wp_add_dashboard_widget('fm-company-info', 'Thank You!', 'cb_add_company_info');
+		}//cb_add_custom_widgets()
 
 	// Remove Default Dashboard Widgets
-		function fm_remove_dashboard_widgets()
+		function cb_remove_dashboard_widgets()
 		{
 			// == Middle Column ==
 			// Removes the incoming links dashboard widget
@@ -177,11 +177,11 @@
 			remove_meta_box( 'dashboard_primary', 'dashboard', 'side' );
 			// Removes the other WordPress news dashboard widget
 			remove_meta_box( 'dashboard_secondary', 'dashboard', 'side' );
-		} // fm_remove_dashboard_widgets()
+		} // cb_remove_dashboard_widgets()
 
 
 // == Posts ===========================================================
-	function fm_remove_posts_meta_boxes()
+	function cb_remove_posts_meta_boxes()
 	{
 		// Remove revisions metabox.
 		// remove_meta_box( 'revisionsdiv', 'post', 'normal' );
@@ -221,11 +221,11 @@
 		// Remove author metabox
 		// remove_meta_box( 'authordiv', 'post', 'normal' );
 
-	} // fm_remove_posts_meta_boxes()
+	} // cb_remove_posts_meta_boxes()
 
 
 // == Pages ===========================================================
-	function fm_remove_pages_meta_boxes()
+	function cb_remove_pages_meta_boxes()
 	{
 		// Remove revisions metabox.
 		// remove_meta_box( 'revisionsdiv', 'page', 'normal' );
@@ -256,28 +256,28 @@
 			// Remove author metabox
 			// remove_meta_box( 'authordiv', 'page', 'normal' );
 
-	} // fm_remove_pages_meta_boxes()
+	} // cb_remove_pages_meta_boxes()
 
 
 // == Post/Page Meta Box =============================================
 	// Add Meta Box Content
-		function fm_add_meta_box_content($post)
+		function cb_add_meta_box_content($post)
 		{
 			// pp($post);
-			// get_post_meta($post->ID, 'fm_meta_key_name', $single) $single = true for string false for array
-			// add_post_meta($post->ID, 'fm_meta_key_name', $meta_value, $unique);
-			// update_post_meta($post->ID, 'fm_meta_key_name', $meta_value, $prev_value);
-		} // fm_add_meta_box_content()
+			// get_post_meta($post->ID, 'cb_meta_key_name', $single) $single = true for string false for array
+			// add_post_meta($post->ID, 'cb_meta_key_name', $meta_value, $unique);
+			// update_post_meta($post->ID, 'cb_meta_key_name', $meta_value, $prev_value);
+		} // cb_add_meta_box_content()
 
 	// Add Meta Boxes
-		function fm_add_meta_boxes()
+		function cb_add_meta_boxes()
 		{
 			// FMM Title
-			add_meta_box( 'fm-meta-box', 'FMM Title', 'fm_add_meta_box_content', 'post', 'normal', 'high');
-		} // fm_add_meta_boxes()
+			add_meta_box( 'fm-meta-box', 'FMM Title', 'cb_add_meta_box_content', 'post', 'normal', 'high');
+		} // cb_add_meta_boxes()
 
 	// Remove Meta Boxes
-		function fm_remove_meta_boxes() {
+		function cb_remove_meta_boxes() {
 			// Links
 				// Removes Links > Target
 				// remove_meta_box('linktargetdiv', 'link', 'normal');
@@ -329,13 +329,13 @@
 				// Pages > Comments
 				// remove_meta_box('commentsdiv', 'page', 'normal');
 
-		} // fm_remove_meta_boxes()
+		} // cb_remove_meta_boxes()
 
 
 // == Widgets =========================================================
 
 	// Remove Default Widgets
-		function fm_remove_default_widgets()
+		function cb_remove_default_widgets()
 		{
 			// Removes the default WordPress pages widget
 		 // unregister_widget('WP_Widget_Pages');
@@ -380,31 +380,31 @@
 			// :TODO not working WP v3.4.2
 			unregister_widget('Twenty_Eleven_Ephemera_Widget');
 
-		} // fm_remove_default_widgets()
+		} // cb_remove_default_widgets()
 
 
 // == Sidebars ========================================================
-	function fm_unregister_sidebars()
+	function cb_unregister_sidebars()
 	{
 		// global $wp_registered_sidebars
 		// pp($wp_registered_sidebars);
 		// unregister_sidebar( $id );
-	} // fm_unregister_sidebars()
+	} // cb_unregister_sidebars()
 
 
 // == Footer ==========================================================
 	// Custom admin footer text
-		function fm_custom_admin_footer()
+		function cb_custom_admin_footer()
 		{
 			$client_name = get_bloginfo('name');
 			$wp_version = get_bloginfo('version');
 			echo "Created by <a href=\"http://www.freemanhelp.com\">Freeman Marketing</a> for $client_name powered by <a href=\"http://www.wordpress.org\">WordPress $wp_version</a>";
-		} // fm_custom_admin_footer()
+		} // cb_custom_admin_footer()
 
 
 // == Tiny MCE ========================================================
 	// Make TinyMCE Editor Awesome
-		function fm_make_mce_awesome( $init ) {
+		function cb_make_mce_awesome( $init ) {
 			// Removes H1 tags
 			$init['theme_advanced_blockformats'] = 'h2,h3,h4,p';
 
@@ -418,16 +418,16 @@
 			$init['theme_advanced_disable'] = 'wp_help';
 
 			return $init;
-		} // fm_make_mce_awesome($init)
+		} // cb_make_mce_awesome($init)
 
 	// Tiny MCE Buttons 2
-		function fm_mce_buttons_2( $buttons ) {
+		function cb_mce_buttons_2( $buttons ) {
 			array_unshift( $buttons, 'styleselect' );
 			return $buttons;
-		} // fm_mce_buttons_2($buttons)
+		} // cb_mce_buttons_2($buttons)
 
 	// Add a style drop down to Tiny MCE
-		function fm_mce_before_init( $settings ) {
+		function cb_mce_before_init( $settings ) {
 			$style_formats = array();
 			// Style Examples
 			// $style_formats = array(
@@ -453,7 +453,7 @@
 			// );
 			$settings['style_formats'] = json_encode( $style_formats );
 			return $settings;
-		} // fm_mce_before_init($settings)
+		} // cb_mce_before_init($settings)
 
 	// Add Tiny MCE editor styles
 	add_editor_style(get_stylesheet_directory_uri() . '/_assets/css/tiny-mce.css');
@@ -462,37 +462,28 @@
 // == All Add Actions Below ===========================================
 	if (is_admin()) {
 		// == FMM Developers Only ==============
-			if (user_is_fmm_developer()) {
+			if (user_is_admin()) {
 				// Adds a developer documentation menu page
-				add_action('admin_menu', 'fm_add_developer_documentation');
-			} // if(user_is_fmm_developer())
+				add_action('admin_menu', 'cb_add_developer_documentation');
+			} // if(user_is_admin())
 
 		// == Administrator or FMM Developer ==============
-			if(user_is_admin() or user_is_fmm_developer()) {
+			if(user_is_admin() or user_is_admin()) {
 				// Replaces site link with a view your site link
-				add_action( 'wp_before_admin_bar_render', 'fm_remove_admin_bar_menus' ); // Remove the original site name
-				add_action('admin_bar_menu', 'fm_add_view_site_admin_bar_link',25); // Adds a new link that will open in a new window
-
-				// Adds a site documentation menu page
-				add_action('admin_menu', 'fm_add_site_documentation');
+				add_action( 'wp_before_admin_bar_render', 'cb_remove_admin_bar_menus' ); // Remove the original site name
+				add_action('admin_bar_menu', 'cb_add_view_site_admin_bar_link',25); // Adds a new link that will open in a new window
 
 				// Adds a site options menu page
-				add_action('admin_menu', 'fm_add_site_options');
-
-				// Adds company information widget
-				add_action('wp_dashboard_setup', 'fm_add_custom_widgets');
-
-				// Adds contact us link to menu bar
-				add_action('admin_bar_menu', 'fm_add_contact_admin_bar_link',25);
+				add_action('admin_menu', 'cb_add_site_options');
 
 				// Adds website link to admin bar
-				// add_action('admin_bar_menu', 'fm_add_fmhelp_admin_bar_link',25);
+				// add_action('admin_bar_menu', 'cb_add_fmhelp_admin_bar_link',25);
 
 
-			} // if(user_is_admin() or user_is_fmm_developer())
+			} // if(user_is_admin() or user_is_admin())
 
 		// == All users except FMM Developer =============
-			if (!user_is_fmm_developer()) {
+			if (!user_is_admin()) {
 
 				// Only for administrator
 				if(user_is_admin()) {
@@ -500,55 +491,55 @@
 				}
 
 				// Removes Screen Options
-				add_filter('screen_options_show_screen', 'fm_remove_screen_options');
+				add_filter('screen_options_show_screen', 'cb_remove_screen_options');
 
 				// Removes admin menu pages
-				add_action( 'admin_menu', 'fm_remove_admin_menu_pages' );
+				add_action( 'admin_menu', 'cb_remove_admin_menu_pages' );
 
 				// Removes default widgets
-				add_action('wp_dashboard_setup', 'fm_remove_dashboard_widgets');
+				add_action('wp_dashboard_setup', 'cb_remove_dashboard_widgets');
 
 				// Remove posts meta boxes
-				add_action('add_meta_boxes', 'fm_remove_posts_meta_boxes');
+				add_action('add_meta_boxes', 'cb_remove_posts_meta_boxes');
 
 				// Remove pages meta boxes
-				add_action('add_meta_boxes', 'fm_remove_pages_meta_boxes');
+				add_action('add_meta_boxes', 'cb_remove_pages_meta_boxes');
 
 				// Removes default widgets
-				add_action('widgets_init', 'fm_remove_default_widgets', 1);
+				add_action('widgets_init', 'cb_remove_default_widgets', 1);
 
-			} // if(!user_is_fmm_developer())
+			} // if(!user_is_admin())
 
 		// == All users =============================================
 			// Add Meta Box
-			// add_action( 'add_meta_boxes', 'fm_add_meta_boxes' );
+			// add_action( 'add_meta_boxes', 'cb_add_meta_boxes' );
 
 			// Remove meta boxes
-			add_action( 'admin_menu', 'fm_remove_meta_boxes' );
+			add_action( 'admin_menu', 'cb_remove_meta_boxes' );
 
 			// Adds admin stylesheet
-			add_action('admin_init', 'fm_add_admin_stylesheet');
+			add_action('admin_init', 'cb_add_admin_stylesheet');
 
 			// Sets admin bar to not display when viewing page by default
-			add_action("user_register", "fm_set_user_view_page_admin_bar_false", 10, 1);
+			add_action("user_register", "cb_set_user_view_page_admin_bar_false", 10, 1);
 
 			// Adds custom admin footer text
-			add_filter('admin_footer_text', 'fm_custom_admin_footer');
+			add_filter('admin_footer_text', 'cb_custom_admin_footer');
 
 			// Makes Tiny MCE awesome
-			add_filter('tiny_mce_before_init', 'fm_make_mce_awesome');
+			add_filter('tiny_mce_before_init', 'cb_make_mce_awesome');
 
 			// Tiny MCE buttons 2
-			add_filter( 'mce_buttons_2', 'fm_mce_buttons_2' );
+			add_filter( 'mce_buttons_2', 'cb_mce_buttons_2' );
 
 			// Adds styles drop down menu
-			add_filter( 'tiny_mce_before_init', 'fm_mce_before_init' );
+			add_filter( 'tiny_mce_before_init', 'cb_mce_before_init' );
 
 			// Adds a favicon for admin area
-			add_action('admin_head', 'fm_add_favicon');
+			add_action('admin_head', 'cb_add_favicon');
 
 			// Remove registered sidebars
-			add_action( 'widgets_init', 'fm_unregister_sidebars', 11 );
+			add_action( 'widgets_init', 'cb_unregister_sidebars', 11 );
 
 
 	} // if(is_admin())

@@ -1,5 +1,5 @@
 <?php
-function fm_recent_posts($values = array())
+function cb_recent_posts($values = array())
 {
 	/* Values Array Example
 	'limit'						=>	'3',
@@ -64,4 +64,4 @@ function fm_recent_posts($values = array())
 			<?php
 		} // foreach($recent_posts as $post)
 	echo '</ul></div>';
-} // function fm_recent_posts($values = array())
+} // function cb_recent_posts($values = array())

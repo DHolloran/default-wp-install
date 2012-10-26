@@ -1,5 +1,5 @@
 <?php
-function fm_recent_tweets( $values )
+function cb_recent_tweets( $values )
 {
 	// :TODO Make links clickable.
 	// :TODO Make into a jQuery plugin.
@@ -19,9 +19,9 @@ function fm_recent_tweets( $values )
 		$display_amount = (int)$display_amount;
 
 		// Get cache values.
-		$twitter_cache_time = get_option('fm_twitter_time', FALSE);
-		$twitter_cache_data = get_option('fm_twitter_data', FALSE);
-		$twitter_cache_user = get_option('fm_twitter_user', FALSE);
+		$twitter_cache_time = get_option('cb_twitter_time', FALSE);
+		$twitter_cache_data = get_option('cb_twitter_data', FALSE);
+		$twitter_cache_user = get_option('cb_twitter_user', FALSE);
 
 		if($twitter_cache_user and $twitter_cache_user == $user){
 			// Check if cache exists
@@ -77,9 +77,9 @@ function fm_recent_tweets( $values )
 				} // if/else($users_tweets)
 
 				// Update cache.
-				update_option('fm_twitter_time', date('m/d/Y H:i:s'));
-				update_option('fm_twitter_data', $tweet_text);
-				update_option('fm_twitter_user', $user);
+				update_option('cb_twitter_time', date('m/d/Y H:i:s'));
+				update_option('cb_twitter_data', $tweet_text);
+				update_option('cb_twitter_user', $user);
 
 				// Print out the tweet text
 				echo $tweet_text;

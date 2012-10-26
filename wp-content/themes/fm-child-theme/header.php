@@ -10,7 +10,7 @@
  */
 
 // Gives better debug functionality
-if (fm_is_localhost()) {
+if (cb_is_localhost()) {
 require( 'php_error.php' );
 \php_error\reportErrors(array(
     'wordpress' => true

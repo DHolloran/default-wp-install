@@ -1,6 +1,6 @@
 <?php
 // :TODO Make into a Google Maps Wordpress plugin.
-function google_map_init( $gmaps_sensor = 'false', $height = '350px' , $width = '350px', $map_id = "fm_map_canvas", $options = array(), $marker_options = array() )
+function google_map_init( $gmaps_sensor = 'false', $height = '350px' , $width = '350px', $map_id = "cb_map_canvas", $options = array(), $marker_options = array() )
 {
 	// Google maps API
 	// :TODO look into having user submit their own
@@ -18,7 +18,7 @@ function google_map_init( $gmaps_sensor = 'false', $height = '350px' , $width = 
 										padding:0;
 										background-color:#fafafa;
 										padding: 10px;";
-		echo "<h2 style=\"$style_values\">Please enter a valid center latitude and longitude location.<br><span style=\"font-size: 16px;\">Example: <br>[fm_google_map center=\"-34.397, 150.644\"]</span></h2>";
+		echo "<h2 style=\"$style_values\">Please enter a valid center latitude and longitude location.<br><span style=\"font-size: 16px;\">Example: <br>[cb_google_map center=\"-34.397, 150.644\"]</span></h2>";
 	} else {
 		// Load Google Maps API
 		// $gmaps_sensor indicates whether this application uses a sensor (such as a GPS locator) to determine the user's location.
@@ -26,7 +26,7 @@ function google_map_init( $gmaps_sensor = 'false', $height = '350px' , $width = 
 
 		// Echo out the google map container with selected size settings.
 		// :TODO add more options aka add class or classes
-		echo '<div id="fm_map_canvas" class="fm_map" style="width: '.$width.'; height: '.$height.'"></div>';
+		echo '<div id="cb_map_canvas" class="cb_map" style="width: '.$width.'; height: '.$height.'"></div>';
 
 		// Once map is created set the map options
 		google_map_set_opts( $options, $map_id, $marker_options );
