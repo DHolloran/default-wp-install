@@ -1,20 +1,20 @@
 <?php
 // == Object To Array ===========================================================
-	function fm_to_array($data) {
-		if (is_object($data)) $data = get_object_vars($data);
-		return is_array($data) ? array_map(__FUNCTION__, $data) : $data;
+	function fm_to_array($obj) {
+		if (is_object($obj)) $obj = get_object_vars($obj);
+		return is_array($obj) ? array_map(__FUNCTION__, $obj) : $obj;
 	} // fm_to_array($data)
 
 
 // == Array To Object ============================================================
-	function fm_to_object($data) {
-		return is_array($data) ? (object) array_map(__FUNCTION__, $data) : $data;
+	function fm_to_object($array) {
+		return is_array($array) ? (object) array_map(__FUNCTION__, $array) : $array;
 	} // fm_to_object($data)
 
 
 // == Add Breadcrumbs To Pages/Posts =============================================
-	function the_breadcrumb() {
-		if (!is_home()) {
+	function fm_the_breadcrumb() {
+		if (!is_home() OR !is_front_page()) {
 			echo '<a href="'.get_option('home').'">';
 			bloginfo('name');
 			echo "</a> » ";
@@ -91,20 +91,24 @@
 
 
 //  == Set Default Post Thumbnail ================================================
-	function fm_default_thumbnail( $post_id ) {
-	   // Link to default thumbnail
-	   $default_thumb = get_stylesheet_directory_uri(). '_assets/img/thumbs/default_thumb.png';
-	   // Get Thumbnail
-	   $post_thumbnail = get_post_meta( $post_id, $key = '_thumbnail_id', $single = true );
+	function fm_default_thumbnail( $post_id, $default_thumb=false ) {
 
-	   // Verify that post is not a revision
-	   if (!wp_is_post_revision($post_id)) {
-	      // Check if Thumbnail exists
-	      if (empty($post_thumbnail)) {
-	         // Add thumbnail to post
-	         update_post_meta( $post_id, $meta_key = '_thumbnail_id', $meta_value = $default_thumb );
-	      } // if(empty($post_thumbnail))
-	   } // if(!wp_is_post_revision)
+		// Link to default thumbnail
+		if (!$default_thumb) {
+			$default_thumb = get_stylesheet_directory_uri(). '_assets/img/thumbs/default_thumb.png';
+		}
+
+		// Get Thumbnail
+		 $post_thumbnail = get_post_meta( $post_id, $key = '_thumbnail_id', $single = true );
+
+		 // Verify that post is not a revision
+		 if (!wp_is_post_revision($post_id)) {
+		    // Check if Thumbnail exists
+		    if (empty($post_thumbnail)) {
+		       // Add thumbnail to post
+		       update_post_meta( $post_id, $meta_key = '_thumbnail_id', $meta_value = $default_thumb );
+		    } // if(empty($post_thumbnail))
+		 } // if(!wp_is_post_revision)
 
 	} // fm_default_thumbnail( $post_id )
 
@@ -141,13 +145,28 @@
 
 // == Get Page ID by Slug ========================================================
 	function fm_get_page_id_by_slug($page_slug) {
+		// Get the page from the page slug
 		$page = get_page_by_path($page_slug);
-		if ($page) {
-		    return $page->ID;
-		} else {
-		    return null;
-		}
+
+		// If we have a page then send back the page ID
+		if ($page) return $page->ID;
+
+		// If not return FALSE
+		return FALSE;
 	} // fm_get_page_id_by_slug($page_slug)
+
+
+// == Get User IP ================================================================
+	function fm_get_user_ip() {
+		if (isset($_SERVER["HTTP_X_FORWARDED_FOR"])) {
+			return $_SERVER["HTTP_X_FORWARDED_FOR"];
+		} elseif (isset($_SERVER["HTTP_CLIENT_IP"])) {
+			return $_SERVER["HTTP_CLIENT_IP"];
+		} else {
+			return $_SERVER["REMOTE_ADDR"];
+		}
+	} // fm_get_user_ip()
+
 
 
 
