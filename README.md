@@ -25,6 +25,17 @@ Default WordPress Install
  	- Added jquery.timeago.js
  	- Add setup instructions/checklist to developer documentation
  	- Added JW Player plugin
+ 	- Added Facebook open graph plugin
+ 	- Added wp-optimize plugin
+	- Added Sitemap Generator plugin
+	- Added Google Drive DB backup plugin
+	- Added documentation on the available PHP helper functions
+	- Removed unused plugins
+	- Added icons from icomoon
+	- Added applicaiton icons
+	- Updated docs added available plugins information and links to there plugin page
+	- Added prelaunch check list to developer documentation
+	- And much more
 
 ***
 ###TODO
