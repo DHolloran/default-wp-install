@@ -1,0 +1,12 @@
+/* === Modal Text Editor in Admin === */
+.modal-text-edit-box {
+	float: left;
+	margin: 40px 0 60px -254px;
+	width: 900px;
+}
+.wp_themeSkin iframe {
+	background-color: #fff!important;
+}
+.themefuse {
+	display: none;
+}
