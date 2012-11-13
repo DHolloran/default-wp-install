@@ -52,6 +52,19 @@
 			'meta'  => array( 'target' => '_blank')));
 		} // cb_add_fmhelp_admin_bar_link()
 
+	// Removes Links from New+
+	function fm_admin_bar_new_btn() {
+		global $wp_admin_bar;
+		// $wp_admin_bar->remove_menu('new-content'); // This removes the complete menu “Add New”. You will not require the below “remove_menu” if you using this line.
+		// $wp_admin_bar->remove_menu('new-post'); // This (when used individually with other “remove menu” lines removed) will hide the menu item “Post”.
+		// $wp_admin_bar->remove_menu('new-page'); // This (when used individually with other “remove menu” lines removed) will hide the menu item “Page”.
+		// $wp_admin_bar->remove_menu('new-media'); // This (when used individually with other “remove menu” lines removed) will hide the menu item “Media”.
+		// $wp_admin_bar->remove_menu('new-link'); // This (when used individually with other “remove menu” lines removed) will hide the menu item “Link”.
+		// $wp_admin_bar->remove_menu('new-user'); // This (when used individually with other “remove menu” lines removed) will hide the menu item “User”.
+		// $wp_admin_bar->remove_menu('new-theme'); // This (when used individually with other “remove menu” lines removed) will hide the menu item “Theme”.
+		// $wp_admin_bar->remove_menu('new-plugin'); // This (when used individually with other “remove menu” lines removed) will hide the menu item “Plugin”.
+	}
+
 
 // == Side Menu =======================================================
 	// :TODO Make it to where everything can be visible to developers only.
@@ -513,6 +526,9 @@
 		// == All users =============================================
 			// Add Meta Box
 			// add_action( 'add_meta_boxes', 'cb_add_meta_boxes' );
+
+			// Remove un-needed items from admin bar NEW+
+			add_action( 'wp_before_admin_bar_render', 'fm_admin_bar_new_btn' );
 
 			// Remove meta boxes
 			add_action( 'admin_menu', 'cb_remove_meta_boxes' );
