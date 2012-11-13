@@ -1,10 +1,10 @@
 Default WordPress Install
 =========================
 
-**Author(s):** Dan Holloran
-**Author(s) email:** <Dan@freemanhelp.com>
-**Website:** [http://www.FreeManHelp.com]( http://www.freemanhelp.com)
-**Description:** For use at FreeMan Marketing as a good starting place for all new project
+**Author(s):** Dan Holloran  
+**Author(s) email:** <Dan@freemanhelp.com>  
+**Website:** [http://www.FreeManHelp.com]( http://www.freemanhelp.com)  
+**Description:** For use at FreeMan Marketing as a good starting place for all new project  
 **Acknowledgments:** Thank you to everyone that has created an open project that I have included in this project which allows me to make my job/life easier
 
 ***
@@ -53,31 +53,29 @@ Default WordPress Install
 - Make error pages
 - Implement H5BP into child theme
 - Page to PDF creation
-- Decided on what files require other files
 
 ####Repsonsive TODOs
 - Add more responsive helpers
 - Add Adaptive.js????
 - Add Enhance.js????
-- Implement 360andup or some other sort of media-queries
-- Implement /wp-content/themes/fm-child-theme/_assets/js/libs/jquery.timeago.js
+- Add grid system
 
 ####General TODOs
 - Look for other libs to add that will make life easier
-- Add explanations to LESS mixins
 - Add style guide/best practices
-- Look over WordCamp notes
-- Add launch checklist/punch-list
 - Fill out license
-- Add setup instructions/checklist
-- Custom theme options page to transplant theme options client should have access too
 - Make contact us form
+- Print Stylesheet
+- Re-test fm_get_thumbnail_url()
+- Code/Directory Cleanup
+- List of shortcodes available
 
 ####Completed TODOs
 - ~~Make a function that unregisters sidebars use global $wp_registered_sidebars to get the sidebar id~~
 - ~~Add humans.txt~~
 - ~~Add author meta tag to header as Freeman Marketing~~
 - ~~Make robots.txt stop google from indexing until launch~~
+- ~~Add explanations to LESS mixins~~
 
 ***
 ###Plugins Included
@@ -188,6 +186,18 @@ Default WordPress Install
 	- `.skew (@deg, @deg2)`
 	- `.translate3d (@x, @y: 0, @z: 0)`
 	- `.animation (@name, @duration: 300ms, @delay: 0, @ease: ease)`
+***
+###PHP Helper Functions
+- `fm_to_array($obj);` Used to turn a Object into an Associative Array returns `Array`.
+- `fm_to_object($array);` Used to Turn an Array into an Object returns `STDOBJ`.
+- `fm_the_breadcrumb();` Adds breadcrumbs to pages and posts returns `NULL`.
+- `fm_is_localhost();` Checks if the current working directory is on localhost 127.0.0.1 returns `TRUE` or `FALSE`.
+- `fm_default_thumbnail($post_id, $default_thumb=false);` Checks to see if the post has a thumbnail image if not it adds the default thumbnail found in _assets/img/thumbs/default_thumb.png or the path to the default thumbnail that was passed to the function returns `NULL`.
+- `fm_session_start();` Checks to see if there is a session started and if not starts a session returns `NULL`.
+- `fm_get_thumbnail($id, $size='thumbnail', $attr='' );` Checks if the post has a thumbnail if not it returns `FALSE` if it does have a thumbnail returns `get_the_post_thumbnail()`.
+- `fm_get_thumbnail_url();` Checks if the post has a thumbnail if not it returns `FALSE` if it does have a thumbnail it returns `$image_url`.
+- `fm_get_page_id_by_slug($page_slug);` Gets the page by the slug returns `$page->ID` on success and `FALSE` on failure.
+- `fm_get_user_ip();` Gets the users IP information returns `$_SERVER["HTTP_X_FORWARDED_FOR"]`, `$_SERVER["HTTP_CLIENT_IP"]`, or `$_SERVER["REMOTE_ADDR"]`.
 
 
 
