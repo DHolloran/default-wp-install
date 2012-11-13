@@ -1,13 +1,15 @@
 ###Table of Contents
 1. [Install Check-list](#install_checklist)
 2. [Launch Check-list](#launch_checklist)
-3. [Included Projects](#included_projects)
-4. [Included Plugins](#included_plugins)
-5. [Shortcodes](#shortcodes)
-6. [Css Utility Classes](#css_utilities)
-7. [CSS Helpers](#css_helpers)
-8. [LESS Mixins](#less_mixins)
-9. [PHP Helper Functions](#php_helpers)
+3. [Important Wordpress Links](#important_wp_links)
+4. [Included Projects](#included_projects)
+5. [Included Plugins](#included_plugins)
+6. [Shortcodes](#shortcodes)
+7. [Css Utility Classes](#css_utilities)
+8. [CSS Helpers](#css_helpers)
+9. [LESS Mixins](#less_mixins)
+10. [PHP Helper Functions](#php_helpers)
+
 
 
 ***
@@ -52,6 +54,13 @@
 	- Optimise images
 	- Proofread
 - Others [Ultimate-Web-Development-Checklist.pdf](Ultimate-Web-Development-Checklist.pdf)
+
+***
+<h3 id="important_wp_links">Important Wordpress Links</h3>
+- [Wordpress Coding Standards]("http://codex.wordpress.org/WordPress_Coding_Standards")
+- [Wordpress Codex]("http://codex.wordpress.org/Main_Page")
+- [Wordpress Function Reference]("http://codex.wordpress.org/Function_Reference/")
+- [Give Wordpress It's Own Directory]("http://codex.wordpress.org/Giving_WordPress_Its_Own_Directory")
 
 ***
 <h3 id="included_projects">Included Projects</h3>
@@ -169,11 +178,11 @@
 	- `.skew (@deg, @deg2)`
 	- `.translate3d (@x, @y: 0, @z: 0)`
 	- `.animation (@name, @duration: 300ms, @delay: 0, @ease: ease)`
-	
-	
+
+
 ***
 <h3 id="php_helpers">PHP Helper Functions</h3>
-- `fm_to_array($obj);` Used to turn a Object into an Associative Array returns `Array`. 
+- `fm_to_array($obj);` Used to turn a Object into an Associative Array returns `Array`.
 - `fm_to_object($array);` Used to Turn an Array into an Object returns `STDOBJ`.
 - `fm_the_breadcrumb();` Adds breadcrumbs to pages and posts returns `NULL`.
 - `fm_is_localhost();` Checks if the current working directory is on localhost 127.0.0.1 returns `TRUE` or `FALSE`.

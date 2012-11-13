@@ -4,12 +4,14 @@
   <ol>
   <li><a href="#install_checklist">Install Check-list</a></li>
   <li><a href="#launch_checklist">Launch Check-list</a></li>
+  <li><a href="#important_wp_links">Important Wordpress Links</a></li>
   <li><a href="#included_projects">Included Projects</a></li>
   <li><a href="#included_plugins">Included Plugins</a></li>
   <li><a href="#shortcodes">Shortcodes</a></li>
   <li><a href="#css_utilities">Css Utility Classes</a></li>
   <li><a href="#css_helpers">CSS Helpers</a></li>
   <li><a href="#less_mixins">LESS Mixins</a></li>
+  <li><a href="#php_helpers">PHP Helper Functions</a></li>
   </ol>
 
 
@@ -45,10 +47,13 @@
   <li>Setup Helps With Spam in .htaccess with site url</li>
   <li>Setup Force WWW/no-WWW in .htaccess with site url</li>
   <li>Turn on wp-cache plugin</li>
+  <li>Fill out humans.txt</li>
+  <li>Remove disallow all from robots.txt</li>
   <li>Check contact forms for correct emails</li>
   <li>Update General > Settings email to clients main info email</li>
   <li>Update Users > Admin users email to main info email</li>
   <li>Associate any posts made by developer accounts with clients editor accounts</li>
+  <li>Create and add All icons for devices/favicon in /wp-content/themes/fm-child-theme/_assets/img/icons</li>
   <li>Run W3C link check validator <a href="http://validator.w3.org/checklink">http://validator.w3.org/checklink</a> <strong>IMPORTANT: Make sure dev folder is renamed site-dev-name-moved</strong></li>
   <li>Turn on sitemap plugin</li>
   <li>Remove all developer plugins</li>
@@ -69,7 +74,20 @@
   <li>Proofread</li>
   </ul>
   </li>
-  <li>Others <a href="<?php echo get_stylesheet_directory_uri(); ?>/documentation/developer/Ultimate-Web-Development-Checklist.pdf">Ultimate-Web-Development-Checklist.pdf</a></li>
+  <li>Others <a href="Ultimate-Web-Development-Checklist.pdf">Ultimate-Web-Development-Checklist.pdf</a></li>
+  </ul>
+
+
+  <hr />
+
+  <h3 id="important_wp_links">Important Wordpress Links</h3>
+
+
+  <ul>
+  <li><a href="" title="http://codex.wordpress.org/WordPress_Coding_Standards">Wordpress Coding Standards</a></li>
+  <li><a href="" title="http://codex.wordpress.org/Main_Page">Wordpress Codex</a></li>
+  <li><a href="" title="http://codex.wordpress.org/Function_Reference/">Wordpress Function Reference</a></li>
+  <li><a href="" title="http://codex.wordpress.org/Giving_WordPress_Its_Own_Directory">Give Wordpress It's Own Directory</a></li>
   </ul>
 
 
@@ -79,10 +97,11 @@
 
 
   <ul>
-  <li>Retina.js <a href="http://retinajs.com/">http://retinajs.com/</a> <em>Disabled by default</em></li>
+  <li>Retina.js <a href="http://retinajs.com/">http://retinajs.com/</a> <em>Disabled by default</em> <em>Activate CSS in site.less</em></li>
   <li>HTML 5 Shim</li>
   <li>Prefix Free <a href="http://leaverou.github.com/prefixfree/">http://leaverou.github.com/prefixfree/</a> <em>Disabled by default</em></li>
   <li>jquery.timeago.js <a href="http://timeago.yarp.com">http://timeago.yarp.com</a> <em>Disabled by default</em></li>
+  <li>jquery.pikaday.js <a href="https://github.com/dbushell/Pikaday">https://github.com/dbushell/Pikaday</a> <em>Disabled by default</em> <em>Activate CSS in site.less</em></li>
   </ul>
 
 
@@ -249,5 +268,23 @@
   <li><code>.animation (@name, @duration: 300ms, @delay: 0, @ease: ease)</code></li>
   </ul>
   </li>
+  </ul>
+
+
+  <hr />
+
+  <h3 id="php_helpers">PHP Helper Functions</h3>
+
+  <ul>
+  <li><code>fm_to_array($obj);</code> Used to turn a Object into an Associative Array returns <code>Array</code>.</li>
+  <li><code>fm_to_object($array);</code> Used to Turn an Array into an Object returns <code>STDOBJ</code>.</li>
+  <li><code>fm_the_breadcrumb();</code> Adds breadcrumbs to pages and posts returns <code>NULL</code>.</li>
+  <li><code>fm_is_localhost();</code> Checks if the current working directory is on localhost 127.0.0.1 returns <code>TRUE</code> or <code>FALSE</code>.</li>
+  <li><code>fm_default_thumbnail($post_id, $default_thumb=false);</code> Checks to see if the post has a thumbnail image if not it adds the default thumbnail found in _assets/img/thumbs/default_thumb.png or the path to the default thumbnail that was passed to the function returns <code>NULL</code>.</li>
+  <li><code>fm_session_start();</code> Checks to see if there is a session started and if not starts a session returns <code>NULL</code>.</li>
+  <li><code>fm_get_thumbnail($id, $size='thumbnail', $attr='' );</code> Checks if the post has a thumbnail if not it returns <code>FALSE</code> if it does have a thumbnail returns <code>get_the_post_thumbnail()</code>.</li>
+  <li><code>fm_get_thumbnail_url();</code> Checks if the post has a thumbnail if not it returns <code>FALSE</code> if it does have a thumbnail it returns <code>$image_url</code>.</li>
+  <li><code>fm_get_page_id_by_slug($page_slug);</code> Gets the page by the slug returns <code>$page-&gt;ID</code> on success and <code>FALSE</code> on failure.</li>
+  <li><code>fm_get_user_ip();</code> Gets the users IP information returns <code>$_SERVER["HTTP_X_FORWARDED_FOR"]</code>, <code>$_SERVER["HTTP_CLIENT_IP"]</code>, or <code>$_SERVER["REMOTE_ADDR"]</code>.</li>
   </ul>
 </div> <!-- END .fm-documentation -->
