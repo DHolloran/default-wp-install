@@ -65,7 +65,6 @@ Default WordPress Install
 - Make contact us form
 - Re-test fm_get_thumbnail_url()
 - Code/Directory Cleanup
-- List of shortcodes available
 
 ####Completed TODOs
 - ~~Make a function that unregisters sidebars use global $wp_registered_sidebars to get the sidebar id~~
@@ -76,17 +75,19 @@ Default WordPress Install
 - ~~Implement H5BP into child theme~~
 - ~~Fill out license~~
 - ~~Print Stylesheet~~
+- ~~List of shortcodes available~~
 
 ***
 ###Plugins Included
 - [ALO Easymail](http://wordpress.org/extend/plugins/alo-easymail/)
+- [Backup](http://wordpress.org/extend/plugins/backup/)
 - [Clean Notifications](http://wordpress.org/extend/plugins/clean-notifications/)
 - [Debogger](http://wordpress.org/extend/plugins/debogger/) **Developer**
 - [Debug Bar](http://wordpress.org/extend/plugins/debug-bar/) **Developer**
 - [Debug Bar Cron](http://wordpress.org/extend/plugins/debug-bar-cron/) **Developer**
 - [Developer](http://wordpress.org/extend/plugins/developer/) **Developer**
 - [Disable Comments](http://wordpress.org/extend/plugins/disable-comments/)
-- [Google XML Sitemaps V3 for qTranslate](http://wordpress.org/extend/plugins/google-xml-sitemaps-v3-for-qtranslate/)
+- [Google XML Sitemaps](http://wordpress.org/extend/plugins/google-sitemap-generator/)
 - [JW Player](http://wordpress.org/extend/plugins/jw-player-plugin-for-wordpress/)
 - [Log Deprecated Notices](http://wordpress.org/extend/plugins/log-deprecated-notices/) **Developer**
 - [Rewrite Rules Inspector](http://wordpress.org/extend/plugins/rewrite-rules-inspector/) **Developer**
@@ -100,6 +101,8 @@ Default WordPress Install
 - [WordPress SEO by Yoast](http://wordpress.org/extend/plugins/wordpress-seo/)
 - [WP DBManager](http://wordpress.org/extend/plugins/wp-dbmanager/)
 - [WP Members](http://wordpress.org/extend/plugins/wp-members/)
+- [WP Open Graph Meta](http://wordpress.org/extend/plugins/wp-open-graph-meta/)
+- [WP Optimize] (http://wordpress.org/extend/plugins/wp-optimize/)
 
 ***
 ###Shortcodes
