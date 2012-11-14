@@ -1,0 +1,138 @@
+<?php
+/**
+ * The base configurations of the WordPress.
+ *
+ * This file has the following configurations: MySQL settings, Table Prefix,
+ * Secret Keys, WordPress Language, and ABSPATH. You can find more information
+ * by visiting {@link http://codex.wordpress.org/Editing_wp-config.php Editing
+ * wp-config.php} Codex page. You can get the MySQL settings from your web host.
+ *
+ * This file is used by the wp-config.php creation script during the
+ * installation. You don't have to use the web site, you can just copy this file
+ * to "wp-config.php" and fill in the values.
+ *
+ * @package WordPress
+ */
+
+// ********************************* Custom Settings *******************************************//
+
+	/* Do not ask for FTP on LocalHost */
+	$host = $_SERVER['HTTP_HOST'];
+	if (in_array($host, array('localhost', '127.0.0.1'))) {
+		define('FS_METHOD', 'direct');
+	} // if()
+
+
+	/* Turns off the post revisions feature to speed up posting. */
+	// define('WP_POST_REVISIONS', false );
+
+	/* Set the auto save duration between saves */
+	define('AUTOSAVE_INTERVAL', 240 );
+
+	/* Allows for moving Wordpress site with less headaches */
+	// http://wordpress.org/extend/plugins/velvet-blues-update-urls/
+	// define('RELOCATE',true);
+
+	/* Override Home URL and Site URL(not permanent) */
+	// define('WP_HOME', 'http://sitename.com');
+	// define('WP_SITEURL', 'http://sitename.com');
+
+	/* Disallows the theme editor in Wordpress admin*/
+	define('DISALLOW_FILE_EDIT',true);
+
+	/* Automatically Empty Trash */
+	// define('EMPTY_TRASH_DAYS', 7);
+
+	/* Increase WordPress Memory Limit */
+	// define('WP_MEMORY_LIMIT', '96M');
+
+	/* Automatic Database Repair */
+	define('WP_ALLOW_REPAIR', true);
+
+	/* Disallows any theme or plugin updates */
+	// define('DISALLOW_FILE_MODS',true);
+
+	/* Turns on WP debugging output. */
+	// define('WP_DEBUG',true);
+	// define('SAVEQUERIES', true);
+	// define('WP_DEBUG_LOG', true);
+	// define('WP_DEBUG_DISPLAY', false);
+	// @ini_set('display_errors', 0);
+
+// ****************************** End Custom Settings *******************************************//
+
+// ** MySQL settings - You can get this info from your web host ** //
+/** The name of the database for WordPress */
+define('DB_NAME', '');
+
+/** MySQL database username */
+define('DB_USER', '');
+
+/** MySQL database password */
+define('DB_PASSWORD', '');
+
+/** MySQL hostname */
+define('DB_HOST', '');
+
+/** Database Charset to use in creating database tables. */
+define('DB_CHARSET', 'utf8');
+
+/** The Database Collate type. Don't change this if in doubt. */
+define('DB_COLLATE', '');
+
+/**#@+
+ * Authentication Unique Keys and Salts.
+ *
+ * Change these to different unique phrases!
+ * You can generate these using the {@link https://api.wordpress.org/secret-key/1.1/salt/ WordPress.org secret-key service}
+ * You can change these at any point in time to invalidate all existing cookies. This will force all users to have to log in again.
+ *
+ * @since 2.6.0
+ */
+define('AUTH_KEY',         ':cva4xG&&lBg.HD8;M9]Hjka:+sU#1$#7<y]RBh04jL/5L9_T$3AqMf7X3,+](.=');
+define('SECURE_AUTH_KEY',  '-TCA{vopA8(WE?8:A7O=p5f:W0Uhc||qa#_Hsv@,*?rFB2*BPm%+|5z1CstGoK~+');
+define('LOGGED_IN_KEY',    '~pYR&-@@Z$r!GN:$LSd>@%|7)nz$P3|0LF2B6{n;>iZ_2[G?bFYAFP`@kdr}HQB8');
+define('NONCE_KEY',        '~$:B;2cM(Bi13.KV!sIB,.?-&0Z{FipkRVS(j<kn`J4Bj3}0utjmNDi[ZmkJ-Ebg');
+define('AUTH_SALT',        'nv0vWrsnt*$Z*qSgOOw|vT4meH4g-!Kd~+XN}0biE5V}9TI4(|H~dy/b8g~W676x');
+define('SECURE_AUTH_SALT', '$Ylfi&xr(tY08cBcj+A&3~|3{.G^=gUIB @G+0+VT;,l9<CtfpUzf>2/>[~M$~P?');
+define('LOGGED_IN_SALT',   'M<95l>fsl-QUd^EegX|%c{|W+j]p&.k[0pNVVppChTOxRD_i%T5(T$>DuKz)Nk9r');
+define('NONCE_SALT',       'n4y/#h}7oo+Zkpi1oMaF,M]ijRGC<*E<*~ffNNZwU-Sl~jdi8Lw]f~9u8Rgm9Vkk');
+
+
+/**#@-*/
+
+/**
+ * WordPress Database Table prefix.
+ *
+ * You can have multiple installations in one database if you give each a unique
+ * prefix. Only numbers, letters, and underscores please!
+ */
+$table_prefix  = 'fm_';
+
+/**
+ * WordPress Localized Language, defaults to English.
+ *
+ * Change this to localize WordPress. A corresponding MO file for the chosen
+ * language must be installed to wp-content/languages. For example, install
+ * de_DE.mo to wp-content/languages and set WPLANG to 'de_DE' to enable German
+ * language support.
+ */
+define('WPLANG', '');
+
+/**
+ * For developers: WordPress debugging mode.
+ *
+ * Change this to true to enable the display of notices during development.
+ * It is strongly recommended that plugin and theme developers use WP_DEBUG
+ * in their development environments.
+ */
+// define('WP_DEBUG', false);
+
+/* That's all, stop editing! Happy blogging. */
+
+/** Absolute path to the WordPress directory. */
+if ( !defined('ABSPATH') )
+	define('ABSPATH', dirname(__FILE__) . '/');
+
+/** Sets up WordPress vars and included files. */
+require_once(ABSPATH . 'wp-settings.php');
