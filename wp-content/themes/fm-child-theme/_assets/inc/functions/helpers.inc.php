@@ -1,19 +1,19 @@
 <?php
 // == Object To Array ===========================================================
-	function cb_to_array($obj) {
+	function fm_to_array($obj) {
 		if (is_object($obj)) $obj = get_object_vars($obj);
 		return is_array($obj) ? array_map(__FUNCTION__, $obj) : $obj;
-	} // cb_to_array($data)
+	} // fm_to_array($data)
 
 
 // == Array To Object ============================================================
-	function cb_to_object($array) {
+	function fm_to_object($array) {
 		return is_array($array) ? (object) array_map(__FUNCTION__, $array) : $array;
-	} // cb_to_object($data)
+	} // fm_to_object($data)
 
 
 // == Add Breadcrumbs To Pages/Posts =============================================
-	function cb_the_breadcrumb() {
+	function fm_the_breadcrumb() {
 		if (!is_home() OR !is_front_page()) {
 			echo '<a href="'.get_option('home').'">';
 			bloginfo('name');
@@ -32,7 +32,7 @@
 
 
 // == Check If LocalHost =========================================================
-	function cb_is_localhost()
+	function fm_is_localhost()
 	{
 		$localhost = array('localhost', '127.0.0.1');
 		$host = $_SERVER['HTTP_HOST'];
@@ -42,11 +42,11 @@
 			return false;
 		} // if/else()
 
-	} // cb_is_localhost()
+	} // fm_is_localhost()
 
 
 // == Email Validation ===========================================================
-	function cb_is_valid_email($email)
+	function fm_is_valid_email($email)
 	{
 		//Perform a basic syntax-check if this check fails, there's no need to continue
 		if(!filter_var($email, FILTER_VALIDATE_EMAIL)) return false;
@@ -60,11 +60,11 @@
 		}
 
 		return true;
-	} //cb_is_valid_email($email)
+	} //fm_is_valid_email($email)
 
 
 // == Links in Text to URLs ======================================================
-	function cb_url_to_link($text) {
+	function fm_url_to_link($text) {
 		// The Regular Expression filter
 		$reg_exUrl = "/(http|https|ftp|ftps)\:\/\/[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(\/\S*)?/g";
 
@@ -91,7 +91,7 @@
 
 
 //  == Set Default Post Thumbnail ================================================
-	function cb_default_thumbnail( $post_id, $default_thumb=false ) {
+	function fm_default_thumbnail( $post_id, $default_thumb=false ) {
 
 		// Link to default thumbnail
 		if (!$default_thumb) {
@@ -110,29 +110,29 @@
 		    } // if(empty($post_thumbnail))
 		 } // if(!wp_is_post_revision)
 
-	} // cb_default_thumbnail( $post_id )
+	} // fm_default_thumbnail( $post_id )
 
 
 // == Safe Session Start =========================================================
-	function cb_session_start()
+	function fm_session_start()
 	{
 		if(!isset($_SESSION)) session_start();
-	} // cb_session_start()
+	} // fm_session_start()
 
 
 // == Check/Get Post Thumbnail ===================================================
-	function cb_get_thumbnail($id, $size='thumbnail', $attr='' )
+	function fm_get_thumbnail($id, $size='thumbnail', $attr='' )
 	{
 		// If the post does not have a thumbnail
 		if (!has_post_thumbnail($id)) return false;
 
 		// If the post has a thumbnail
 		return get_the_post_thumbnail($id, $size, $attr);
-	} // cb_post_thumbnail()
+	} // fm_post_thumbnail()
 
 
 // == Check/Get Post Thumbnail URL ===============================================
-	function cb_get_thumbnail_url()
+	function fm_get_thumbnail_url()
 	{
 		// If the post does not have a thumbnail
 		if (!has_post_thumbnail($id)) return false;
@@ -140,11 +140,11 @@
 		// If the post has a thumbnail
 		$image_url = wp_get_attachment_image_src(get_post_thumbnail_id());
 		return $image_url[0];
-	} // cb_get_thumbnail_url()
+	} // fm_get_thumbnail_url()
 
 
 // == Get Page ID by Slug ========================================================
-	function cb_get_page_id_by_slug($page_slug) {
+	function fm_get_page_id_by_slug($page_slug) {
 		// Get the page from the page slug
 		$page = get_page_by_path($page_slug);
 
@@ -153,11 +153,11 @@
 
 		// If not return FALSE
 		return FALSE;
-	} // cb_get_page_id_by_slug($page_slug)
+	} // fm_get_page_id_by_slug($page_slug)
 
 
 // == Get User IP ================================================================
-	function cb_get_user_ip() {
+	function fm_get_user_ip() {
 		if (isset($_SERVER["HTTP_X_FORWARDED_FOR"])) {
 			return $_SERVER["HTTP_X_FORWARDED_FOR"];
 		} elseif (isset($_SERVER["HTTP_CLIENT_IP"])) {
@@ -165,7 +165,7 @@
 		} else {
 			return $_SERVER["REMOTE_ADDR"];
 		}
-	} // cb_get_user_ip()
+	} // fm_get_user_ip()
 
 
 

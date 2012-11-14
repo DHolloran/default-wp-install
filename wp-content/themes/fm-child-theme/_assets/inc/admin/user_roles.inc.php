@@ -1,6 +1,6 @@
 <?php
 // == Create Developer User Role ===========================================
-	// function cb_create_developer_user_role()
+	// function fm_create_developer_user_role()
 	// {
 	// 	if (!get_option('fmm_developer_created')) {
 	// 		// Adds a new FreeMan Marketing Developer with the capabilities of an Administrator.
@@ -59,10 +59,10 @@
 	// 			update_option('fmm_developer_created', true);
 	// 		} // if($result != null)
 	// 	} // if(!get_option('fmm_developer_created'))
-	// } // cb_create_developer_user_role()
+	// } // fm_create_developer_user_role()
 
 	// Execute create FreeMan Marketing developer user role
-	// cb_create_developer_user_role();
+	// fm_create_developer_user_role();
 // == Get Current Users Role ==========================================
 	function get_current_user_role()
 	{

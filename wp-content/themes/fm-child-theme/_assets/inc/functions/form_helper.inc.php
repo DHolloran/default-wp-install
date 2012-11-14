@@ -1,7 +1,7 @@
 <?php
 
 // == Save Form Data On Error ==================================
-	function cb_save_values($values = array())
+	function fm_save_values($values = array())
 	{
 		// Make sure we have something to work with
 		if (count($values) and get_type($values) == 'array') {
@@ -24,10 +24,10 @@
 
 
 		return false;
-	} // cb_save_values($values = array())
+	} // fm_save_values($values = array())
 
 // == Retrieve Saved Form Values
-	function cb_retrieve_value($value)
+	function fm_retrieve_value($value)
 	{
 		// Make sure a session is started
 		if(!isset($_SESSION)) session_start();
@@ -37,4 +37,4 @@
 		} else {
 			return false;
 		} // if/else()
-	} // cb_retrieve_value($value)
+	} // fm_retrieve_value($value)
