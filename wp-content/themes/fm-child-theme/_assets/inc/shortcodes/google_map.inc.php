@@ -1,17 +1,16 @@
 <?php
 // :TODO Make into a Google Maps Wordpress plugin.
-function google_map_init( $gmaps_sensor = 'false', $height = '350px' , $width = '350px', $map_id = "fm_map_canvas", $options = array(), $marker_options = array() )
-{
+function google_map_init( $gmaps_sensor = 'false', $height = '350px' , $width = '350px', $map_id = "fm_map_canvas", $options = array(), $marker_options = array() ) {
 	// Google maps API
 	// :TODO look into having user submit their own
-	define('API_KEY', 'AIzaSyBmQFEYLR43gBrgXJMtDnwgrwZZKbUFI-c');
+	define( 'API_KEY', 'AIzaSyBmQFEYLR43gBrgXJMtDnwgrwZZKbUFI-c' );
 
 	// Make sure the user has at the very least supplied the center: LatLng values.
-	if ($options['center'] == 'new google.maps.LatLng()') {
+	if ( $options['center'] == 'new google.maps.LatLng()' ) {
 		// If the user has not then notify them.
 		// Adjust width values to account for padding: 10px and setup error styles.
-		$width = ((int)$width - 20) . "px";
-		$height = ((int)$height - 20) . "px";
+		$width = ( (int)$width - 20 ) . "px";
+		$height = ( (int)$height - 20 ) . "px";
 		$style_values = "width:$width;
 										height:$height;
 										margin:0;
@@ -34,8 +33,7 @@ function google_map_init( $gmaps_sensor = 'false', $height = '350px' , $width = 
 } //google_map_init($gmaps_sensor = 'false')
 
 // :TODO Find a better way to handle the options setting???
-function google_map_set_opts( $opts = array(), $map_id, $marker_options )
-{
+function google_map_set_opts( $opts = array(), $map_id, $marker_options ) {
 	// :TODO Add more options to short code, it works but could be better.
 	/* Available Options and an example
 	*
@@ -59,27 +57,27 @@ function google_map_set_opts( $opts = array(), $map_id, $marker_options )
 
 	$map_options = '';
 	// Check if we have an options to work with...
-	if ( count($opts) ) {
+	if ( count( $opts ) ) {
 		// :TODO make a more intelligent way to handle missing options especially center, maybe even throw an error or maybe just handle it in the Wordpress back end.
 
 		// ...if so then loop through and turn options into a string separated by , ...
-		foreach ($opts as $opt_key => $opt_value) {
-			$map_options .= trim($opt_key).': '.trim($opt_value).',';
+		foreach ( $opts as $opt_key => $opt_value ) {
+			$map_options .= trim( $opt_key ).': '.trim( $opt_value ).',';
 		} // foreach()
 
 		// Check if required Google Maps parameters have been given if not set some defaults
-		if ( stripos( $map_options, 'zoom:') === false ) {
+		if ( stripos( $map_options, 'zoom:' ) === false ) {
 			// Set sensible default value for zoom.
 			$map_options .= 'zoom: 8,';
 		} // if(!stripos($map_options,'zoom:'))
 
-		if ( stripos($map_options, 'mapTypeId:') === false ) {
+		if ( stripos( $map_options, 'mapTypeId:' ) === false ) {
 			// Set sensible default value for mapTypeId.
 			$map_options .= 'mapTypeId: google.maps.MapTypeId.ROADMAP,';
 		} // if(!stripos($map_options,'mapTypeId:'))
 
 		// Remove the last comma from map_options.
-		$map_options = substr_replace($map_options, '', strrpos($map_options, ','));
+		$map_options = substr_replace( $map_options, '', strrpos( $map_options, ',' ) );
 	} else {
 		// ...if we have no options to work with then set sensible defaults.
 		$map_options .= 'center: new google.maps.LatLng(-34.397, 150.644), zoom: 8, mapTypeId: google.maps.MapTypeId.ROADMAP';
@@ -90,8 +88,7 @@ function google_map_set_opts( $opts = array(), $map_id, $marker_options )
 	echo '</script>';
 } // google_map_set_opts()
 
-function google_map_set_marker( $marker_opts = array() )
-{
+function google_map_set_marker( $marker_opts = array() ) {
 	// :TODO Create marker icon choices feature for Google Map.
 	// :TODO Setup pop for marker.
 	/*

@@ -1,8 +1,8 @@
 <?php
-if (!empty($_POST['fm_site_options_submit'])) {
-	# code...
+if ( !empty( $_POST['fm_site_options_submit'] ) ) {
+	// code...
 } // if('fm_site_options_submit')
-$contact_email = (get_option('fm_contact_email')) ? get_option('fm_contact_email') : get_bloginfo('admin_email');
+$contact_email = ( get_option( 'fm_contact_email' ) ) ? get_option( 'fm_contact_email' ) : get_bloginfo( 'admin_email' );
 $submit_url = site_url(). '/wp-admin/admin.php?page=site-options';
 ?>
 <form action="<?php echo $submit_url; ?>" method="post" accept-charset="utf-8"  id="fm_site_options_form">
