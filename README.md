@@ -1,10 +1,10 @@
 Default WordPress Install
 =========================
 
-**Author(s):** Dan Holloran  
-**Author(s) email:** <Dan@freemanhelp.com>  
-**Website:** [http://www.FreeManHelp.com]( http://www.freemanhelp.com)  
-**Description:** For use at FreeMan Marketing as a good starting place for all new project  
+**Author(s):** Dan Holloran
+**Author(s) email:** <Dan@freemanhelp.com>
+**Website:** [http://www.FreeManHelp.com]( http://www.freemanhelp.com)
+**Description:** For use at FreeMan Marketing as a good starting place for all new project
 **Acknowledgments:** Thank you to everyone that has created an open project that I have included in this project which allows me to make my job/life easier
 
 ***
@@ -51,7 +51,6 @@ Default WordPress Install
 ####Add/Edit Files TODOs
 - Complete /wp-content/sample-db-error.php for custom DB error page
 - Make error pages
-- Implement H5BP into child theme
 - Page to PDF creation
 
 ####Repsonsive TODOs
@@ -63,9 +62,7 @@ Default WordPress Install
 ####General TODOs
 - Look for other libs to add that will make life easier
 - Add style guide/best practices
-- Fill out license
 - Make contact us form
-- Print Stylesheet
 - Re-test fm_get_thumbnail_url()
 - Code/Directory Cleanup
 - List of shortcodes available
@@ -76,6 +73,9 @@ Default WordPress Install
 - ~~Add author meta tag to header as Freeman Marketing~~
 - ~~Make robots.txt stop google from indexing until launch~~
 - ~~Add explanations to LESS mixins~~
+- ~~Implement H5BP into child theme~~
+- ~~Fill out license~~
+- ~~Print Stylesheet~~
 
 ***
 ###Plugins Included
