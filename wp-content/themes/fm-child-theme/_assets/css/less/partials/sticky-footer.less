@@ -1,0 +1,31 @@
+// == Sticky Footer =======================
+// <div id="wrap">
+// 	<div id="main" class="clearfix"></div>
+// </div>
+// <footer></footer>
+@sticky-height: 150px;
+* { margin:0; padding:0; }
+html, body, #wrap { height: 100%; }
+body > #wrap {height: auto; min-height: 100%;}
+#main { padding-bottom: @sticky-height; }  /* must be same height as the footer */
+footer,
+#footer {
+  position: relative;
+	margin-top: -@sticky-height; /* negative value of footer height */
+	height: @sticky-height;
+	clear:both;
+}
+
+/* CLEAR FIX*/
+.clearfix:after {
+	content: ".";
+	display: block;
+	height: 0;
+	clear: both;
+	visibility: hidden;
+}
+.clearfix {display: inline-block;}
+/* Hides from IE-mac \*/
+* html .clearfix { height: 1%;}
+.clearfix { display: block; }
+/* End hide from IE-mac */

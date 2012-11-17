@@ -97,17 +97,22 @@
 	// == Gradient ===================================================
 		.gradient(@color: #F5F5F5, @start: #EEE, @stop: #FFF) {
 			background: @color;
-			background: -webkit-gradient(linear,
-																	 left bottom,
-																	 left top,
-																	 color-stop(0, @start),
-																	 color-stop(1, @stop));
-			background: -ms-linear-gradient(bottom,
-																			@start,
-																			@stop);
-			background: -moz-linear-gradient(center bottom,
-																			 @start 0%,
-																			 @stop 100%);
+			background-image: -webkit-linear-gradient(top, @start, @stop);
+			background-image:    -moz-linear-gradient(top, @start, @stop);
+			background-image:     -ms-linear-gradient(top, @start, @stop);
+			background-image:      -o-linear-gradient(top, @start, @stop);
+			background-image:         linear-gradient(top, @start, @stop);
+			// background: -webkit-gradient(linear,
+			// 														 left bottom,
+			// 														 left top,
+			// 														 color-stop(0, @start),
+			// 														 color-stop(1, @stop));
+			// background: -ms-linear-gradient(bottom,
+			// 																@start,
+			// 																@stop);
+			// background: -moz-linear-gradient(center bottom,
+			// 																 @start 0%,
+			// 																 @stop 100%);
 		}
 	// == Backwards Gradient =========================================
 		.bw-gradient(@color: #F5F5F5, @start: 0, @stop: 255) {

@@ -1,1 +1,68 @@
 // == Global ======================================================================
+
+.button-lists {
+	width: 200px;
+	margin-left: 50px;
+	li { margin-top: 20px; }
+}
+
+.button {
+	display: block;
+	float: left;
+	text-align: center;
+	.box-shadow(1px 1px 2px rgba(0, 0, 0, 0.25));
+
+	&.small {
+		padding: 5px 10px;
+		border-radius: 3px;
+		font-weight: bold;
+		font-size: 12px;
+	} // .button.small
+
+	&.medium {
+		padding: 7px 15px;
+		border-radius: 5px;
+		font-weight: bold;
+		font-size: 14px;
+	} // .button.medium
+
+	&.large {
+		padding: 10px 25px;
+		border-radius: 5px;
+		font-weight: bold;
+		font-size: 16px;
+	} // .button.small
+
+	.bg-lighten(@color, @start, @stop) {
+		color: @color;
+		.gradient(@start, @start, @stop);
+		&:hover, &:active {
+			.gradient(lighten(@stop, 5%), lighten(@start, 5%), lighten(@stop, 5%));
+		}
+	}
+
+	.bg-darken(@color, @start, @stop) {
+		color: @color;
+		.gradient(@start, @start, @stop);
+		&:hover, &:active {
+			.gradient(darken(@stop, 5%), darken(@start, 5%), darken(@stop, 5%));
+		}
+	}
+
+	&.gold { .bg-lighten( #FAFAFA, #e2b235, #D4A017); }
+	&.cyan { .bg-lighten( #FAFAFA, #4fe9e9, #46C7C7); }
+	&.purple { .bg-lighten( #FAFAFA, #d01dd0, #800080); }
+	&.brown { .bg-lighten( #FAFAFA, #cb7520, #804000); }
+	&.rosy { .bg-lighten( #FAFAFA, #f78d9a, #f16c7c); }
+	&.green { .bg-lighten( #FAFAFA, #b0d342, #a2c437); }
+	&.pink { .bg-lighten( #FAFAFA, #f34daf, #e22092); }
+	&.blue { .bg-lighten( #FAFAFA, #23c0fb, #00ADEE); }
+	&.yellow { .bg-lighten( #FAFAFA, #fcc244, #ffb515); }
+	&.magenta { .bg-lighten( #FAFAFA, #e63a86, #a9014b); }
+	&.orange { .bg-lighten( #FAFAFA, #ff7b31, #ff5c00); }
+	&.red { .bg-lighten( #FAFAFA, #ef4646, #e62727); }
+	&.grey { .bg-lighten( #FAFAFA, #4e4e4e, #353535); }
+	&.black { .bg-lighten( #FAFAFA, #545353, #000); }
+	&.white { .bg-darken( #333333, #efefef, #e1e1e1); }
+
+}
