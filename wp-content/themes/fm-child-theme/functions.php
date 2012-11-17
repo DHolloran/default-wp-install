@@ -38,18 +38,19 @@ function fm_add_site_options_content() {
 
 // All PHP requires should be placed in _assets/inc/ thanks!
 
-// Functions Folder
-require_once "_assets/inc/functions/file_loader.inc.php";
-require_once "_assets/inc/classes/class-fm-form.inc.php";
-require_once "_assets/inc/functions/form_helper.inc.php";
-require_once "_assets/inc/functions/ajax_helper.inc.php";
+// General Requires
 require_once "_assets/inc/functions/debug.inc.php";
+require_once "_assets/inc/functions/file_loader.inc.php";
+require_once "_assets/inc/functions/user_roles.inc.php";
+require_once "_assets/inc/functions/custom_post_types.inc.php";
+require_once "_assets/inc/functions/form_helper.inc.php";
+require_once "_assets/inc/classes/class-fm-form.inc.php";
+require_once "_assets/inc/functions/ajax_helper.inc.php";
 require_once "_assets/inc/functions/helpers.inc.php";
-require_once "_assets/inc/shortcodes/shortcodes.inc.php";
+require_once "_assets/inc/functions/shortcodes.inc.php";
 require_once "_assets/inc/functions/project_specific.inc.php";
 
-// Admin Folder
-require_once "_assets/inc/admin/user_roles.inc.php";
-require_once "_assets/inc/admin/custom_post_types.inc.php";
+
+// Admin Requires
 require_once "_assets/inc/admin/login_customizations.inc.php";
 require_once "_assets/inc/admin/admin_customizations.inc.php";

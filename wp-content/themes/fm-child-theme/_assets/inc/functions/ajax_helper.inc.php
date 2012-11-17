@@ -42,7 +42,7 @@
 		add_action( 'wp_ajax_nopriv_some_action', 'fm_ajax_some_action' ); // ajax for not logged in users
 
 	} // fm_add_ajax()
-	add_action('init', 'fm_add_ajax');
+	// add_action('init', 'fm_add_ajax');
 
 
 // == Ajax Action == some_action ================================================
