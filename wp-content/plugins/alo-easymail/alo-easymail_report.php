@@ -2,7 +2,7 @@
 include('../../../wp-load.php');
 //auth_redirect();
 
-if ( !current_user_can( "edit_posts" ) ) 	wp_die( __('Cheatin&#8217; uh?') );
+if ( !current_user_can( "edit_newsletters" ) ) 	wp_die( __('Cheatin&#8217; uh?') );
 
 //print_r ($_REQUEST); // DEBUG
 

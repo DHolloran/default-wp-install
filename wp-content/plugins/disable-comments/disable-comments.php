@@ -3,7 +3,7 @@
 Plugin Name: Disable Comments
 Plugin URI: http://wordpress.org/extend/plugins/disable-comments/
 Description: Allows administrators to globally disable comments on their site. Comments can be disabled according to post type.
-Version: 0.6
+Version: 0.7
 Author: Samir Shah
 Author URI: http://rayofsolaris.net/
 License: GPL2
@@ -13,13 +13,17 @@ if( !defined( 'ABSPATH' ) )
 	exit;
 
 class Disable_Comments {
-	const db_version = 4;
+	const db_version = 5;
 	private $options;
+	private $networkactive;
 	private $modified_types = array();
 	
 	function __construct() {
+		// are we network activated?
+		$this->networkactive = ( is_multisite() && array_key_exists( plugin_basename( __FILE__ ), get_site_option( 'active_sitewide_plugins' ) ) );
+		
 		// load options
-		$this->options = get_option( 'disable_comments_options', array() );
+		$this->options = $this->networkactive ? get_site_option( 'disable_comments_options', array() ) : get_option( 'disable_comments_options', array() );
 		
 		// If it looks like first run, check compat
 		if ( empty( $this->options ) && version_compare( $GLOBALS['wp_version'], '3.2', '<' ) ) {
@@ -36,21 +40,34 @@ class Disable_Comments {
 				$this->options['disabled_post_types'] = get_option( 'disable_comments_post_types', array() );
 				delete_option( 'disable_comments_post_types' );
 			}
+			if( $old_ver < 5 ) {
+				// simple is beautiful - remove multiple settings in favour of one
+				$this->options['remove_everywhere'] = isset( $this->options['remove_admin_menu_comments'] ) ? $this->options['remove_admin_menu_comments'] : false;
+				foreach( array( 'remove_admin_menu_comments', 'remove_admin_bar_comments', 'remove_recent_comments', 'remove_discussion', 'remove_rc_widget' ) as $v )
+					unset( $this->options[$v] );
+			}
 
-			foreach( array( 'remove_admin_menu_comments', 'remove_admin_bar_comments', 'remove_recent_comments', 'remove_discussion', 'remove_rc_widget', 'permanent' ) as $v )
+			foreach( array( 'remove_everywhere', 'permanent' ) as $v )
 				if( !isset( $this->options[$v] ) )
 					$this->options[$v] = false;
 
 			$this->options['db_version'] = self::db_version;
-			update_option( 'disable_comments_options', $this->options );
+			$this->update_options();
 		}
 		
 		// these need to happen now
-		if( $this->options['remove_rc_widget'] )
+		if( $this->options['remove_everywhere'] )
 			add_action( 'widgets_init', array( $this, 'disable_rc_widget' ) );
 		
 		// these can happen later
 		add_action( 'wp_loaded', array( $this, 'setup_filters' ) );	
+	}
+	
+	private function update_options() {
+		if( $this->networkactive )
+			update_site_option( 'disable_comments_options', $this->options );
+		else
+			update_option( 'disable_comments_options', $this->options );
 	}
 	
 	function setup_filters(){
@@ -67,16 +84,25 @@ class Disable_Comments {
 			add_filter( 'pings_open', array( $this, 'filter_comment_status' ), 20, 2 );
 		}
 		elseif( is_admin() ) {
-			add_action( 'admin_notices', array( $this, 'setup_notice' ) );
+			add_action( 'all_admin_notices', array( $this, 'setup_notice' ) );
 		}
 		
-		if( $this->options['remove_admin_bar_comments'] && is_admin_bar_showing() ) {
+		if( $this->options['remove_everywhere'] && is_admin_bar_showing() ) {
 			remove_action( 'admin_bar_menu', 'wp_admin_bar_comments_menu', 50 );	// WP<3.3
 			remove_action( 'admin_bar_menu', 'wp_admin_bar_comments_menu', 60 );	// WP 3.3
+			if( $this->networkactive )
+				add_action( 'admin_bar_menu', array( $this, 'remove_network_comment_links' ), 500 );
 		}
 		
 		if( is_admin() ) {
-			add_action( 'admin_menu', array( $this, 'settings_menu' ) );
+			if( $this->networkactive ) {
+				add_action( 'network_admin_menu', array( $this, 'settings_menu' ) );
+			}
+			else {
+				add_action( 'admin_menu', array( $this, 'settings_menu' ) );
+				register_deactivation_hook( __FILE__, array( $this, 'single_site_deactivate' ) );
+			}
+
 			add_action( 'admin_print_footer_scripts', array( $this, 'discussion_notice' ) );
 			
 			if( !$this->options['permanent'] ) {
@@ -84,15 +110,17 @@ class Disable_Comments {
 				add_action( 'edit_page_form', array( $this, 'edit_form_inputs' ) );
 			}
 			
-			if( $this->options['remove_admin_menu_comments'] )
+			if( $this->options['remove_everywhere'] ) {
 				add_action( 'admin_menu', array( $this, 'filter_admin_menu' ), 9999 );	// do this as late as possible
-				
-			if( $this->options['remove_discussion'] )
 				add_action( 'admin_head', array( $this, 'hide_discussion_rightnow' ) );
-				
-			if( $this->options['remove_recent_comments'] )
 				add_action( 'wp_dashboard_setup', array( $this, 'filter_dashboard' ) );
+			}
 		}
+	}
+	
+	function remove_network_comment_links( $wp_admin_bar ) {
+		foreach( (array) $wp_admin_bar->user->blogs as $blog )
+			$wp_admin_bar->remove_menu( 'blog-' . $blog->userblog_id . '-c' );
 	}
 	
 	function edit_form_inputs() {
@@ -119,14 +147,18 @@ jQuery(document).ready(function($){
 	}
 	
 	function setup_notice(){
-		if( current_user_can( 'manage_options' ) && get_current_screen()->id != 'settings_page_disable_comments_settings' )
-			echo '<div class="updated fade"><p>The <em>Disable Comments</em> plugin is active, but isn\'t configured to do anything yet. Visit the <a href="options-general.php?page=disable_comments_settings">configuration page</a> to choose which post types to disable comments on.</p></div>';
+		if( strpos( get_current_screen()->id, 'settings_page_disable_comments_settings' ) === 0 )
+			return;
+		$hascaps = $this->networkactive ? is_network_admin() && current_user_can( 'manage_network_plugins' ) : current_user_can( 'manage_options' );
+		$url = $this->networkactive ? network_admin_url( 'settings.php?page=disable_comments_settings' ) : admin_url( 'options-general.php?page=disable_comments_settings' );
+		$url = esc_url( $url );
+		if( $hascaps )
+			echo '<div class="updated fade"><p>The <em>Disable Comments</em> plugin is active, but isn\'t configured to do anything yet. Visit the <a href="' . $url . '">configuration page</a> to choose which post types to disable comments on.</p></div>';
 	}
 	
 	function filter_admin_menu(){
-		global $menu;
-		if( isset( $menu[25] ) && $menu[25][2] == 'edit-comments.php' )
-			unset( $menu[25] );
+		remove_menu_page( 'edit-comments.php' );
+		remove_submenu_page( 'options-general.php', 'options-discussion.php' );
 	}
 	
 	function filter_dashboard(){
@@ -153,11 +185,17 @@ jQuery(document).ready(function($){
 	}
 	
 	function settings_menu() {
-		add_submenu_page('options-general.php', 'Disable Comments', 'Disable Comments', 'manage_options', 'disable_comments_settings', array( $this, 'settings_page' ) );
+		if( $this->networkactive )
+			add_submenu_page( 'settings.php', 'Disable Comments', 'Disable Comments', 'manage_network_plugins', 'disable_comments_settings', array( $this, 'settings_page' ) );
+		else
+			add_submenu_page( 'options-general.php', 'Disable Comments', 'Disable Comments', 'manage_options', 'disable_comments_settings', array( $this, 'settings_page' ) );
 	}
 	
 	function settings_page() {
-		$types = get_post_types( array( 'public' => true ), 'objects' );
+		$typeargs = array( 'public' => true );
+		if( $this->networkactive )
+			$typeargs['_builtin'] = true;	// stick to known types for network
+		$types = get_post_types( $typeargs, 'objects' );
 		foreach( array_keys( $types ) as $type ) {
 			if( ! in_array( $type, $this->modified_types ) && ! post_type_supports( $type, 'comments' ) )	// the type doesn't support comments anyway
 				unset( $types[$type] );
@@ -171,17 +209,18 @@ jQuery(document).ready(function($){
 				$this->enter_permanent_mode();
 			
 			$this->options['disabled_post_types'] = $disabled_post_types;
-			foreach( array( 'remove_admin_menu_comments', 'remove_admin_bar_comments', 'remove_recent_comments', 'remove_discussion', 'remove_rc_widget', 'permanent' ) as $v )
+			foreach( array( 'remove_everywhere', 'permanent' ) as $v )
 				$this->options[$v] = !empty( $_POST[$v] );	
 			
-			update_option( 'disable_comments_options', $this->options );
+			$this->update_options();
 			echo '<div id="message" class="updated fade"><p>Options updated. Changes to the Admin Menu and Admin Bar will not appear until you leave or reload this page.</p></div>';
 		}	
 	?>
 	<style> .indent {padding-left: 2em} </style>
 	<div class="wrap">
-	<?php screen_icon(); ?>
+	<?php screen_icon( 'plugins' ); ?>
 	<h2>Disable Comments</h2>
+	<?php if( $this->networkactive ) echo '<div class="updated fade"><p><em>Disable Comments</em> is Network Activated. The settings below will affect <strong>all sites</strong> in this network.</p></div>';?>
 	<form action="" method="post" id="disable-comments">
 	<p>Globally disable comments on:</p>
 	<ul class="indent">
@@ -190,14 +229,22 @@ jQuery(document).ready(function($){
 	<p><strong>Note:</strong> disabling comments will also disable trackbacks and pingbacks. All comment-related fields will also be hidden from the edit/quick-edit screens of the affected posts. These settings cannot be overridden for individual posts.</p>
 	<h3>Other options</h3>
 	<ul class="indent">
-		<li><label for="remove_admin_menu_comments"><input type="checkbox" name="remove_admin_menu_comments" id="remove_admin_menu_comments" <?php checked( $this->options['remove_admin_menu_comments'] );?>> Remove the "Comments" link from the Admin Menu</label></li>
-		<li><label for="remove_admin_bar_comments"><input type="checkbox" name="remove_admin_bar_comments" id="remove_admin_bar_comments" <?php checked( $this->options['remove_admin_bar_comments'] );?>> Remove the "Comments" icon from the Admin Bar</label></li>
-		<li><label for="remove_recent_comments"><input type="checkbox" name="remove_recent_comments" id="remove_recent_comments" <?php checked( $this->options['remove_recent_comments'] );?>> Disable the "Recent Comments" Dashboard widget</label></li>
-		<li><label for="remove_rc_widget"><input type="checkbox" name="remove_rc_widget" id="remove_rc_widget" <?php checked( $this->options['remove_rc_widget'] );?>> Disable the "Recent Comments" template widget (this prevents the widget from being available in <code>Appearance -> Widgets</code> and from being used by your theme)</label></li>
-		<li><label for="remove_discussion"><input type="checkbox" name="remove_discussion" id="remove_discussion" <?php checked( $this->options['remove_discussion'] );?>> Remove the "Discussion" section from the "Right Now" Dashboard widget <span class="hide-if-js"><strong>(Note: this option will only work if you have Javascript enabled in your browser)</strong></span></label></li>
+		<li><label for="remove_everywhere"><input type="checkbox" name="remove_everywhere" id="remove_everywhere" <?php checked( $this->options['remove_everywhere'] );?>> Remove all comment-related controls from WordPress</label></li>
+			<p>Selecting this option will remove the following:</p>
+			<ul class="indent" style="list-style: disc">
+			<li>The "Comments" link from the Admin Menu</li>
+			<li>The "Comments" icon from the Admin Bar</li>
+			<li>The "Recent Comments" Dashboard widget</li>
+			<li>The "Recent Comments" template widget (this prevents the widget from being available in <code>Appearance -> Widgets</code> and from being used by themes)</li>
+			<li>The "Discussion" section from the WordPress Dashboard <span class="hide-if-js"><strong>(Note: this requires Javascript to be enabled in the browser)</strong></span></li>
+			<li>The "Discussion Settings" page</strong></span></li>
+			</ul>
+			<p><strong>Note:</strong> this option is global. They will affect all users, everywhere, regardless of whether comments are enabled on portions of your site. Use it only if you want to remove all references to comments <em>everywhere</em>.</p>
+		</li>
+		<li><label for="permanent"><input type="checkbox" name="permanent" id="permanent" <?php checked( $this->options['permanent'] );?>> Use permanent mode (use only if normal mode doesn't work - see the <a href="http://wordpress.org/extend/plugins/disable-comments/faq/" target="_blank">FAQ</a> for what this means)</a></label>
+		<?php if( $this->networkactive ) echo '<p><strong>Warning:</strong> entering permanent mode on large multi-site networks requires a large number of database queries and can take a while. Use with caution!</p>';?>
+		</li>
 	</ul>
-	<p><strong>Note:</strong> these options are global. They will affect all users, everywhere, regardless of whether comments are enabled on portions of your site. Use them only if you want to remove all references to comments <em>everywhere</em>.
-	<ul class="indent"><li><label for="permanent"><input type="checkbox" name="permanent" id="permanent" <?php checked( $this->options['permanent'] );?>> Use permanent mode (see the <a href="http://wordpress.org/extend/plugins/disable-comments/faq/" target="_blank">FAQ</a> for what this means)</a></label></li></ul>
 	<p class="submit"><input class="button-primary" type="submit" name="submit" value="Update settings"></p>
 	</form>
 	</div>
@@ -217,8 +264,31 @@ jQuery(document).ready(function($){
 			return;
 			
 		global $wpdb;
+
+		if( $this->networkactive ) {
+			// NOTE: this can be slow on large networks!
+			$blogs = $wpdb->get_col( $wpdb->prepare( "SELECT blog_id FROM $wpdb->blogs WHERE site_id = %d AND public = '1' AND archived = '0' AND deleted = '0'", $wpdb->siteid ) );
+	
+			foreach ( $blogs as $id ) {
+				switch_to_blog( $id );
+				$this->close_comments_in_db( $types );
+				restore_current_blog();
+			}
+		}
+		else {
+			$this->close_comments_in_db( $types );
+		}
+	}
+	
+	private function close_comments_in_db( $types ){
+		global $wpdb;
 		$bits = implode( ', ', array_pad( array(), count( $types ), '%s' ) );
 		$wpdb->query( $wpdb->prepare( "UPDATE `$wpdb->posts` SET `comment_status` = 'closed', ping_status = 'closed' WHERE `post_type` IN ( $bits )", $types ) );
+	}
+	
+	function single_site_deactivate() {
+		// for single sites, delete the options upon deactivation, not uninstall
+		delete_option( 'disable_comments_options' );
 	}
 }
 

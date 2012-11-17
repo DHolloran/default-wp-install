@@ -2,8 +2,8 @@
 Contributors: johnbillion
 Donate link: http://lud.icro.us/donations/
 Tags: user, users, profiles, switching, wpmu, multisite, buddypress, become, user control, user management, user access, developer
-Requires at least: 2.7
-Tested up to: 3.4.2
+Requires at least: 3.1
+Tested up to: 3.5
 Stable tag: trunk
 
 Instant switching between user accounts in WordPress.
@@ -18,7 +18,7 @@ This plugin allows you to quickly swap between user accounts in WordPress at the
  * Switch back: Instantly switch back to your originating account.
  * Switch off: Log out of your account but retain the ability to instantly switch back in again.
  * It's completely secure (see the *Security* section below).
- * Compatible with WordPress, WordPress Multisite, BuddyPress and WordPress MU.
+ * Compatible with WordPress, WordPress Multisite and BuddyPress.
 
 = Security =
 
@@ -49,7 +49,7 @@ Alternatively, see the guide to [Manually Installing Plugins](http://codex.wordp
 
 = Usage =
 
-Visit the *Users* menu in WordPress and you'll see a *Switch To* link next to each user. Clicking this will switch you into that user account. Once switched, you can switch back to your originating account via the *Switch back* link on each dashboard screen.
+Visit the *Users* menu in WordPress and you'll see a *Switch To* link next to each user. Clicking this will immediately switch you into that user account. Once switched, you can switch back to your originating account via the *Switch back* link on each dashboard screen and in your profile menu in the WordPress toolbar.
 
 See the FAQ for information about the *Switch Off* feature.
 
@@ -57,7 +57,7 @@ See the FAQ for information about the *Switch Off* feature.
 
 = What does "Switch off" mean? =
 
-Switching off logs you out of your account but retains your current user ID in a cookie so you can switch straight back (ie. log straight back in) without having to log in with your username and password. It's akin to switching to no user, and being able to switch back.
+Switching off logs you out of your account but retains your user ID in an authorisation cookie so you can switch straight back without having to log in again manually. It's akin to switching to no user, and being able to switch back.
 
 The *Switch Off* link can be found in your profile menu in the WordPress toolbar. Once you've switched off you'll see a *Switch back* link in the footer of your site.
 
@@ -68,10 +68,6 @@ Yes, and you'll also be able to switch users from the Users screen in Network Ad
 = Does this plugin work with BuddyPress? =
 
 Yes, and you'll also be able to switch users from the Members screens.
-
-= Does this plugin work with WordPress MU? =
-
-Yes, but you should really update to Multisite.
 
 = Does this work as a mu-plugin? =
 
@@ -96,13 +92,14 @@ When a user switches off, the `switch_off_user` hook is called with the old user
 
 == Upgrade Notice ==
 
-= 0.6.3 =
-* Lithuanian, Polish and Slovak translations.
-
-= 0.6 =
-* More intuitive redirecting after switching, a BuddyPress bugfix and some hooks added.
+= 0.7 =
+* More intuitive redirecting after switching. Always show a 'Switch back' link in the footer when the admin toolbar isn't showing.
 
 == Changelog ==
+
+= 0.7 =
+* Always show a 'Switch back' link in the footer when the admin toolbar isn't showing.
+* More intuitive redirecting after switching.
 
 = 0.6.3 =
 * Lithuanian translation by Tommixoft.

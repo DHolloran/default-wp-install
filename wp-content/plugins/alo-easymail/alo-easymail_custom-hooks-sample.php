@@ -258,6 +258,7 @@ add_action ( 'alo_easymail_subscriber_activated',  'custom_easymail_subscriber_a
  * 
  * TO ADD THE SAMPLE FIELDS you have to uncomment the code inside the next function
  *
+ * From v.2.4.13 there is automatically a newsletter placehoolder for each custom field: e.g. 'cf_country' => [USER-CF_COUNTRY].
  * 
  * You have to populate an array following these rules.
  *
@@ -332,8 +333,7 @@ add_filter ( 'alo_easymail_newsletter_set_custom_fields', 'custom_easymail_set_m
  *
  */
 function custom_easymail_cf_check_number_5_digits ($data) {
-	$ids = array ( 1, 2, 3 );
-	if ( in_array( $data, $ids ) {
+	if ( preg_match( "/^[0-9]{5}$/", $data ) ) {
 		return true;
 	} else {
 		return false;

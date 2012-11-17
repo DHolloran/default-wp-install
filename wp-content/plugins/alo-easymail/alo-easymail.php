@@ -4,7 +4,7 @@
 Plugin Name: ALO EasyMail Newsletter
 Plugin URI: http://www.eventualo.net/blog/wp-alo-easymail-newsletter/
 Description: To send newsletters. Features: collect subcribers on registration or with an ajax widget, mailing lists, cron batch sending, multilanguage.
-Version: 2.4.12
+Version: 2.4.13
 Author: Alessandro Massasso
 Author URI: http://www.eventualo.net
 
@@ -153,11 +153,21 @@ function alo_em_install() {
     // add scheduled cron batch
     if( !wp_next_scheduled( 'alo_em_batch' ) ) wp_schedule_event( time() +60, 'alo_em_interval', 'alo_em_batch' );
     
-    // default permission
-	$wp_roles->add_cap( 'administrator', 'manage_easymail_options');
-	$wp_roles->add_cap( 'administrator', 'manage_easymail_subscribers');		
-	//$wp_roles->add_cap( 'administrator', 'manage_easymail_newsletters');
-	//$wp_roles->add_cap( 'administrator', 'send_easymail_newsletters');
+    // default permissions
+	$wp_roles->add_cap( 'administrator', 'manage_newsletter_options');
+	$wp_roles->add_cap( 'administrator', 'manage_newsletter_subscribers');		
+	$wp_roles->add_cap( 'administrator', 'publish_newsletters');
+	$wp_roles->add_cap( 'administrator', 'edit_newsletters');
+	$wp_roles->add_cap( 'administrator', 'edit_others_newsletters');
+	$wp_roles->add_cap( 'administrator', 'delete_newsletters');
+	$wp_roles->add_cap( 'administrator', 'delete_others_newsletters');
+	$wp_roles->add_cap( 'administrator', 'read_private_newsletters');
+
+	$wp_roles->add_cap( 'editor', 'publish_newsletters');
+	$wp_roles->add_cap( 'editor', 'edit_newsletters');
+	$wp_roles->add_cap( 'editor', 'edit_others_newsletters');
+	$wp_roles->add_cap( 'editor', 'delete_newsletters');
+	$wp_roles->add_cap( 'editor', 'delete_others_newsletters');
 }
 
 
@@ -355,10 +365,19 @@ function alo_em_uninstall() {
 		// reset cap
 		$roles = $wp_roles->get_names(); // get a list of values, containing pairs of: $role_name => $display_name
 		foreach ( $roles as $rolename => $key) {
+			$wp_roles->remove_cap( $rolename, 'manage_newsletter_options');
+			$wp_roles->remove_cap( $rolename, 'manage_newsletter_subscribers');		
+
+			$wp_roles->remove_cap( $rolename, 'publish_newsletters');
+			$wp_roles->remove_cap( $rolename, 'edit_newsletters');
+			$wp_roles->remove_cap( $rolename, 'edit_others_newsletters');
+			$wp_roles->remove_cap( $rolename, 'delete_newsletters');
+			$wp_roles->remove_cap( $rolename, 'delete_others_newsletters');
+			$wp_roles->remove_cap( $rolename, 'read_private_newsletters');
+
+			// deprecated old caps to be removed
 			$wp_roles->remove_cap( $rolename, 'manage_easymail_options');
-			$wp_roles->remove_cap( $rolename, 'manage_easymail_subscribers');		
-			//$wp_roles->remove_cap( $rolename, 'manage_easymail_newsletters');
-			//$wp_roles->remove_cap( $rolename, 'send_easymail_newsletters');
+			$wp_roles->remove_cap( $rolename, 'manage_easymail_subscribers');
 		}		
 	}
 	
@@ -410,12 +429,12 @@ add_action( 'wpmu_new_blog', 'alo_em_new_blog' );
  * Add menu pages 
  */
 function alo_em_add_admin_menu() {
-  	if ( current_user_can('manage_easymail_subscribers') )  {
-  		add_submenu_page( 'edit.php?post_type=newsletter', __("Subscribers", "alo-easymail"), __("Subscribers", "alo-easymail"), 'manage_easymail_subscribers', 'alo-easymail/alo-easymail_subscribers.php' );
+  	if ( current_user_can('manage_newsletter_subscribers') )  {
+  		add_submenu_page( 'edit.php?post_type=newsletter', __("Subscribers", "alo-easymail"), __("Subscribers", "alo-easymail"), 'manage_newsletter_subscribers', 'alo-easymail/alo-easymail_subscribers.php' );
   		add_action( 'load-alo-easymail/alo-easymail_subscribers.php', 'alo_em_contextual_help_tabs' );
   	}
-    if ( current_user_can('manage_easymail_options') ) {
-		add_submenu_page( 'edit.php?post_type=newsletter', __("Settings"), __("Settings"), 'manage_easymail_options', 'alo-easymail/alo-easymail_options.php' );
+    if ( current_user_can('manage_newsletter_options') ) {
+		add_submenu_page( 'edit.php?post_type=newsletter', __("Settings"), __("Settings"), 'manage_newsletter_options', 'alo-easymail/alo-easymail_options.php' );
 		add_action( 'load-alo-easymail/alo-easymail_options.php', 'alo_em_contextual_help_tabs' );
 	}
 	add_action( 'load-edit.php', 'alo_em_contextual_help_tabs' );
@@ -637,8 +656,26 @@ function alo_em_register_newsletter_type () {
 		'query_var' => true,
 		'exclude_from_search' => false,
 		'rewrite' => array('slug' => 'newsletters'),
-		'capability_type' => 'post',
-		/*'map_meta_cap' => true,*/
+
+		//'capability_type' => 'post', // TODO vedi sotto
+
+		
+		// http://justintadlock.com/archives/2010/07/10/meta-capabilities-for-custom-post-types
+		'capability_type' => 'newsletter',
+		'capabilities' => array(
+			'publish_posts' 	=> 'publish_newsletters',
+			'edit_posts' 		=> 'edit_newsletters',
+			'edit_others_posts'	=> 'edit_others_newsletters',
+			'delete_posts' 		=> 'delete_newsletters',
+			'delete_others_posts'=> 'delete_others_newsletters',
+			'read_private_posts'=> 'read_private_newsletters',
+			// DO not assign the next 3 caps to roles: will be mapped by filter
+			'edit_post' 		=> 'edit_newsletter',
+			'delete_post' 		=> 'delete_newsletter',
+			'read_post' 		=> 'read_newsletter',
+		),
+		
+			
 		'has_archive' => true, 
 		'hierarchical' => false,
 		'menu_position' => false,
@@ -659,6 +696,56 @@ function alo_em_register_newsletter_type () {
 	register_post_type( 'newsletter', $args );
 }
 add_action('init', 'alo_em_register_newsletter_type');
+
+
+/**
+ * Filtering the map_meta_cap hook to know if user can do something
+ *
+ * http://justintadlock.com/archives/2010/07/10/meta-capabilities-for-custom-post-types
+ */
+function alo_em_map_meta_cap( $caps, $cap, $user_id, $args ) {
+
+	// If editing, deleting, or reading an item, get the post and post type object.
+	if ( 'edit_newsletter' == $cap || 'delete_newsletter' == $cap || 'read_newsletter' == $cap ) {
+		$post = get_post( $args[0] );
+		$post_type = get_post_type_object( $post->post_type );
+
+		// Set an empty array for the caps.
+		$caps = array();
+	}
+
+	// If editing assign the required capability. 
+	if ( 'edit_newsletter' == $cap ) {
+		if ( $user_id == $post->post_author )
+			$caps[] = $post_type->cap->edit_posts;
+		else
+			$caps[] = $post_type->cap->edit_others_posts;
+	}
+
+	// If deleting, assign the required capability.
+	elseif ( 'delete_newsletter' == $cap ) {
+		if ( $user_id == $post->post_author )
+			$caps[] = $post_type->cap->delete_posts;
+		else
+			$caps[] = $post_type->cap->delete_others_posts;
+	}
+	
+	// If reading a private item, assign the required capability.
+	elseif ( 'read_newsletter' == $cap ) {
+
+		if ( 'private' != $post->post_status )
+			$caps[] = 'read';
+		elseif ( $user_id == $post->post_author )
+			$caps[] = 'read';
+		else
+			$caps[] = $post_type->cap->read_private_posts;
+	}
+
+	// Return the capabilities required by the user. 
+	return $caps;
+}
+add_filter( 'map_meta_cap', 'alo_em_map_meta_cap', 10, 4 );
+
 
 
 /**
@@ -746,31 +833,24 @@ add_filter ('manage_edit-newsletter_columns', 'alo_em_edit_table_columns');
  * Fills the columns of Newsletter display table
  */
 function alo_em_table_column_value ( $columns ) {
-	global $post;
+	global $post, $user_ID;
 	$count_recipients = alo_em_count_recipients_from_meta( $post->ID );
 	$recipients = alo_em_get_recipients_from_meta( $post->ID );
 	
 	if ( $columns == "easymail_recipients" ) {
 		if ( $count_recipients == 0 ) {
   			if ( alo_em_user_can_edit_newsletter( $post->ID ) ) echo '<a href="'. get_edit_post_link( $post->ID ) . '">';
-  			echo '<img src="'. ALO_EM_PLUGIN_URL. '/images/12-exclamation.png" alt="" /> <strong class="easymail-column-no-yet-recipients">' . __( 'No recipients selected yet', "alo-easymail").'</strong>';
+  			echo '<img src="'. ALO_EM_PLUGIN_URL. '/images/12-exclamation.png" alt="" /> <strong class="easymail-column-no-yet-recipients-'.$user_ID.'">' . __( 'No recipients selected yet', "alo-easymail").'</strong>';
   			if ( alo_em_user_can_edit_newsletter( $post->ID ) ) echo '</a>';
   		} else {
-  			//echo "<pre>". print_r ( $recipients, true ) . "</pre>";
-  			echo "<a href='#' class='easymail-toggle-short-summary' rel='{$post->ID}'>".  __( 'Total recipients', "alo-easymail") .": ";
-  			/*if ( alo_em_get_newsletter_status( $post->ID ) ) { // if already created list of recipients, count form db, otherwise from meta
-  				if( $archive = alo_em_is_newsletter_recipients_archived( $post->ID ) ) { // if archived recipients
-  					echo $archive[0]['tot'];
-  				} else {
-  					echo alo_em_count_newsletter_recipients( $post->ID );
-  				}
-  			} else { 
-  			 	echo alo_em_count_recipients_from_meta ( $post->ID );
-  			}*/
+  			if ( alo_em_user_can_edit_newsletter( $post->ID ) ) echo "<a href='#' class='easymail-toggle-short-summary' rel='{$post->ID}'>";
+  			echo __( 'Total recipients', "alo-easymail") .": ";
   			echo $count_recipients;
   			
-  			echo "</a><br />\n";
-  			echo "<div id='easymail-column-short-summary-{$post->ID}' class='easymail-column-short-summary'>\n". alo_em_recipients_short_summary ( $recipients ) ."</div>\n";
+  			if ( alo_em_user_can_edit_newsletter( $post->ID ) ) {
+				echo "</a><br />\n";
+				echo "<div id='easymail-column-short-summary-{$post->ID}' class='easymail-column-short-summary'>\n". alo_em_recipients_short_summary ( $recipients ) ."</div>\n";
+			}
   		}
 	}
 	
@@ -803,7 +883,7 @@ add_action('wp_ajax_alo_easymail_update_column_status', 'alo_em_ajax_column_stat
 function alo_em_ajax_pauseplay_column_status () {
 	$newsletter = $_POST['post_id'];
 	$button = $_POST['button']; // pause or play?
-	if ( $newsletter ) {
+	if ( $newsletter && current_user_can( "publish_newsletters" ) ) {
 		if ( $button == "pause" ) {
 			alo_em_edit_newsletter_status ( $newsletter, 'paused' );
 		} else {
@@ -825,7 +905,7 @@ function alo_em_ajax_alo_easymail_subscriber_edit_inline () {
 	$row_index = $_POST['row_index'];	
 	$inline_action = $_POST['inline_action'];
 	
-	if ( $subscriber ) {
+	if ( $subscriber && current_user_can( "manage_newsletter_subscribers" )) {
 		$mailinglists = alo_em_get_mailinglists( 'admin,public' );
 		$languages = alo_em_get_all_languages ( true );
 		
@@ -950,14 +1030,21 @@ add_action('wp_ajax_alo_easymail_subscriber_edit_inline', 'alo_em_ajax_alo_easym
  * Print html of Status column of Newsletter in display table
  */
 function alo_em_update_column_status ( $newsletter ) {
+	global $user_ID;
 	$recipients = alo_em_get_recipients_from_meta ( $newsletter );
 	if ( $recipients ) {
+
+		// Post status
+		$post_status = get_post_status( $newsletter );
+
+		//Newsletter status		
 		$status = alo_em_get_newsletter_status( $newsletter );
+		
 		$report_url = wp_nonce_url( ALO_EM_PLUGIN_URL . '/alo-easymail_report.php?', 'alo-easymail_report');		
 		$goto_report = "<a href=\"#\" onclick=\"jQuery(this).easymailReportPopup ( '$report_url', $newsletter, '". alo_em_get_language () ."' );\" title=\"". __( 'Report', "alo-easymail") ."\">";
 		$goto_report .= "<img src=\"". ALO_EM_PLUGIN_URL. "/images/16-report.png\" alt=\"\" /> ". __( 'Report', "alo-easymail") ."</a>"; 
 		if ( alo_em_is_newsletter_recipients_archived ( $newsletter ) ) $goto_report .= " <em>(". __( 'archived', "alo-easymail") . ")</em>"; 
-						
+
 		switch ( $status ) {
 		
 			case "sent":
@@ -968,18 +1055,18 @@ function alo_em_update_column_status ( $newsletter ) {
 				break;
 				
 			case "sendable":
-				$post_status = get_post_status( $newsletter );
+				
 				switch ( $post_status ) {
 					case "publish":
 						echo "<span class='status-onsending'>".__("On sending queue", "alo-easymail"). "...</span><br />";					
 						echo __("Progress", "alo-easymail"). ": ". alo_em_newsletter_recipients_percentuage_already_sent( $newsletter ) . "%<br />";
-						if ( alo_em_user_can_edit_newsletter( $newsletter ) ) {
+						if ( alo_em_user_can_edit_newsletter( $newsletter ) && current_user_can( "publish_newsletters" ) ) {
 							echo ' <img src="'. ALO_EM_PLUGIN_URL. '/images/16-refresh.png" class="easymail-refresh-column-status" alt="'. __( 'refresh', "alo-easymail"). '" title="'. __( 'refresh', "alo-easymail"). '" rel="'. $newsletter. '" />';
 							echo "<a href=\"#\" onclick=\"jQuery(this).easymailPausePlay ( $newsletter, 'pause' );return false;\">";
 							echo ' <img src="'. ALO_EM_PLUGIN_URL. '/images/16-pause.png" class="easymail-pause-column-status" alt="'. __( 'pause', "alo-easymail"). '" title="'. __( 'pause the sending', "alo-easymail"). '" rel="'. $newsletter. '" />';
 							echo "</a>";
 						}
-						if ( alo_em_user_can_edit_newsletter( $newsletter ) ) echo " ". $goto_report; 
+						if ( alo_em_user_can_edit_newsletter( $newsletter ) && current_user_can( "publish_newsletters" )) echo " ". $goto_report; 
 						break;
 					case "pending":
 						echo "<span class='status-paused'>".__("Pending Review"). "</span><br />";
@@ -1013,12 +1100,27 @@ function alo_em_update_column_status ( $newsletter ) {
 				
 			case false:
 			default:
-				if ( get_option('alo_em_js_rec_list') != "no_ajax_onsavepost" ) { // if required, no link to ajax
-					$rec_url = wp_nonce_url( ALO_EM_PLUGIN_URL . '/alo-easymail_recipients-list.php?', 'alo-easymail_recipients-list');
-					if ( alo_em_user_can_edit_newsletter( $newsletter ) ) echo "<a href=\"#\" onclick=\"jQuery(this).easymailRecipientsGenPopup ( '$rec_url', $newsletter, '". alo_em_get_language () ."' );\">";
-					echo "<img src=\"". ALO_EM_PLUGIN_URL. "/images/16-arrow-right.png\" alt=\"\" /> <strong class=\"easymail-column-status-required-list\">" . __( 'Required', "alo-easymail") .":</strong> " . __( 'Create list of recipients', "alo-easymail");
-					if ( alo_em_user_can_edit_newsletter( $newsletter ) ) echo "</a>";
-				}
+
+				switch ( $post_status ) {
+					case "pending":
+					case "draft":
+						echo "<span class='status-paused'>".__("A newsletter cannot be sent if its status is draft or pending review"). "</span><br />";
+						break;
+						
+					default:
+						if ( get_option('alo_em_js_rec_list') != "no_ajax_onsavepost" ) { // if required, no link to ajax
+							$rec_url = wp_nonce_url( ALO_EM_PLUGIN_URL . '/alo-easymail_recipients-list.php?', 'alo-easymail_recipients-list');
+							if ( alo_em_user_can_edit_newsletter( $newsletter ) && current_user_can( "publish_newsletters" ) ) {
+								echo "<a href=\"#\" onclick=\"jQuery(this).easymailRecipientsGenPopup ( '$rec_url', $newsletter, '". alo_em_get_language () ."' );\">";
+								echo "<img src=\"". ALO_EM_PLUGIN_URL. "/images/16-arrow-right.png\" alt=\"\" /> <strong class=\"easymail-column-status-required-list-".$user_ID."\">" . __( 'Required', "alo-easymail") .":</strong> " . __( 'Create list of recipients', "alo-easymail");
+								echo "</a>";
+							} else {
+								echo "<span class='status-paused'>".__('Ready to be sent by an administrator', "alo-easymail"). "</span><br />";
+							}
+						}								
+						break;
+				} // $post_status	
+				
 		}
 	}
 }
@@ -1588,7 +1690,7 @@ function alo_em_save_newsletter_meta ( $post_id ) {
 
 	// Check permissions
 	if ( 'newsletter' == $_POST['post_type'] ) {
-		if ( !current_user_can( 'edit_post', $post_id ) ) return $post_id;
+		if ( !current_user_can( 'edit_newsletter', $post_id ) ) return $post_id;
 	}
 	
 	do_action ( 'alo_easymail_save_newsletter_meta_extra', $post_id );
@@ -1711,7 +1813,7 @@ function alo_em_dashboard_widget_function() {
 } 
 
 function alo_em_add_dashboard_widgets() {
-	if ( current_user_can ( 'manage_easymail_subscribers' ) && current_user_can ( 'edit_posts' ) ) {
+	if ( current_user_can ( 'manage_newsletter_subscribers' ) && current_user_can ( 'edit_others_newsletters' ) ) {
 		wp_add_dashboard_widget('alo-easymail-widget', 'EasyMail Newsletter', 'alo_em_dashboard_widget_function');	
 	}
 } 
@@ -1868,16 +1970,16 @@ if ( version_compare ( $wp_version , '3.1', '>=' ) && version_compare ( $wp_vers
 		if ( !$wp_admin_bar ) return;
 		if ( !is_admin_bar_showing() ) return;
 		
-		if ( current_user_can('edit_posts') ) {
+		if ( current_user_can('edit_newsletters') ) {
 			$wp_admin_bar->add_menu( array( 'id' => 'alo_easymail', 'title' =>__( 'Newsletters', "alo-easymail" ), 'href' => admin_url('edit.php')."?post_type=newsletter" ) );
 			$wp_admin_bar->add_menu( array( 'id' => 'alo_easymail_main', 'parent' => 'alo_easymail', 'title' => __( 'Newsletters', "alo-easymail" ), 'href' => admin_url('edit.php')."?post_type=newsletter" ) );
 			$wp_admin_bar->add_menu( array( 'parent' => 'alo_easymail_main', 'title' => __( 'Add New Newsletter', "alo-easymail" ), 'href' => admin_url('post-new.php')."?post_type=newsletter" ) );       
 			$wp_admin_bar->add_menu( array( 'parent' => 'alo_easymail_main', 'title' => __( 'Show all', "alo-easymail" ), 'href' => admin_url('edit.php')."?post_type=newsletter" ) );   
 		}
-		if ( current_user_can('manage_easymail_subscribers') ) {
+		if ( current_user_can('manage_newsletter_subscribers') ) {
 			$wp_admin_bar->add_menu( array( 'parent' => 'alo_easymail', 'title' => __( 'Subscribers', "alo-easymail" ), 'href' => admin_url('edit.php')."?post_type=newsletter&page=alo-easymail/alo-easymail_subscribers.php" ) );
 		}
-		if ( current_user_can('manage_easymail_options') ) {
+		if ( current_user_can('manage_newsletter_options') ) {
 			$wp_admin_bar->add_menu( array( 'parent' => 'alo_easymail', 'title' => __( 'Options', "alo-easymail" ), 'href' => admin_url('edit.php')."?post_type=newsletter&page=alo-easymail/alo-easymail_options.php" ) );    
 		}   
 	}
@@ -1886,7 +1988,7 @@ if ( version_compare ( $wp_version , '3.1', '>=' ) && version_compare ( $wp_vers
 else if ( version_compare ( $wp_version , '3.3', '>=' ) )
 {
 	function alo_em_add_menu_toolbar( $wp_admin_bar ) {
-		if ( current_user_can('edit_posts') ) {
+		if ( current_user_can('edit_newsletters') ) {
 			$ico = '<span class="alo-easymail-toolbar-ico">&nbsp;</span>';
 			$args = array('id' => 'alo_easymail', 'title' => $ico. __( 'Newsletters', "alo-easymail" ), 'parent' => false, 'href' => admin_url('edit.php')."?post_type=newsletter" );
 			$wp_admin_bar->add_node($args);
@@ -1897,11 +1999,11 @@ else if ( version_compare ( $wp_version , '3.3', '>=' ) )
 			$args = array('id' => 'alo_easymail-new', 'title' => __( 'Add New', "alo-easymail" ), 'parent' => 'alo_easymail', 'href' => admin_url('post-new.php')."?post_type=newsletter" );
 			$wp_admin_bar->add_node($args);
 
-			if ( current_user_can('manage_easymail_subscribers') ) {
+			if ( current_user_can('manage_newsletter_subscribers') ) {
 				$args = array('id' => 'alo_easymail-subscribers', 'title' => __( 'Subscribers', "alo-easymail" ), 'parent' => 'alo_easymail', 'href' => admin_url('edit.php')."?post_type=newsletter&page=alo-easymail/alo-easymail_subscribers.php" );
 				$wp_admin_bar->add_node($args);
 			}
-			if ( current_user_can('manage_easymail_options') ) {
+			if ( current_user_can('manage_newsletter_options') ) {
 				$args = array('id' => 'alo_easymail-settings', 'title' => __( 'Options', "alo-easymail" ), 'parent' => 'alo_easymail', 'href' => admin_url('edit.php')."?post_type=newsletter&page=alo-easymail/alo-easymail_options.php" );
 				$wp_admin_bar->add_node($args);	
 			}
@@ -1921,7 +2023,7 @@ function alo_em_send_mailtest () {
 	check_ajax_referer( "alo-easymail_recipients-list" );
 	$newsletter = ( isset( $_POST['newsletter'] ) && is_numeric( $_POST['newsletter'] ) ) ? (int) $_POST['newsletter'] : false;
 	$email = ( isset( $_POST['email'] ) && is_email( $_POST['email'] ) ) ? $_POST['email'] : false;
-	if ( $email && $newsletter ) {
+	if ( $email && $newsletter && current_user_can( "publish_newsletters" ) ) {
 		
 		$maybe_subscriber = (array)alo_em_get_subscriber( $email );
 		if ( isset( $maybe_subscriber['ID'] ) ) {
@@ -2173,7 +2275,7 @@ add_action ( 'alo_easymail_new_subscriber_added',  'alo_em_delete_unsubscribed_e
 function alo_em_init_tinymce_buttons() {
 	global $typenow;
 	if ( empty($typenow) || 'newsletter' != $typenow ) return;
-	if ( ! current_user_can('edit_posts') && ! current_user_can('edit_pages') ) {
+	if ( ! current_user_can('edit_newsletters') ) {
 		return;
 	}
 	if ( get_user_option('rich_editing') == 'true' ) {
@@ -2264,7 +2366,7 @@ add_action( 'admin_enqueue_scripts', 'alo_em_tooltip_head_scripts');
  * Print tooltip pointers (3.3+)
  */
 function alo_em_print_pointer_footer_scripts() {
-	global $pagenow, $typenow;
+	global $pagenow, $typenow, $user_ID;
 	$page = isset( $_GET['page'] ) ? $_GET['page'] : false;
 
 	// In subscribers screen
@@ -2297,7 +2399,7 @@ function alo_em_print_pointer_footer_scripts() {
    <script type="text/javascript">
    //<![CDATA[
    jQuery(document).ready( function($) {
-		$('.easymail-column-no-yet-recipients:first').pointer({
+		$('.easymail-column-no-yet-recipients-<?php echo $user_ID ?>:first').pointer({
 			content: '<?php echo $pointer_content; ?>',
 			position: 'top',
 			//close: function() { // Once the close button is hit
@@ -2319,7 +2421,7 @@ function alo_em_print_pointer_footer_scripts() {
    <script type="text/javascript">
    //<![CDATA[
    jQuery(document).ready( function($) {
-		$('.easymail-column-status-required-list:first').pointer({
+		$('.easymail-column-status-required-list-<?php echo $user_ID ?>:first').pointer({
 			content: '<?php echo $pointer_content; ?>',
 			position: 'top',
 			//close: function() { // Once the close button is hit

@@ -1,6 +1,6 @@
 <?php // No direct access, only through WP
 if(preg_match('#' . basename(__FILE__) . '#', $_SERVER['PHP_SELF'])) die('You can\'t call this page directly.'); 
-if ( !current_user_can('manage_easymail_subscribers') ) 	wp_die(__('Cheatin&#8217; uh?'));
+if ( !current_user_can('manage_newsletter_subscribers') ) 	wp_die(__('Cheatin&#8217; uh?'));
 global $user_ID;
 ?>
 

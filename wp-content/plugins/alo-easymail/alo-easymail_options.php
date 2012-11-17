@@ -1,6 +1,6 @@
 <?php
 //auth_redirect();
-if ( !current_user_can('manage_easymail_options') ) 	wp_die(__('Cheatin&#8217; uh?'));
+if ( !current_user_can('manage_newsletter_options') ) 	wp_die(__('Cheatin&#8217; uh?'));
 
 
 // Base link
@@ -37,7 +37,7 @@ $text_fields = array ( "optin_msg", "optout_msg", "lists_msg", "preform_msg", "d
 if ( isset($_REQUEST['submit']) ) {
 	flush_rewrite_rules( false ); // reset for newsletter permalink 
 	
-	// -------- Options permitted to all ('manage_easymail_options')
+	// -------- Options permitted to all ('manage_newsletter_options')
 	// Tab TEXTS
 	if ( isset($_REQUEST['task']) && $_REQUEST['task'] == "tab_texts" ) {
 		$activamail_subj = array();
@@ -153,60 +153,45 @@ if ( isset($_REQUEST['submit']) ) {
 		} // end Tab BATCH SENDING
 
 		// Tab PERMISSIONS
-		if ( isset($_REQUEST['task']) && $_REQUEST['task'] == "tab_permissions" ) {				
-			// get roles to update cap
-			$role_author = get_role( 'author' );
-			$role_editor = get_role( 'editor' );
-		
-			if ( isset($_POST['can_manage_newsletters']) ) {
-				switch ( $_POST['can_manage_newsletters'] ) {
-					case "editor":
-						$role_editor->add_cap( 'manage_easymail_newsletters' );
-						$role_editor->add_cap( 'send_easymail_newsletters' );
-						break;
-					case "administrator":
-					default:
-						$role_editor->remove_cap( 'manage_easymail_newsletters' );
-				}
-			}		
-			if ( isset($_POST['can_send_newsletters']) ) {	
-				switch ( $_POST['can_send_newsletters'] ) {
-					case "author":
-						$role_author->add_cap( 'send_easymail_newsletters' );
-						$role_editor->add_cap( 'send_easymail_newsletters' );				
-						break;
-					case "editor":
-						$role_editor->add_cap( 'send_easymail_newsletters' );
-						$role_author->remove_cap( 'send_easymail_newsletters' );	
-						break;
-					case "administrator":
-					default:
-						$role_author->remove_cap( 'send_easymail_newsletters' );
-						$role_editor->remove_cap( 'send_easymail_newsletters' );
-						$role_editor->remove_cap( 'manage_easymail_newsletters' );
-				}
+		if ( isset($_REQUEST['task']) && $_REQUEST['task'] == "tab_permissions" ) {
+
+			// Get role objects: $role_administrator, $role_editor, ecc.
+			$roles = array_keys( get_editable_roles() );
+			foreach ( $roles as $key )
+			{
+				if ( $key == 'administrator' ) continue; // skip admin
+				${'role_'.$key} = get_role( $key );
 			}
-			if ( isset($_POST['can_manage_subscribers']) ) {
-				switch ( $_POST['can_manage_subscribers'] ) {
-					case "editor":
-						$role_editor->add_cap( 'manage_easymail_subscribers' );
-						break;
-					case "administrator":
-					default:
-						$role_editor->remove_cap( 'manage_easymail_subscribers' );
+
+			// Option => capabilities
+			$map_caps = array(
+				'can_edit_own_newsletters' 		=> array('edit_newsletters','delete_newsletters'),
+				'can_edit_other_newsletters' 	=> array('edit_others_newsletters','delete_others_newsletters'),
+				'can_send_newsletters'			=> array('publish_newsletters'),
+				'can_manage_subscribers'		=> array('manage_newsletter_subscribers'),
+				'can_manage_options'			=> array('manage_newsletter_options')
+			);
+
+			foreach ( $map_caps as $option => $caps )
+			{
+				$role_options = ( isset($_POST[$option]) ) ? (array)$_POST[$option] : false;
+					
+				foreach ( $roles as $key )
+				{
+					if ( $key == 'administrator' ) continue; // skip admin
+					
+					if ( $role_options && in_array( $key, $role_options ) )
+					{
+						foreach ( $caps as $cap ) 	${'role_'.$key}->add_cap( $cap );
+					}
+					else
+					{
+						foreach ( $caps as $cap ) 	${'role_'.$key}->remove_cap( $cap );
+					}
 				}
+			
 			}
-			if ( isset($_POST['can_manage_options']) ) {
-				switch ( $_POST['can_manage_options'] ) {
-					case "editor":
-						$role_editor->add_cap( 'manage_easymail_options' );
-						break;
-					case "administrator":
-					default:
-						$role_editor->remove_cap( 'manage_easymail_options' );
-				}
-			}
-			//echo "<pre style='font-size:80%'>";print_r($wp_roles);echo "</pre>";	
+			
 		} // end Tab PERMISSIONS
 		
 	} // end if Submit
@@ -948,125 +933,83 @@ PERMISSIONS
 
 <?php if ( current_user_can('manage_options') ) : /* only admin can */ ?>
 
-<?php // load roles names
-$rolenames = $wp_roles->get_names(); // get a list of values, containing pairs of: $role_name => $display_name
-// get roles to check cap
-$get_author = get_role( 'author' );
-$get_editor = get_role( 'editor' );
-?>
 <div id="permissions">
 
 <form action="#permissions" method="post">
 <h2><?php _e("Permissions", "alo-easymail") ?></h2>
 
 <table class="form-table"><tbody>
+
 <tr valign="top">
-<th scope="row"><?php _e("The lowest role can send newsletters", "alo-easymail") ?>:</th>
+<th scope="row"><?php _e("Can create and edit own newsletters", "alo-easymail") ?>:</th>
 <td>
-<?php
-/*
-if ( $get_author->has_cap ('send_easymail_newsletters') ) {
-	$selected_editor	= "";
-	$selected_author	= "selected='selected'";
-	$selected_admin		= "";
-} else if ( $get_editor->has_cap ('send_easymail_newsletters') ) {
-	$selected_editor	= "selected='selected'";
-	$selected_author	= "";
-	$selected_admin		= "";
-} else { // admin
-	$selected_editor	= "";
-	$selected_author	= "";
-	$selected_admin		= "selected='selected'";
-}
-*/
+<div style="float: left;display: inline-block">
+<?php 
+echo alo_em_role_checkboxes ( 'can_edit_own_newsletters', array('edit_newsletters','delete_newsletters') );
 ?>
-<!--
-<select name="can_send_newsletters" id="can_send_newsletters">
-	<option value='admin' <?php //echo $selected_admin; ?> ><?php //echo translate_user_role ($rolenames['administrator']) ?> </option>
-	<option value='editor' <?php //echo $selected_editor; ?> ><?php //echo translate_user_role ($rolenames['editor']) ?> </option>
-	<option value='author' <?php //echo $selected_author; ?> ><?php //echo translate_user_role ($rolenames['author']) ?> </option>
-</select><br />
--->
-<span class="description">
-	<?php printf( __("The authorised roles are the same with the %s capability", "alo-easymail"), "<code>edit_post</code>" ); ?>.<br />
-	<?php _e("The user with this capability can manage own newsletters (view the report, delete)", "alo-easymail") ?>.
+</div>
+<span class="description"  style="float: left;margin-left: 2em"> <?php _e("The user with this capability can manage own newsletters (view the report, delete)", "alo-easymail") ?>.
+<br /><?php _e("This user cannot publish and send newsletters", "alo-easymail") ?>.
 </span>
 </td>
 </tr>
 
 <tr valign="top">
-<th scope="row"><?php _e("The lowest role can manage newsletters", "alo-easymail") ?>:</th>
+<th scope="row"><?php _e("Can edit newsletters of other users", "alo-easymail") ?>:</th>
 <td>
+<div style="float: left;display: inline-block">
 <?php 
-/*
-if ( $get_editor->has_cap ('manage_easymail_newsletters') ) {
-	$selected_editor	= "selected='selected'";
-	$selected_admin		= "";
-} else { // admin
-	$selected_editor	= "";
-	$selected_admin		= "selected='selected'";
-}
-*/
+echo alo_em_role_checkboxes ( 'can_edit_other_newsletters', array('edit_others_newsletters','delete_others_newsletters') );
 ?>
-<!--
-<select name="can_manage_newsletters" id="can_manage_newsletters">
-	<option value='admin' <?php //echo $selected_admin; ?> ><?php //echo translate_user_role ($rolenames['administrator']) ?> </option>
-	<option value='editor' <?php //echo $selected_editor; ?> ><?php //echo translate_user_role ($rolenames['editor']) ?> </option>
-</select><br />
--->
-<span class="description">
-	<?php printf( __("The authorised roles are the same with the %s capability", "alo-easymail"), "<code>edit_posts</code>" ); ?>.<br />
-	<?php _e("The user with this capability can manage newsletters of all users (view the report, delete)", "alo-easymail") ?>.
-	<?php // _e("Note: to let a user manage newsletters of other users, this user must have the capability to manage subscribers too", "alo-easymail") ?>.
+</div>
+<span class="description"  style="float: left;margin-left: 2em"> <?php _e("The user with this capability can manage newsletters of all users (view the report, delete)", "alo-easymail") ?>.
+<br /><?php _e("This user cannot publish and send newsletters", "alo-easymail") ?>.
 </span>
 </td>
 </tr>
 
 <tr valign="top">
-<th scope="row"><?php _e("The lowest role can manage subscribers", "alo-easymail") ?>:</th>
+<th scope="row"><?php _e("Can publish and send newsletters", "alo-easymail") ?>:</th>
 <td>
+<div style="float: left;display: inline-block">
 <?php 
-if ( is_object ($get_editor) && $get_editor->has_cap ('manage_easymail_subscribers') ) {
-	$selected_editor	= "selected='selected'";
-	$selected_admin		= "";
-} else { // admin
-	$selected_editor	= "";
-	$selected_admin		= "selected='selected'";
-}
+echo alo_em_role_checkboxes ( 'can_send_newsletters', array('publish_newsletters') );
 ?>
-<select name="can_manage_subscribers" id="can_manage_subscribers">
-	<option value='admin' <?php echo $selected_admin; ?> ><?php echo translate_user_role ($rolenames['administrator']) ?> </option>
-	<option value='editor' <?php echo $selected_editor; ?> ><?php echo translate_user_role ($rolenames['editor']) ?> </option>
-</select>
-<br />
-<span class="description"> <?php _e("The user with this capability can manage subscribers (add, delete, assign to mailing lists...)", "alo-easymail") ?>.
+</div>
+<span class="description"  style="float: left;margin-left: 2em"> <?php _e("The user with this capability can send and publish newsletters", "alo-easymail") ?>.
 </span>
 </td>
 </tr>
 
 <tr valign="top">
-<th scope="row"><?php _e("The lowest role can manage options", "alo-easymail") ?>:</th>
+<th scope="row"><?php _e("Can manage newsletter subscribers", "alo-easymail") ?>:</th>
 <td>
+<div style="float: left;display: inline-block">
 <?php 
-if ( is_object ($get_editor) && $get_editor->has_cap ('manage_easymail_options') ) {
-	$selected_editor	= "selected='selected'";
-	$selected_admin		= "";
-} else { // admin
-	$selected_editor	= "";
-	$selected_admin		= "selected='selected'";
-}
+echo alo_em_role_checkboxes ( 'can_manage_subscribers', array('manage_newsletter_subscribers') );
 ?>
-<select name="can_manage_options" id="can_manage_options">
-	<option value='admin' <?php echo $selected_admin; ?> ><?php echo translate_user_role ($rolenames['administrator']) ?> </option>
-	<option value='editor' <?php echo $selected_editor; ?> ><?php echo translate_user_role ($rolenames['editor']) ?> </option>
-</select><br />
-<span class="description"> <?php _e("The user with this capability can set up these setting sections", "alo-easymail") ?>: 
+</div>
+<span class="description"  style="float: left;margin-left: 2em"> <?php _e("The user with this capability can manage subscribers (add, delete, assign to mailing lists...)", "alo-easymail") ?>.
+</span>
+</td>
+</tr>
+
+<tr valign="top">
+<th scope="row"><?php _e("Can manage newsletter options", "alo-easymail") ?>:</th>
+<td>
+<div style="float: left;display: inline-block">
+<?php 
+echo alo_em_role_checkboxes ( 'can_manage_options', array('manage_newsletter_options') );
+?>
+</div>
+<span class="description"  style="float: left;margin-left: 2em"> <?php _e("The user with this capability can set up these setting sections", "alo-easymail") ?>: 
 <?php _e("Texts", "alo-easymail") ?>, 
 <?php _e("Mailing Lists", "alo-easymail") ?>.<br />
 <?php _e("Other sections can be modified only by administrators", "alo-easymail") ?>.
 </span>
 </td>
 </tr>
+
 
 </tbody> </table>
 

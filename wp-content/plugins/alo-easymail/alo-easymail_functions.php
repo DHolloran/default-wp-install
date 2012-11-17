@@ -170,7 +170,7 @@ function alo_em_user_can_edit_newsletter ( $newsletter, $user_id=false ) {
 	//return user_can( $user_id, 'edit_post', $newsletter ); // TODO user_can c'è solo dalla 3.1
 	//return current_user_can( 'edit_post', $newsletter );	
 	$user = new WP_User( $user_id );
-	return $user->has_cap( 'edit_post', $newsletter );
+	return $user->has_cap( 'edit_newsletter', $newsletter );
 }
 
 
@@ -624,9 +624,17 @@ function alo_em_add_recipients_from_cache_to_db ( $newsletter, $limit=10, $sendn
  */
 function alo_em_get_recipient_by_email_and_newsletter ( $email, $newsletter ) {
     global $wpdb;
-    //return $wpdb->get_row( $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}easymail_recipients WHERE email=%s AND newsletter=%d", $email, $newsletter ) );
     
-    $rec = $wpdb->get_row( $wpdb->prepare( "SELECT r.*, s.lang, s.unikey, s.name, s.ID AS subscriber FROM {$wpdb->prefix}easymail_recipients AS r 
+	$alo_em_cf = alo_easymail_get_custom_fields();
+	$select_cf = '';
+	if ( $alo_em_cf ) {
+		foreach( $alo_em_cf as $key => $value ){
+			$select_cf .= ', s.' . $key;
+		}
+	}
+	    
+    $rec = $wpdb->get_row( $wpdb->prepare( "SELECT r.*, s.lang, s.unikey, s.name, s.ID AS subscriber {$select_cf}
+											FROM {$wpdb->prefix}easymail_recipients AS r 
     										LEFT JOIN {$wpdb->prefix}easymail_subscribers AS s ON r.email = s.email 
     										WHERE r.email=%s AND r.newsletter=%d", $email, $newsletter ) );	
     if ( $rec ) {
@@ -646,8 +654,18 @@ function alo_em_get_recipient_by_email_and_newsletter ( $email, $newsletter ) {
  */
 function alo_em_get_recipient_by_id ( $recipient ) {
     global $wpdb;
-    settype($recipient, 'integer'); 
-    $rec = $wpdb->get_row( $wpdb->prepare( "SELECT r.*, s.lang, s.unikey, s.name, s.ID AS subscriber FROM {$wpdb->prefix}easymail_recipients AS r 
+    settype($recipient, 'integer');
+
+	$alo_em_cf = alo_easymail_get_custom_fields();
+	$select_cf = '';
+	if ( $alo_em_cf ) {
+		foreach( $alo_em_cf as $key => $value ){
+			$select_cf .= ', s.' . $key;
+		}
+	}
+		
+    $rec = $wpdb->get_row( $wpdb->prepare( "SELECT r.*, s.lang, s.unikey, s.name, s.ID AS subscriber {$select_cf}
+											FROM {$wpdb->prefix}easymail_recipients AS r 
     										LEFT JOIN {$wpdb->prefix}easymail_subscribers AS s ON r.email = s.email 
     										WHERE r.ID=%d", $recipient ) );
     if ( $rec && isset( $rec->email ) ) {
@@ -860,7 +878,7 @@ function alo_em_add_subscriber( $fields, $newstate=0, $lang="" ) { //edit : orig
  	$output = true;
  	$fields = array_map( 'strip_tags', $fields );
  	$email = $fields['email'];
- 	if ( !is_admin() ) $fields['ip_address'] = preg_replace( '/[^0-9a-fA-F:., ]/', '',$_SERVER['REMOTE_ADDR'] );
+ 	if ( !is_admin() ) $fields['ip_address'] = alo_em_ip_address();
 	//foreach( $fields as $key => $value ) { ${$key} = $value; } //edit : added all this line in order to transform the fields array into simple variables
     // if there is NOT a subscriber with this email address: add new subscriber and send activation email
     if (alo_em_is_subscriber($email) == false){
@@ -887,7 +905,7 @@ function alo_em_add_subscriber( $fields, $newstate=0, $lang="" ) { //edit : orig
             
             if ( alo_em_send_activation_email($fields, $exist_unikey, $lang) ) {
                 // update join date to today
-                $ip_address = preg_replace( '/[^0-9a-fA-F:., ]/', '',$_SERVER['REMOTE_ADDR'] );
+                $ip_address = alo_em_ip_address();
                 $output = $wpdb->update(    "{$wpdb->prefix}easymail_subscribers",
                                             array ( 'join_date' => get_date_from_gmt( date("Y-m-d H:i:s") ), 'lang' => $lang, 'last_act' => get_date_from_gmt( date("Y-m-d H:i:s") ), 'ip_address' => $ip_address ),
                                             array ( 'ID' => alo_em_is_subscriber($email) )
@@ -928,7 +946,7 @@ function alo_em_update_subscriber_by_email ( $old_email, $fields, $newstate=0, $
 	//unset( $fields['old_email'] ); //edit : added all this line in order to prevent "update" to break
 	$fields['active'] = $newstate; //edit : added all this line
 	$fields['lang'] = $lang; //edit : added all this line
-	$fields['ip_address'] = preg_replace( '/[^0-9a-fA-F:., ]/', '',$_SERVER['REMOTE_ADDR'] );
+	$fields['ip_address'] = alo_em_ip_address();
 	if ( $update_lastact ) $fields['last_act'] = get_date_from_gmt( date("Y-m-d H:i:s") );
 
 	// Filter custom fields
@@ -1044,7 +1062,8 @@ function alo_em_newsletter_placeholders() {
 			"title" 		=> __( "Subscriber tags", "alo-easymail" ),
 			"tags" 			=> array (
 				"[USER-NAME]"		=> __("Name and surname of registered user.", "alo-easymail") . " (". __("For subscribers: the name used for registration", "alo-easymail") ."). ". __("This tag works also in the <strong>subject</strong>", "alo-easymail").".",
-				"[USER-FIRST-NAME]"	=> __("First name of registered user.", "alo-easymail") . " (". __("For subscribers: the name used for registration", "alo-easymail") ."). ". __("This tag works also in the <strong>subject</strong>", "alo-easymail")."."
+				"[USER-FIRST-NAME]"	=> __("First name of registered user.", "alo-easymail") . " (". __("For subscribers: the name used for registration", "alo-easymail") ."). ". __("This tag works also in the <strong>subject</strong>", "alo-easymail").".",
+				"[USER-EMAIL]"	=> __("Email address of subscriber", "alo-easymail") . ". "
 			)
 		)		
 	);
@@ -1090,7 +1109,7 @@ function alo_em_tags_table ( $post_id ) {
  */
 function alo_em_update_subscriber_last_act($email) {
     global $wpdb;
-    $ip_address = preg_replace( '/[^0-9a-fA-F:., ]/', '',$_SERVER['REMOTE_ADDR'] );
+    $ip_address = alo_em_ip_address();
 	$out = $wpdb->update( 	"{$wpdb->prefix}easymail_subscribers",
 								array ( 'last_act' => get_date_from_gmt( date("Y-m-d H:i:s") ), 'ip_address' => $ip_address ),
 								array ( 'ID' => alo_em_is_subscriber($email) )
@@ -1098,6 +1117,14 @@ function alo_em_update_subscriber_last_act($email) {
 	return $out;		
 }
 
+
+/**
+ * Get IP address: useful if you like to filter it
+ */
+function alo_em_ip_address() {
+    $ip_address = preg_replace( '/[^0-9a-fA-F:., ]/', '',$_SERVER['REMOTE_ADDR'] );
+	return apply_filters ( 'alo_easymail_ip_address', $ip_address ); 
+}
 
 
 /*************************************************************************
@@ -1724,14 +1751,23 @@ function alo_em_get_recipients_in_queue ( $limit=false, $newsletter=false ) {
 	if ( !$limit ) $limit = alo_em_get_batchrate ();
 	$query_limit = ( $limit ) ? " LIMIT ".$limit : "";
 	$query_newsletter = ( $newsletter ) ? " AND newsletter =". $newsletter ." " : "";
+
+	$alo_em_cf = alo_easymail_get_custom_fields();
+	$select_cf = '';
+	if ( $alo_em_cf ) {
+		foreach( $alo_em_cf as $key => $value ){
+			$select_cf .= ', s.' . $key;
+		}
+	}
+		
 	$recipients = $wpdb->get_results( 
-		"SELECT r.*, s.lang, s.unikey, s.name, s.ID AS subscriber FROM {$wpdb->prefix}easymail_recipients AS r 
+		"SELECT r.*, s.lang, s.unikey, s.name, s.ID AS subscriber {$select_cf} FROM {$wpdb->prefix}easymail_recipients AS r 
 		LEFT JOIN {$wpdb->prefix}easymail_subscribers AS s ON r.email = s.email 
 		INNER JOIN {$wpdb->postmeta} AS pm ON pm.post_id = r.newsletter 
 		INNER JOIN {$wpdb->posts} AS p ON p.ID = r.newsletter 
 		WHERE pm.meta_key = '_easymail_status' AND pm.meta_value = 'sendable' AND r.result = 0 AND p.post_status = 'publish' ". $query_newsletter ." 
 		ORDER BY r.ID ASC" . $query_limit );
-	if ( $recipients ) : foreach ( $recipients as $recipient ) :
+	if ( $recipients ) : foreach ( $recipients as $index => $recipient ) :
 			if ( $user_id = $recipient->user_id ) {
 				if ( get_user_meta( $user_id, 'first_name', true ) != "" ) {
 					$recipient->firstname = ucfirst( get_user_meta( $user_id, 'first_name', true ) );
@@ -1741,6 +1777,13 @@ function alo_em_get_recipients_in_queue ( $limit=false, $newsletter=false ) {
 		 	} else {
 		 		$recipient->firstname = $recipient->name;
 		 	}
+		 	
+		 	// You can filter the $recipient object and its properties; return false to unset it.
+		 	// Note: if you unset a recipient here, you probably have to mark it as not-sent in your function or somewhere
+		 	// to avoid to get the same recipient again and again when you call 'alo_em_get_recipients_in_queue'
+		 	$recipients[ $index ] = apply_filters( 'alo_easymail_recipient_in_queue', $recipient ); // Hook
+		 	if ( ! $recipients[ $index ] ) unset( $recipients[ $index ] );
+		 	
 	endforeach; endif;
 	return $recipients;
 }
@@ -2331,7 +2374,12 @@ function alo_em_filter_content ( $content, $newsletter, $recipient, $stop_recurs
 		    $content = str_replace("[USER-FIRST-NAME]", stripslashes ( $recipient->firstname ), $content);       
 		} else {
 		    $content = str_replace("[USER-FIRST-NAME]", "", $content);
-		}        	
+		}
+		if ( isset( $recipient->email ) ) {
+		    $content = str_replace("[USER-EMAIL]", stripslashes ( $recipient->email ), $content);       
+		} else {
+		    $content = str_replace("[USER-EMAIL]", "", $content);
+		}        			
     }
 
 	$home_url = alo_em_translate_home_url ( $recipient->lang );
@@ -2479,6 +2527,43 @@ function alo_em_placeholders_replace_customlink_tag ( $content, $newsletter, $re
 }
 add_filter ( 'alo_easymail_newsletter_content',  'alo_em_placeholders_replace_customlink_tag', 10, 4 );
 
+
+/**
+ * Add placeholders of custom fields
+ */
+
+function alo_em_cf_placeholders ( $placeholders ) {
+
+	$alo_em_cf = alo_easymail_get_custom_fields();
+
+	if( $alo_em_cf ) {
+		foreach( $alo_em_cf as $key => $value ){
+			$placeholders['easymail_subscriber']['tags']['[USER-'.strtoupper($key).']'] = __('Subscriber custom field',"alo-easymail").': '. __($value['humans_name'],"alo-easymail");
+		}
+	}
+
+	return $placeholders;
+}
+add_filter ( 'alo_easymail_newsletter_placeholders_table', 'alo_em_cf_placeholders' );
+
+
+function alo_em_cf_placeholders_replace_tags ( $content, $newsletter, $recipient, $stop_recursive_the_content=false ) {
+	if ( !is_object( $recipient ) ) $recipient = new stdClass();
+	if ( empty( $recipient->lang ) ) $recipient->lang = alo_em_short_langcode ( get_locale() );
+
+	//$content = str_replace("[CUST_ANREDE]", $recipient->cust_anrede, $content);
+
+	$alo_em_cf = alo_easymail_get_custom_fields();
+
+	if( $alo_em_cf ) {
+		foreach( $alo_em_cf as $key => $value ){
+			$content = str_replace('[USER-'.strtoupper($key).']', alo_easymail_custom_field_html ( $key, $value, $key, $recipient->{$key}, false ), $content);
+		}
+	}
+		
+	return $content;
+}
+add_filter ( 'alo_easymail_newsletter_content',  'alo_em_cf_placeholders_replace_tags', 10, 4 );
 
 
 
@@ -3733,6 +3818,47 @@ function alo_easymail_custom_field_html ( $key, $field, $input_name="", $value="
 		}
 	}
 	return $input;
+}
+
+
+/**
+ * Get a checkbox list of WP roles, useful in options
+ *
+ * @param	str		name field
+ * @param	arr		the caps to search in roles
+ * @param	str		more attributes
+ * @return	html
+ *
+ * echo alo_em_role_checkboxes( 'roles', 'publish_posts' );
+ */
+ 
+function alo_em_role_checkboxes ( $name='roles', $search_caps=array(), $attrs='' ) {
+	
+	settype( $search_caps, 'array' );
+	
+	if ( empty($search_caps[0]) ) return '';
+	
+	$get_editable_roles = get_editable_roles();
+
+	$html = '';
+	
+	foreach ($get_editable_roles as $role => $val )
+	{
+		// Search the req caps in role caps
+		$has_caps = array_intersect( array_keys($val['capabilities']), $search_caps );
+		// Compare the reordered arrays: must be identical
+		sort( $search_caps );
+		sort( $has_caps );
+		$checked = ( $search_caps == $has_caps )? 'checked="checked"' : '';
+
+		// Admin always checked
+		$disabled = ( $role == 'administrator' ) ? 'disabled="disabled"' : '';
+		
+		$html .= '<input type="checkbox" name="'.$name.'[]" id="'.$name.'-'.$role.'" value="'.$role.'" '.$checked .' '.$attrs.' '. $disabled.' /> ';
+		$html .= '<label for="'.$name.'-'.$role.'">'.$val['name'].'</label><br />';
+	}
+	//$html .='<pre>'. print_r( $get_editable_roles, true ) .'</pre>'; // debug		
+	return $html;
 }
 
 ?>

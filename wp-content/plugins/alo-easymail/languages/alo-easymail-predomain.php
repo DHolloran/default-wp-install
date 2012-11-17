@@ -35,6 +35,7 @@ $alo_em_textpre['alo_em_txtpre_activationmail_subj']['ro'] = "Confirmă abonamen
 $alo_em_textpre['alo_em_txtpre_activationmail_subj']['sk'] = "Potvrďte zasielanie noviniek z %BLOGNAME%";
 $alo_em_textpre['alo_em_txtpre_activationmail_subj']['sv'] = "Verifiera din prenumeration av %BLOGNAME% nyhetsbrev";
 $alo_em_textpre['alo_em_txtpre_activationmail_subj']['tr'] = "%BLOGNAME%  Bülten aboneliğinizi onaylayın";
+$alo_em_textpre['alo_em_txtpre_activationmail_subj']['zh'] = "向 %BLOGNAME% 时事通讯确认您的订阅";
 
 
 /*
@@ -241,6 +242,15 @@ Bu aboneliği istemiyorsanız, maili görmezden gelebilirsiniz.
 Teşekkür ederiz
 %BLOGNAME%";
 
+$alo_em_textpre['alo_em_txtpre_activationmail_mail']['zh'] = "你好，%NAME%
+为了完成您对于%BLOGNAME% 时事通讯的订阅，您需要点击以下链接激活（或者将它黏贴至您浏览器的地址栏中）:
+
+%ACTIVATIONLINK%
+
+如果您没有做过此类订阅，请忽视这条消息。
+谢谢
+%BLOGNAME%";
+
 
 /*
  * Unsubscription notice
@@ -268,6 +278,7 @@ $alo_em_textpre['alo_em_custom_unsub_footer']['ro'] = "<p><em>Ai primit acest me
 $alo_em_textpre['alo_em_custom_unsub_footer']['sk'] = "<p><em>Táto správa Vám prišla, pretože ste se prihlásili k zasielaniu noviniek. Ak chcete zasielanie ukončiť kliknite na <br /> %UNSUBSCRIBELINK%</em></p>";
 $alo_em_textpre['alo_em_custom_unsub_footer']['sv'] = "<p><em>Du har fått detta meddelande då du har anmält dig till vårt nyhetsbrev. Om du vill avsluta prenumerationen besök denna länk<br /> %UNSUBSCRIBELINK%</em></p>";
 $alo_em_textpre['alo_em_custom_unsub_footer']['tr'] = "<p><em>Bültenimize üye olduğunuz için bu maili aldınız. Eğer aboneliği iptal etmek istiyorsanız: Linke tıklayın<br /> %UNSUBSCRIBELINK%</em></p>";
+$alo_em_textpre['alo_em_custom_unsub_footer']['zh'] = "<p><em>由于您订阅了我们的时事通讯所以您收到了这个消息。如果您想要取消订阅： 访问这个链接<br /> %UNSUBSCRIBELINK%</em></p>";
 
 
 /*
@@ -296,3 +307,4 @@ $alo_em_textpre['alo_em_custom_viewonline_msg']['ro'] = "<p><em>Pentru a citi on
 $alo_em_textpre['alo_em_custom_viewonline_msg']['sk'] = "<p><em>Pre online čítanie noviniek kliknite na: %NEWSLETTERLINK%</em></p>";
 $alo_em_textpre['alo_em_custom_viewonline_msg']['sv'] = "<p><em>För att läsa nyhetsbrevet på webben kan du besöka: %NEWSLETTERLINK%</em></p>";
 $alo_em_textpre['alo_em_custom_viewonline_msg']['tr'] = "<p><em>Eğer bu maili düzgün görüntüleyemiyorsanız: %NEWSLETTERLINK%</em></p>";
+$alo_em_textpre['alo_em_custom_viewonline_msg']['zh'] = "<p><em>您可以访问这个链接在线阅读时事通讯邮件： %NEWSLETTERLINK%</em></p>";

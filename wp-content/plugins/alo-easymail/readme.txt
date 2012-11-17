@@ -3,8 +3,8 @@ Contributors: eventualo
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=9E6BPXEZVQYHA
 Tags: send, mail, newsletter, widget, subscription, mailing list, subscribe, cron, batch sending, mail throttling, signup, multilanguage
 Requires at least: 3.0
-Tested up to: 3.4.2
-Stable tag: 2.4.12
+Tested up to: 3.5
+Stable tag: 2.4.13
 License: GPLv2 or later
 
 To send newsletters. Features: collect subscribers on registration or with an ajax widget, mailing lists, cron batch sending, multilanguage.
@@ -72,6 +72,14 @@ Plugin links: [homepage](http://www.eventualo.net/blog/wp-alo-easymail-newslette
 5. The list of subscribers in administration
 
 == Changelog ==
+
+= 2.4.13 =
+* Added: new capabilities for newsletter post type and new permission settings
+* Added: [USER-EMAIL] placeholder
+* Added: now recipient object has subscriber custom fields as properties
+* Added: there is automatically a placehoolder for each custom field (e.g. 'cf_country' => [USER-CF_COUNTRY])
+* Added: some filters ('alo_easymail_recipient_in_queue', 'alo_easymail_ip_address')
+* Fixed: a divide-by-0 warning in a rate calculation
 
 = 2.4.12 =
 * Updated: the sending engine in cron batch, so maybe reduced the opportunity of multiple emails to same recipients
@@ -459,3 +467,6 @@ PHP Simple HTML DOM Parser (added in 2.4.10) is now disabled because it causes s
 
 = 2.4.12 =
 Some improvements
+
+= 2.4.13 =
+Capability settings changed: you have to go to Newsletters → Settings → tab Permissions and update settings

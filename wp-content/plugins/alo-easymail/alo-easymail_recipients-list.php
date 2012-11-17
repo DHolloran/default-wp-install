@@ -2,8 +2,8 @@
 include('../../../wp-load.php');
 //auth_redirect();
 
-$button_exit = '<br /><a href="javascript:self.parent.tb_remove();" class="easymail-navbutton easymail-recipients-close-popup">'. __("close", "alo-easymail") .'</a>';
-if ( !current_user_can( "edit_posts" ) ) 	wp_die( __('Cheatin&#8217; uh?'). $button_exit ); 
+$button_exit = '<br /><br /><a href="javascript:self.parent.tb_remove();" class="button easymail-recipients-close-popup">'. __("close", "alo-easymail") .'</a>';
+if ( !current_user_can( "publish_newsletters" ) ) 	wp_die( __('Cheatin&#8217; uh?'). $button_exit ); 
 
 global $user_email;
 
@@ -20,7 +20,11 @@ if ( isset( $_REQUEST['newsletter'] ) ) {
 	$newsletter = (int)$_REQUEST['newsletter'];
 	if ( get_post_type( $newsletter ) != "newsletter" ) wp_die( __('The required newsletter does not exist', "alo-easymail"). $button_exit ); 
 	if ( !get_post( $newsletter ) ) wp_die( __('The required newsletter does not exist', "alo-easymail") . $button_exit );
-	if ( !get_edit_post_link( $newsletter ) ) wp_die( __('Cheatin&#8217; uh?') . $button_exit ); 
+	//if ( !get_edit_post_link( $newsletter ) ) wp_die( __('Cheatin&#8217; uh?') . $button_exit );
+	if ( !alo_em_user_can_edit_newsletter( $newsletter ) ) wp_die( __('Cheatin&#8217; uh?') . $button_exit );
+
+	$post_status = get_post_status( $newsletter );
+	if ( $post_status == "draft" || $post_status == "pending" )  wp_die( __('A newsletter cannot be sent if its status is draft or pending review') . $button_exit );
 } else {
 	wp_die( __('Cheatin&#8217; uh?') . $button_exit ); 
 }

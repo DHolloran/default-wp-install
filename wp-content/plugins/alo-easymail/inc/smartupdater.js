@@ -1,1 +1,270 @@
-(function(a){a.fn.smartupdater=function(b,c){return this.each(function(){var d=this,e={};d.settings=a.extend(true,{url:"",type:"get",data:"",dataType:"text",minTimeout:60000,maxFailedRequests:10,maxFailedRequestsCb:false,httpCache:false,rCallback:false,selfStart:true,smartStop:{active:false,monitorTimeout:2500,minHeight:1,minWidth:1}},b);d.smartupdaterStatus={state:"",timeout:0};e=d.settings;e.prevContent="";e.failedRequests=0;e.etag="0";e.lastModified="0";e.callback=c;e.origReq={url:e.url,data:e.data,callback:c};e.stopFlag=false;function f(){if(!a(d).parents("body").length){clearInterval(d.smartupdaterStatus.smartStop);clearTimeout(d.settings.h);d={};return}a.ajax({url:e.url,type:e.type,data:e.data,dataType:e.dataType,cache:false,success:function(l,m,n){var j=false,h=false,k=a.parseJSON(n.getResponseHeader("X-Smartupdater")),g,i;if(k){e.minTimeout=k.timeout?k.timeout:e.minTimeout;h=k.callback?k.callback:false}if(e.httpCache){g=n.getResponseHeader("ETag");i=n.getResponseHeader("Last-Modified");j=(e.etag==g||e.lastModified==i)?true:false;e.etag=g?g:e.etag;e.lastModified=i?i:e.lastModified}if(j||e.prevContent==n.responseText||n.status==304){if(!e.stopFlag){clearTimeout(e.h);e.h=setTimeout(f,e.minTimeout)}}else{e.prevContent=n.responseText;if(!e.stopFlag){clearTimeout(e.h);e.h=setTimeout(f,e.minTimeout)}if(e.rCallback&&h&&e.rCallback.search(h)!=-1){window[h](l)}else{e.callback(l)}}d.smartupdaterStatus.timeout=e.minTimeout;e.failedRequests=0},error:function(h,i,g){if(++e.failedRequests<e.maxFailedRequests){if(!e.stopFlag){clearTimeout(e.h);e.h=setTimeout(f,e.minTimeout);d.smartupdaterStatus.timeout=e.minTimeout}}else{clearTimeout(e.h);d.smartupdaterStatus.state="OFF";if(typeof(e.maxFailedRequestsCb)==="function"){e.maxFailedRequestsCb(h,i,g)}}},beforeSend:function(h,g){if(e.httpCache){h.setRequestHeader("If-None-Match",e.etag);h.setRequestHeader("If-Modified-Since",e.lastModified)}h.setRequestHeader("X-Smartupdater",'{"timeout":"'+d.smartupdaterStatus.timeout+'"}')}});d.smartupdaterStatus.state="ON"}e.fnStart=f;if(e.selfStart){f()}if(e.smartStop.active){d.smartupdaterStatus.smartStop=setInterval(function(){if(!a(d).parents("body").length){clearInterval(d.smartupdaterStatus.smartStop);clearTimeout(d.settings.h);d={};return}var h=a(d);var i=h.width(),g=h.height(),j=h.is(":hidden");if(!j&&g>e.smartStop.minHeight&&i>e.smartStop.minWidth&&d.smartupdaterStatus.state=="OFF"){h.smartupdaterRestart()}else{if((j||g<=e.smartStop.minHeight||i<=e.smartStop.minWidth)&&d.smartupdaterStatus.state=="ON"){h.smartupdaterStop()}}},e.smartStop.monitorTimeout)}})};a.fn.smartupdaterStop=function(){return this.each(function(){this.settings.stopFlag=true;clearTimeout(this.settings.h);this.smartupdaterStatus.state="OFF"})};a.fn.smartupdaterRestart=function(){return this.each(function(){this.settings.stopFlag=false;clearTimeout(this.settings.h);this.settings.failedRequests=0;this.settings.etag="0";this.settings.lastModified="0";this.settings.fnStart()})};a.fn.smartupdaterSetTimeout=function(b){return this.each(function(){clearTimeout(this.settings.h);this.settings.minTimeout=b;this.settings.fnStart()})};a.fn.smartupdaterAlterCallback=function(b){return this.each(function(){this.settings.callback=b?b:this.settings.origReq.callback})};a.fn.smartupdaterAlterUrl=function(b,c){return this.each(function(){this.settings.url=b?b:this.settings.origReq.url;this.settings.data=c?c:this.settings.origReq.data})}})(jQuery);
+/**
+* smartupdater - jQuery Plugin
+*  
+* Version - 3.2.00
+* Copyright (c) 2010 - 2011 Vadim Kiryukhin
+* vkiryukhin @ gmail.com
+* 
+* http://www.eslinstructor.net/smartupdater3/
+*
+* Dual licensed under the MIT and GPL licenses:
+*   http://www.opensource.org/licenses/mit-license.php
+*   http://www.gnu.org/licenses/gpl.html
+*
+* USAGE:
+*
+*	$("#myObject").smartupdater({
+*			url : "foo.php"
+*			}, function (data) {
+*				//process data here;
+*			}
+*		);
+*		
+*	Public functions:
+*		$("#myObject").smartupdaterStop();
+*		$("#myObject").smartupdaterRestart();
+*		$("#myObject").smartupdaterSetTimeout();
+*		$("#myObject").smartupdaterAlterUrl();
+*		$("#myObject").smartupdaterAlterCallback();
+*
+*	Public Attributes:
+*		var smStatus  = $("#myObject")[0].smartupdaterStatus.state; 
+*		var smTimeout = $("#myObject")[0].smartupdaterStatus.timeout;
+*
+**/
+
+(function(jQuery) {
+	jQuery.fn.smartupdater = function (options, callback) {
+
+		return this.each(function () {
+			var elem = this,
+			es = {};
+
+			elem.settings = jQuery.extend(true,{
+				url					: '',		// see jQuery.ajax for details
+				type				: 'get', 	// see jQuery.ajax for details
+				data				: '',   	// see jQuery.ajax for details
+				dataType			: 'text', 	// see jQuery.ajax for details
+						
+				minTimeout			: 60000, 	// 1 minute
+				maxFailedRequests 	: 10, 		// max. number of consecutive ajax failures by default
+				maxFailedRequestsCb	: false, 	// falure callback function by default
+				httpCache 			: false,	// http cache 
+				rCallback			: false,	// remote callback functions
+				selfStart			: true,		// start automatically after initializing
+				smartStop			: { active:			false, 	//disabled by default
+										monitorTimeout:	2500, 	// 2.5 seconds
+										minHeight:		1,	  	// 1px
+										minWidth:		1	  	// 1px	
+									  } 
+
+			}, options);
+				
+			elem.smartupdaterStatus = {state:'',timeout:0};
+
+			es = elem.settings;
+				
+			es.prevContent 		= '';
+			es.failedRequests	= 0;
+			es.etag 			= '0';
+			es.lastModified 	= '0';
+			es.callback 		= callback;
+			es.origReq = {url:es.url,data:es.data,callback:callback};
+			es.stopFlag = false;
+		
+			
+			function start() {
+			
+			/* check if element has been deleted and clean it up  */
+				if(!jQuery(elem).parents('body').length) {
+						clearInterval(elem.smartupdaterStatus.smartStop);
+						clearTimeout(elem.settings.h);
+						elem = {};
+						return;
+				} 
+			
+				jQuery.ajax({
+					url		: es.url,
+					type	: es.type,
+					data	: es.data,
+					dataType: es.dataType,
+					cache	: false, // MUST be set to false to prevent IE caching bug.
+
+					success: function (data, statusText, xhr) {
+					
+						var dataNotModified = false, 
+							rCallback = false, 
+							xSmart = jQuery.parseJSON(xhr.getResponseHeader("X-Smartupdater")),
+							xhrEtag, xhrLM;
+						
+						if(xSmart) { // remote control 
+						
+							/* remote timeout */
+							es.minTimeout = xSmart.timeout ? xSmart.timeout : es.minTimeout;
+							
+							/* remote callback */
+							rCallback = xSmart.callback ? xSmart.callback : false;
+						}
+						
+						if(es.httpCache) { // http cache process here
+						
+							xhrEtag = xhr.getResponseHeader("ETag");
+							xhrLM = xhr.getResponseHeader("Last-Modified");
+							
+							dataNotModified = (es.etag ==  xhrEtag || es.lastModified == xhrLM) ? true : false;
+							es.etag 		=  xhrEtag ? xhrEtag : es.etag;
+							es.lastModified =  xhrLM   ? xhrLM   : es.lastModified;
+						}
+						
+						if ( 	dataNotModified || 
+								es.prevContent == xhr.responseText || 
+								xhr.status == 304 ) { // data is not changed 
+								
+								if(!es.stopFlag) {
+									clearTimeout(es.h);
+									es.h = setTimeout(start, es.minTimeout);
+								}
+									
+						} else { // data is changed 
+
+						/* cache response data */
+							es.prevContent = xhr.responseText;
+							
+						/* reset timeout */
+							if(!es.stopFlag) {
+								clearTimeout(es.h);
+								es.h = setTimeout(start, es.minTimeout);
+							}
+							
+						/* run callback function */
+							if(es.rCallback && rCallback && es.rCallback.search(rCallback) != -1) {
+								window[rCallback](data);
+							} else  { 
+								es.callback(data);
+							}
+						}
+						
+						elem.smartupdaterStatus.timeout = es.minTimeout;
+						es.failedRequests = 0;
+					}, 
+							
+					error: function(xhr, textStatus, errorThrown) { 
+						if ( ++es.failedRequests < es.maxFailedRequests ) {
+						
+						/* increment falure counter and reset timeout */
+							if(!es.stopFlag) {
+								clearTimeout(es.h);
+								es.h = setTimeout(start, es.minTimeout);
+								elem.smartupdaterStatus.timeout = es.minTimeout;
+							}
+							
+						} else {
+						
+						/* stop smartupdater */
+							clearTimeout(es.h);
+							elem.smartupdaterStatus.state = 'OFF';
+							if( typeof(es.maxFailedRequestsCb)==='function') {
+								es.maxFailedRequestsCb(xhr, textStatus, errorThrown);
+							}
+						}
+					},
+					
+					beforeSend: function(xhr, settings) {
+					
+						if(es.httpCache) {
+						
+						/* set http cache-related headers */
+							xhr.setRequestHeader("If-None-Match", es.etag );
+							xhr.setRequestHeader("If-Modified-Since", es.lastModified );
+						}
+						
+					/* Feedback: Smartupdater sends it's current timeout to server */
+						xhr.setRequestHeader("X-Smartupdater", '{"timeout":"'+elem.smartupdaterStatus.timeout+'"}');
+					}
+				});
+				
+				elem.smartupdaterStatus.state = 'ON';
+			} 
+				
+			es.fnStart = start;
+			
+			if(es.selfStart) {
+				start();
+			}
+			
+			if(es.smartStop.active) {
+			
+				elem.smartupdaterStatus.smartStop = setInterval(function(){
+
+					// check if object has been deleted 
+					if(!jQuery(elem).parents('body').length) {
+						clearInterval(elem.smartupdaterStatus.smartStop);
+						clearTimeout(elem.settings.h);
+						elem = {};
+						return;
+					} 
+
+					var $elem = jQuery(elem);
+					var width =  $elem.width(),
+						height = $elem.height(),
+						hidden = $elem.is(":hidden");
+						
+					//element has been expanded, so smartupdater should be re-started.
+					if(!hidden && height > es.smartStop.minHeight && width > es.smartStop.minWidth 
+					     && elem.smartupdaterStatus.state=="OFF") {
+						$elem.smartupdaterRestart();
+					} else 	
+					//element has been minimized, so smartupdater should be stopped.
+					if( (hidden || height <= es.smartStop.minHeight || width <= es.smartStop.minWidth) 
+							&& elem.smartupdaterStatus.state=="ON") {
+						$elem.smartupdaterStop();
+
+					} 
+					
+				},es.smartStop.monitorTimeout);
+			}
+			
+		});
+	}; 
+	
+	jQuery.fn.smartupdaterStop = function () {
+		return this.each(function () {
+			this.settings.stopFlag = true;
+			clearTimeout(this.settings.h);
+            this.smartupdaterStatus.state = 'OFF';
+		});
+	}; 
+        
+    jQuery.fn.smartupdaterRestart = function () {        
+		return this.each(function () {
+			this.settings.stopFlag = false;
+			clearTimeout(this.settings.h);
+			this.settings.failedRequests = 0;
+ 			this.settings.etag = "0";
+			this.settings.lastModified = "0";
+			this.settings.fnStart();
+		});
+	}; 
+	
+	jQuery.fn.smartupdaterSetTimeout = function (period) {
+		return this.each(function () {
+			clearTimeout(this.settings.h);
+			this.settings.minTimeout = period;
+            this.settings.fnStart();
+		});
+	}; 
+	
+	jQuery.fn.smartupdaterAlterCallback = function (callback) {
+		return this.each(function () {
+			this.settings.callback  = callback	? callback 	: this.settings.origReq.callback;
+ 		});
+	}; 
+	
+	jQuery.fn.smartupdaterAlterUrl = function (url,data) {
+		return this.each(function () {
+			this.settings.url 	= url 	? url : this.settings.origReq.url;
+			this.settings.data	= data 	? data : this.settings.origReq.data;
+ 		});
+	}; 
+	
+})(jQuery);
