@@ -16,12 +16,21 @@ add_action( 'wp_enqueue_scripts', 'fm_enqueue_site_styles' );
 
 // == Enqueue Site Scripts =================================================
 function fm_enqueue_site_scripts() {
-	// Unregister and re-register jQuery
-	// wp_deregister_script('jquery');
-	// wp_register_script('jquery', 'https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js',null, '1.8.2', true);
+
+	if (!is_admin()) {
+    wp_deregister_script('jquery'); // Deregister WordPress jQuery
+    wp_register_script('jquery', 'http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js', array(), '1.8.2'); // Load Google CDN jQuery
+    wp_enqueue_script('jquery'); // Enqueue it!
+  }
 
 	// Register site main script
 	// wp_register_script('fm-site-script', get_stylesheet_directory_uri(). '/_assets/js/site.js', array('jquery'), null, true);
+
+	// Register Modernizer
+	wp_register_script( 'fm-modernizer', get_stylesheet_directory_uri(). '/_assets/js/libs/modernizr-custom.js', array('jquery') );
+
+	// Register Webshim
+	wp_register_script( 'fm-webshim', get_stylesheet_directory_uri(). '/_assets/js/libs/webshim/polyfiller.js', array('jquery', 'fm-modernizer') );
 
 	// Register site coffee script
 	wp_register_script( 'fm-coffee-script', get_stylesheet_directory_uri(). '/_assets/js/coffee/coffee.js', array( 'jquery' ), null, true );
@@ -48,17 +57,30 @@ function fm_enqueue_site_scripts() {
 	// Enqueue Scripts
 	// wp_enqueue_script('jquery');
 	// wp_enqueue_script('fm-site-script');
+	wp_enqueue_script('fm-modernizer');
+	wp_enqueue_script('fm-webshim');
 	wp_enqueue_script( 'fm-coffee-script' );
 	// wp_enqueue_script('fm-retina-js');
 	// wp_enqueue_script('fm-prefix-free');
 	// wp_enqueue_script('fm-timeago-js');
-	wp_enqueue_script( 'fm-pikaday-js' );
+	// wp_enqueue_script( 'fm-pikaday-js' );
 
 } // fm_enqueue_site_scripts()
 add_action( 'wp_enqueue_scripts', 'fm_enqueue_site_scripts' );
 
 
-// == Add Favicon .ico =====================================================
+// == jQuery Fallback ================================
+function fm_add_jquery_fallback()
+{
+    $jqueryfallback = "<!-- Protocol Relative jQuery fall back if Google CDN offline -->";
+    $jqueryfallback .= "<script>";
+    $jqueryfallback .= "window.jQuery || document.write('<script src=\"" . get_template_directory_uri() . "/js/jquery-1.8.2.min.js\"><\/script>')";
+    $jqueryfallback .= "</script>";
+    echo $jqueryfallback;
+}
+add_action('wp_footer', 'fm_add_jquery_fallback'); // jQuery fallbacks loaded through footer
+
+// == Add Favicon .ico ===============================
 function fm_add_favicon() {
 	echo '<link rel="shortcut icon" href="'.get_stylesheet_directory_uri().'/_assets/img/icons/favicon.ico" />';
 } // fm_add_favicon()
