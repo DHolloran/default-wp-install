@@ -2,7 +2,7 @@
 Coming Soon Page Styles
 Author: Dan Holloran
 Email: dan@freemanhelp.com
-http://www.freemanhelp.com
+http://danholloran.com
 */
 
 /* == Global/Body == */
@@ -23,20 +23,20 @@ http://www.freemanhelp.com
 	body {
 		background-color: #fafafa;
 		color: #333;
-		background-image: url(http://0341f4c.netsolhost.com/wp-content/uploads/2012/01/grandcanyon3.jpg);
+		/*background-image: url(http://0341f4c.netsolhost.com/wp-content/uploads/2012/01/grandcanyon3.jpg);*/
 	}
 	#top-half-bg {
 		width: 100%;
 		height: 100%;
 		position: absolute;z-index: -10;
-		/*background: #7fd0ff;
+		background: #7fd0ff;
 		background: -moz-linear-gradient(top,  #7fd0ff 1%, #cbebff 47%, #fafafa 100%);
 		background: -webkit-gradient(linear, left top, left bottom, color-stop(1%,#7fd0ff), color-stop(47%,#cbebff), color-stop(100%,#fafafa));
 		background: -webkit-linear-gradient(top,  #7fd0ff 1%,#cbebff 47%,#fafafa 100%);
 		background: -o-linear-gradient(top,  #7fd0ff 1%,#cbebff 47%,#fafafa 100%);
 		background: -ms-linear-gradient(top,  #7fd0ff 1%,#cbebff 47%,#fafafa 100%);
 		background: linear-gradient(to bottom,  #7fd0ff 1%,#cbebff 47%,#fafafa 100%);
-		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7fd0ff', endColorstr='#fafafa',GradientType=0 );*/
+		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7fd0ff', endColorstr='#fafafa',GradientType=0 );
 	}
 /* == Header == */
 	header {

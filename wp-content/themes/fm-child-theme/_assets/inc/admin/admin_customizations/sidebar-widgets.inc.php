@@ -2,7 +2,7 @@
 // == Widgets =========================================================
 
 // Remove Default Widgets
-function fm_remove_default_widgets() {
+function dh_remove_default_widgets() {
 	// Removes the default WordPress pages widget
 	// unregister_widget('WP_Widget_Pages');
 
@@ -46,12 +46,12 @@ function fm_remove_default_widgets() {
 	// :TODO not working WP v3.4.2
 	unregister_widget( 'Twenty_Eleven_Ephemera_Widget' );
 
-} // fm_remove_default_widgets()
+} // dh_remove_default_widgets()
 
 
 // == Sidebars ========================================================
-function fm_unregister_sidebars() {
+function dh_unregister_sidebars() {
 	// global $wp_registered_sidebars
 	// pp($wp_registered_sidebars);
 	// unregister_sidebar( $id );
-} // fm_unregister_sidebars()
+} // dh_unregister_sidebars()

@@ -1,21 +1,21 @@
 <?php
 // == Post/Page Meta Box =============================================
 // Add Meta Box Content
-function fm_add_meta_box_content( $post ) {
+function dh_add_meta_box_content( $post ) {
 	// pp($post);
-	// get_post_meta($post->ID, 'fm_meta_key_name', $single) $single = true for string false for array
-	// add_post_meta($post->ID, 'fm_meta_key_name', $meta_value, $unique);
-	// update_post_meta($post->ID, 'fm_meta_key_name', $meta_value, $prev_value);
-} // fm_add_meta_box_content()
+	// get_post_meta($post->ID, 'dh_meta_key_name', $single) $single = true for string false for array
+	// add_post_meta($post->ID, 'dh_meta_key_name', $meta_value, $unique);
+	// update_post_meta($post->ID, 'dh_meta_key_name', $meta_value, $prev_value);
+} // dh_add_meta_box_content()
 
 // Add Meta Boxes
-function fm_add_meta_boxes() {
+function dh_add_meta_boxes() {
 	// FMM Title
-	add_meta_box( 'fm-meta-box', 'FMM Title', 'fm_add_meta_box_content', 'post', 'normal', 'high' );
-} // fm_add_meta_boxes()
+	add_meta_box( 'dh-meta-box', 'FMM Title', 'dh_add_meta_box_content', 'post', 'normal', 'high' );
+} // dh_add_meta_boxes()
 
 // Remove Meta Boxes
-function fm_remove_meta_boxes() {
+function dh_remove_meta_boxes() {
 	// Links
 	// Removes Links > Target
 	// remove_meta_box('linktargetdiv', 'link', 'normal');
@@ -67,10 +67,10 @@ function fm_remove_meta_boxes() {
 	// Pages > Comments
 	// remove_meta_box('commentsdiv', 'page', 'normal');
 
-} // fm_remove_meta_boxes()
+} // dh_remove_meta_boxes()
 
 // == Posts ===========================================================
-function fm_remove_posts_meta_boxes() {
+function dh_remove_posts_meta_boxes() {
 	// Remove revisions metabox.
 	// remove_meta_box( 'revisionsdiv', 'post', 'normal' );
 
@@ -109,10 +109,10 @@ function fm_remove_posts_meta_boxes() {
 	// Remove author metabox
 	// remove_meta_box( 'authordiv', 'post', 'normal' );
 
-} // fm_remove_posts_meta_boxes()
+} // dh_remove_posts_meta_boxes()
 
 // == Pages ===========================================================
-function fm_remove_pages_meta_boxes() {
+function dh_remove_pages_meta_boxes() {
 	// Remove revisions metabox.
 	// remove_meta_box( 'revisionsdiv', 'page', 'normal' );
 
@@ -142,4 +142,4 @@ function fm_remove_pages_meta_boxes() {
 	// Remove author metabox
 	// remove_meta_box( 'authordiv', 'page', 'normal' );
 
-} // fm_remove_pages_meta_boxes()
+} // dh_remove_pages_meta_boxes()
