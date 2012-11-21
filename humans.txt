@@ -2,10 +2,10 @@
 # The humans responsible & technology colophon
 
 # TEAM
-	<name> -- <role> -- <twitter>
+	Dan Holloran -- Developer -- @dholloran
 
 # THANKS
-	<name>
+	Anyone who has contributed to any of the open source projects...there are quite a few if I have not added you to the list in the read me I apologize.
 
 # TECHNOLOGY COLOPHON
 	HTML5, CSS3

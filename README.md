@@ -1,10 +1,10 @@
 Default WordPress Install
 =========================
 
-**Author(s):** Dan Holloran
-**Author(s) email:** <Dan@freemanhelp.com>
-**Website:** [http://www.FreeManHelp.com]( http://www.freemanhelp.com)
-**Description:** For use at FreeMan Marketing as a good starting place for all new project
+**Author(s):** Dan Holloran @dholloran
+**Author(s) email:** <Dan@danholloran.com>
+**Website:** [http://www.DanHolloran.com]( http://www.danholloran.com)
+**Description:** A good starting place for all new Wordpress projects.
 **Acknowledgments:** Thank you to everyone that has created an open project that I have included in this project which allows me to make my job/life easier
 
 ***
@@ -63,13 +63,13 @@ Default WordPress Install
 - Look for other libs to add that will make life easier
 - Add style guide/best practices
 - Make contact us form
-- Re-test fm_get_thumbnail_url()
+- Re-test dh_get_thumbnail_url()
 - Code/Directory Cleanup
 
 ####Completed TODOs
 - ~~Make a function that unregisters sidebars use global $wp_registered_sidebars to get the sidebar id~~
 - ~~Add humans.txt~~
-- ~~Add author meta tag to header as Freeman Marketing~~
+- ~~Add author meta tag to header as Dan Holloran~~
 - ~~Make robots.txt stop google from indexing until launch~~
 - ~~Add explanations to LESS mixins~~
 - ~~Implement H5BP into child theme~~
@@ -106,18 +106,18 @@ Default WordPress Install
 
 ***
 ###Shortcodes
-- [fm-blog-info show="<value>"] Shortcode version of `get_bloginfo($value);`
+- [dh-blog-info show="<value>"] Shortcode version of `get_bloginfo($value);`
 - **Directory Helpers**
-	- [fm-site-url] Shortcode version of `site_url();`
-	- [fm-home-url] Shortcode version of `home_url();`
-	- [fm-template-url] Shortcode version of `get_template_directory_uri();`
-	- [fm-child-theme-url] Shortcode version of `get_stylesheet_directory_uri();`
+	- [dh-site-url] Shortcode version of `site_url();`
+	- [dh-home-url] Shortcode version of `home_url();`
+	- [dh-template-url] Shortcode version of `get_template_directory_uri();`
+	- [dh-child-theme-url] Shortcode version of `get_stylesheet_directory_uri();`
 - **Date Helpers**
-	- [fm-date date_string=""] Shortcode version of `date();`
-	- [fm-day-of-week] Shortcode version of `date('l');` returns current textual day of week name
-	- [fm-date] Shortcode version of `date('j');` returns current numerical date
-	- [fm-month-name] Shortcode version of `date('F');` returns current textual month name
-	- [fm-year] Shortcode version of `date('Y');` returns numerical current year
+	- [dh-date date_string=""] Shortcode version of `date();`
+	- [dh-day-of-week] Shortcode version of `date('l');` returns current textual day of week name
+	- [dh-date] Shortcode version of `date('j');` returns current numerical date
+	- [dh-month-name] Shortcode version of `date('F');` returns current textual month name
+	- [dh-year] Shortcode version of `date('Y');` returns numerical current year
 
 ***
 ###CSS Utility Classes
@@ -191,18 +191,18 @@ Default WordPress Install
 	- `.animation (@name, @duration: 300ms, @delay: 0, @ease: ease)`
 ***
 ###PHP Helper Functions
-- `fm_to_array($obj);` Used to turn a Object into an Associative Array returns `Array`.
-- `fm_to_object($array);` Used to Turn an Array into an Object returns `STDOBJ`.
-- `fm_the_breadcrumb();` Adds breadcrumbs to pages and posts returns `NULL`.
-- `fm_is_localhost();` Checks if the current working directory is on localhost 127.0.0.1 returns `TRUE` or `FALSE`.
-- `fm_default_thumbnail($post_id, $default_thumb=false);` Checks to see if the post has a thumbnail image if not it adds the default thumbnail found in _assets/img/thumbs/default_thumb.png or the path to the default thumbnail that was passed to the function returns `NULL`.
-- `fm_session_start();` Checks to see if there is a session started and if not starts a session returns `NULL`.
-- `fm_get_thumbnail($id, $size='thumbnail', $attr='' );` Checks if the post has a thumbnail if not it returns `FALSE` if it does have a thumbnail returns `get_the_post_thumbnail()`.
-- `fm_get_thumbnail_url();` Checks if the post has a thumbnail if not it returns `FALSE` if it does have a thumbnail it returns `$image_url`.
-- `fm_get_page_id_by_slug($page_slug);` Gets the page by the slug returns `$page->ID` on success and `FALSE` on failure.
-- `fm_get_user_ip();` Gets the users IP information returns `$_SERVER["HTTP_X_FORWARDED_FOR"]`, `$_SERVER["HTTP_CLIENT_IP"]`, or `$_SERVER["REMOTE_ADDR"]`.
+- `dh_to_array($obj);` Used to turn a Object into an Associative Array returns `Array`.
+- `dh_to_object($array);` Used to Turn an Array into an Object returns `STDOBJ`.
+- `dh_the_breadcrumb();` Adds breadcrumbs to pages and posts returns `NULL`.
+- `dh_is_localhost();` Checks if the current working directory is on localhost 127.0.0.1 returns `TRUE` or `FALSE`.
+- `dh_default_thumbnail($post_id, $default_thumb=false);` Checks to see if the post has a thumbnail image if not it adds the default thumbnail found in _assets/img/thumbs/default_thumb.png or the path to the default thumbnail that was passed to the function returns `NULL`.
+- `dh_session_start();` Checks to see if there is a session started and if not starts a session returns `NULL`.
+- `dh_get_thumbnail($id, $size='thumbnail', $attr='' );` Checks if the post has a thumbnail if not it returns `FALSE` if it does have a thumbnail returns `get_the_post_thumbnail()`.
+- `dh_get_thumbnail_url();` Checks if the post has a thumbnail if not it returns `FALSE` if it does have a thumbnail it returns `$image_url`.
+- `dh_get_page_id_by_slug($page_slug);` Gets the page by the slug returns `$page->ID` on success and `FALSE` on failure.
+- `dh_get_user_ip();` Gets the users IP information returns `$_SERVER["HTTP_X_FORWARDED_FOR"]`, `$_SERVER["HTTP_CLIENT_IP"]`, or `$_SERVER["REMOTE_ADDR"]`.
 
 
 
 ***
-Copyright &copy; [Dan Holloran](mailto:dan@freemanhelp.com) for use at [FreeMan Marketing](http://www.freemanhelp.com)
+Copyright &copy; [Dan Holloran](mailto:dan@freemanhelp.com) for use at [FreeMan Marketing](http://danholloran.com)
