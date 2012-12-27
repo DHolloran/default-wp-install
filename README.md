@@ -205,4 +205,4 @@ Default WordPress Install
 
 
 ***
-Copyright &copy; [Dan Holloran](mailto:dan@freemanhelp.com) for use at [FreeMan Marketing](http://danholloran.com)
+Copyright &copy; [Dan Holloran](mailto:dholloran@danholloran.com)
